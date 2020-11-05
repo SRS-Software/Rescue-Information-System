@@ -1,0 +1,63 @@
+﻿<UserControl
+    x:Class="RIS.Views.SettingsFilterDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+
+    Background="{StaticResource ColorbrushDark}" Width="450">
+
+    <DockPanel>
+        <!-- Titel -->
+        <ContentControl DockPanel.Dock="Top" Template="{StaticResource WindowTopbar}" />
+
+        <!-- Content -->
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="10" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition />
+                <ColumnDefinition Width="10" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="5" />
+                <RowDefinition />
+                <RowDefinition Height="5" />
+                <RowDefinition />
+                <RowDefinition Height="5" />
+                <RowDefinition />
+                <RowDefinition Height="5" />
+                <RowDefinition />
+                <RowDefinition Height="10" />
+                <RowDefinition />
+                <RowDefinition Height="5" />
+            </Grid.RowDefinitions>
+
+            <Label Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center"
+                   Content="Ausdruck:" />
+            <TextBox Grid.Row="1" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                     Text="{Binding Path=SearchExpression, UpdateSourceTrigger=PropertyChanged}"
+                     ToolTip="{Binding Path=., Converter={StaticResource DisplayAttributeConverter}, ConverterParameter=SearchExpression}" />
+
+            <Label Grid.Row="3" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center"
+                   Content="ersetzen durch:" />
+            <TextBox Grid.Row="3" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                     Text="{Binding Path=ReplaceExpression, UpdateSourceTrigger=PropertyChanged}"
+                     ToolTip="{Binding Path=., Converter={StaticResource DisplayAttributeConverter}, ConverterParameter=ReplaceExpression}" />
+
+            <StackPanel Grid.Row="5" Grid.Column="2">
+                <RadioButton Margin="5" Content="vor der Auswertung"
+                             IsChecked="{Binding DoBeforeShow, Converter={StaticResource InvertBooleanConverter}}" />
+                <RadioButton Margin="5" Content="vor der Anzeige" IsChecked="{Binding DoBeforeShow}"
+                             ToolTip="{Binding ., ConverterParameter=DoBeforeShow, Converter={StaticResource DisplayAttributeConverter}}" />
+            </StackPanel>
+
+            <Label Grid.Row="7" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" Content="Feld:" />
+            <ComboBox Grid.Row="7" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                      ItemsSource="{Binding FieldList}" SelectedItem="{Binding SelectedField}" DisplayMemberPath="Name"
+                      ToolTip="{Binding Path=., Converter={StaticResource DisplayAttributeConverter}, ConverterParameter=SelectedField}" />
+
+            <!-- Button -->
+            <Button Grid.Row="9" Grid.Column="1" Grid.ColumnSpan="2" Height="35" Content="Speichern"
+                    Command="{Binding SaveCommand}" />
+        </Grid>
+    </DockPanel>
+</UserControl>

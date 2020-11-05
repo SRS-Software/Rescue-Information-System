@@ -1,0 +1,893 @@
+﻿<UserControl x:Class="RIS.Views.SettingsAlarmfaxUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+
+             mc:Ignorable="d" d:DesignHeight="617" d:DesignWidth="980">
+
+    <Grid>
+        <TabControl Background="{x:Null}" TabStripPlacement="Left">
+            <TabControl.Resources>
+                <Style TargetType="TabItem">
+                    <Setter Property="HeaderTemplate">
+                        <Setter.Value>
+                            <DataTemplate>
+                                <TextBlock TextWrapping="Wrap" Text="{TemplateBinding Content}" IsEnabled="True"
+                                           Background="#00000000" TextAlignment="Center" />
+                            </DataTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </TabControl.Resources>
+
+            <TabItem Header="Allgemein" Background="{x:Null}" Width="150" Height="30">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="5" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <!-- Ordner -->
+                    <Label Grid.Row="0" Content="Ordner" Background="{StaticResource ColorbrushLight}" />
+                    <Border Grid.Row="1" BorderBrush="{StaticResource ColorbrushLight}" BorderThickness="1">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="5" />
+                                <RowDefinition />
+                                <RowDefinition Height="5" />
+                                <RowDefinition />
+                                <RowDefinition Height="5" />
+                                <RowDefinition />
+                                <RowDefinition Height="5" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="4*" />
+                                <ColumnDefinition Width="5" />
+                            </Grid.ColumnDefinitions>
+
+                            <Label Grid.Row="1" Grid.Column="0" Content="Faxeingang:" HorizontalAlignment="Right"
+                                   VerticalAlignment="Center" />
+                            <DockPanel Grid.Row="1" Grid.Column="1">
+                                <Button DockPanel.Dock="Right" Content="..."
+                                        Command="{Binding Path=Fax_PathInputBrowseCommand}" />
+                                <TextBox HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                                         Text="{Binding Path=Fax_PathInput, UpdateSourceTrigger=PropertyChanged}"
+                                         ToolTip="{Binding Path=., Converter={StaticResource DisplayAttributeConverter}, ConverterParameter=Fax_PathInput}" />
+                            </DockPanel>
+
+                            <Label Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"
+                                   Content="Sperrzeit:" />
+                            <xctk:TimeSpanUpDown Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left"
+                                                 VerticalAlignment="Center" Watermark="Enter text"
+                                                 DefaultValue="00:00:00" Value="{Binding Fax_LockTime}"
+                                                 ToolTip="{Binding Path=., Converter={StaticResource DisplayAttributeConverter}, ConverterParameter=Fax_LockTime}"
+                                                 CultureInfo="de-DE" DisplayDefaultValueOnEmptyText="True" />
+
+                            <Label Grid.Row="5" Grid.Column="0" Content="Faxarchiv:" HorizontalAlignment="Right"
+                                   VerticalAlignment="Center" />
+                            <DockPanel Grid.Row="5" Grid.Column="1">
+                                <Button DockPanel.Dock="Right" Content="..."
+                                        Command="{Binding Path=Fax_PathArchiveBrowseCommand}" />
+                                <TextBox HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                                         Text="{Binding Path=Fax_PathArchive, UpdateSourceTrigger=PropertyChanged}"
+                                         ToolTip="{Binding Path=., Converter={StaticResource DisplayAttributeConverter}, ConverterParameter=Fax_PathArchive}" />
+                            </DockPanel>
+                        </Grid>
+                    </Border>
+
+                    <!-- E-Mail -->
+                    <Label Grid.Row="3" Content="Maileingang" Background="{StaticResource ColorbrushLight}" />
+                    <Border Grid.Row="4" BorderBrush="{StaticResource ColorbrushLight}" BorderThickness="1">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="5" />
+                                <RowDefinition />
+                                <RowDefinition Height="5" />
+                                <RowDefinition />
+                                <RowDefinition Height="5" />
+                                <RowDefinition />
+                                <RowDefinition Height="5" />
+                                <RowDefinition />
+                                <RowDefinition Height="5" />
+                                <RowDefinition />
+                                <RowDefinition Height="5" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition Width="5" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+
+                            <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"
+                                   Content="IMAP-Server:" />
+                            <TextBox Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch"
+                                     VerticalAlignment="Center"
+                                     Text="{Binding Path=MailInput_Server, UpdateSourceTrigger=PropertyChanged}"
+                                     ToolTip="{Binding Path=., Converter={StaticResource DisplayAttributeConverter}, ConverterParameter=MailInput_Server}" />
+                            <CheckBox Grid.Row="1" Grid.Column="3" HorizontalAlignment="Stretch"
+                                      VerticalAlignment="Center" Content="SSL" IsChecked="{Binding Path=MailInput_SSL}"
+                                      ToolTip="{Binding Path=., Converter={StaticResource DisplayAttributeConverter}, ConverterParameter=MailInput_SSL}" />
+
+                            <Label Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"
+                                   Content="Port:" />
+                            <TextBox Grid.Row="3" Grid.Column="1" HorizontalAlignment="Stretch"
+                                     VerticalAlignment="Center"
+                                     Text="{Binding Path=MailInput_Port, UpdateSourceTrigger=PropertyChanged}"
+                                     ToolTip="{Binding Path=., Converter={StaticResource DisplayAttributeConverter}, ConverterParameter=MailInput_Port}" />
+
+                            <Label Grid.Row="5" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"
+                                   Content="Benutzer:" />
+                            <TextBox Grid.Row="5" Grid.Column="1" HorizontalAlignment="Stretch"
+                                     VerticalAlignment="Center"
+                                     Text="{Binding Path=MailInput_User, UpdateSourceTrigger=PropertyChanged}"
+                                     ToolTip="{Binding Path=., Converter={StaticResource DisplayAttributeConverter}, ConverterParameter=MailInput_User}" />
+
+                            <Label Grid.Row="7" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"
+                                   Content="Passwort:" />
+                            <PasswordBox x:Name="uxMailInput_Password" Grid.Row="7" Grid.Column="1"
+                                         HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                                         ToolTip="{Binding Path=., Converter={StaticResource DisplayAttributeConverter}, ConverterParameter=MailInput_Password}"
+                                         PasswordChanged="uxMailInput_Password_PasswordChanged" />
+
+                            <Label Grid.Row="9" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"
+                                   Content="Betreff:" />
+                            <TextBox Grid.Row="9" Grid.Column="1" HorizontalAlignment="Stretch"
+                                     VerticalAlignment="Center"
+                                     Text="{Binding Path=MailInput_Subject, UpdateSourceTrigger=PropertyChanged}"
+                                     ToolTip="{Binding Path=., Converter={StaticResource DisplayAttributeConverter}, ConverterParameter=MailInput_Subject}" />
+                        </Grid>
+                    </Border>
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="Auswertung" Background="{x:Null}" Width="150" Height="30">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+
+                    <DockPanel Grid.Column="0">
+                        <Button Content="OCR testen" DockPanel.Dock="Bottom" Margin="5"
+                                Command="{Binding Path=TestFax_OcrCommand}"
+                                ToolTip="{Binding Path=., Converter={StaticResource DisplayAttributeConverter}, ConverterParameter=TestFax_OcrCommand}" />
+                        <Button Content="Fax laden" DockPanel.Dock="Bottom" Margin="5"
+                                Command="{Binding Path=TestFax_LoadCommand}"
+                                ToolTip="{Binding Path=., Converter={StaticResource DisplayAttributeConverter}, ConverterParameter=TestFax_LoadCommand}" />
+                        <Border Margin="5">
+                            <!--<xctk:Zoombox>
+                                <Image Source="{Binding Fax_Image}" />
+                            </xctk:Zoombox>-->
+                        </Border>
+                    </DockPanel>
+
+                    <DockPanel Grid.Column="1">
+                        <Button Content="Einstellungen importieren" DockPanel.Dock="Bottom" Margin="0,5"
+                                Command="{Binding TestFax_ImportSettings}"
+                                ToolTip="{Binding Path=., Converter={StaticResource DisplayAttributeConverter}, ConverterParameter=TestFax_ImportSettings}" />
+                        <Button Content="Einstellungen exportieren" DockPanel.Dock="Bottom" Margin="0,5"
+                                Command="{Binding TestFax_ExportSettings}"
+                                ToolTip="{Binding Path=., Converter={StaticResource DisplayAttributeConverter}, ConverterParameter=TestFax_ExportSettings}" />
+                        <TabControl Background="{x:Null}">
+                            <TabItem Header="Allgemein" Background="{x:Null}">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="5" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="5" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+
+                                    <Label Grid.Row="0" Content="Absender"
+                                           Background="{StaticResource ColorbrushLight}" />
+                                    <Border Grid.Row="1" BorderBrush="{StaticResource ColorbrushLight}"
+                                            BorderThickness="1">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="5" />
+                                                <RowDefinition />
+                                                <RowDefinition Height="5" />
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="1*" />
+                                                <ColumnDefinition Width="3*" />
+                                                <ColumnDefinition Width="5" />
+                                            </Grid.ColumnDefinitions>
+                                            <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right"
+                                                   VerticalAlignment="Center" Content="Suchtext:" />
+                                            <TextBox Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch"
+                                                     VerticalAlignment="Center"
+                                                     Text="{Binding Path=Ocr_Absender, UpdateSourceTrigger=PropertyChanged}"
+                                                     ToolTip="{Binding Path=., Converter={StaticResource DisplayAttributeConverter}, ConverterParameter=Ocr_Absender}" />
+                                        </Grid>
+                                    </Border>
+
+                                    <Label Grid.Row="6" Content="Bemerkung"
+                                           Background="{StaticResource ColorbrushLight}" />
+                                    <Border Grid.Row="7" BorderBrush="{StaticResource ColorbrushLight}"
+                                            BorderThickness="1">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="5" />
+                                                <RowDefinition />
+                                                <RowDefinition />
+                                                <RowDefinition Height="5" />
+                                                <RowDefinition />
+                                                <RowDefinition Height="5" />
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="1*" />
+                                                <ColumnDefinition Width="3*" />
+                                                <ColumnDefinition Width="5" />
+                                            </Grid.ColumnDefinitions>
+                                            <Label Grid.Row="1" Grid.RowSpan="2" Grid.Column="0"
+                                                   HorizontalAlignment="Right" VerticalAlignment="Center"
+                                                   Content="Start:" />
+                                            <TextBox Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch"
+                                                     VerticalAlignment="Center"
+                                                     Text="{Binding Path=Ocr_BemerkungStart, UpdateSourceTrigger=PropertyChanged}"
+                                                     ToolTip="{Binding Path=., Converter={StaticResource DisplayAttributeConverter}, ConverterParameter=Ocr_BemerkungStart}" />
+                                            <CheckBox Grid.Row="2" Grid.Column="1" HorizontalAlignment="Stretch"
+                                                      VerticalAlignment="Center"
+                                                      IsChecked="{Binding Path=Ocr_BemerkungStart_FirstWord, UpdateSourceTrigger=PropertyChanged}"
+                                                      ToolTip="{Binding Path=., Converter={StaticResource DisplayAttributeConverter}, ConverterParameter=Ocr_BemerkungStart_FirstWord}"
+                                                      Content="Erstes Wort in Zeile" />
+                                            <Label Grid.Row="4" Grid.Column="0" HorizontalAlignment="Right"
+                                                   VerticalAlignment="Center" Content="Stop:" />
+                                            <TextBox Grid.Row="4" Grid.Column="1" HorizontalAlignment="Stretch"
+                                                     VerticalAlignment="Center"
+                                                     Text="{Binding Path=Ocr_BemerkungStop, UpdateSourceTrigger=PropertyChanged}"
+                                                     ToolTip="{Binding Path=., Converter={StaticResource DisplayAttributeConverter}, ConverterParameter=Ocr_BemerkungStop}" />
+                                        </Grid>
+                                    </Border>
+                                </Grid>
+                            </TabItem>
+
+                            <TabItem Header="Einsatzort I" Background="{x:Null}">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="5" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="5" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="5" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+
+                                    <Label Grid.Row="0" Content="Ort" Background="{StaticResource ColorbrushLight}" />
+                                    <Border Grid.Row="1" BorderBrush="{StaticResource ColorbrushLight}"
+                                            BorderThickness="1">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="5" />
+                                                <RowDefinition />
+                                                <RowDefinition />
+                                                <RowDefinition Height="5" />
+                                                <RowDefinition />
+                                                <RowDefinition Height="5" />
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="1*" />
+                                                <ColumnDefinition Width="3*" />
+                                                <ColumnDefinition Width="5" />
+                                            </Grid.ColumnDefinitions>
+                                            <Label Grid.Row="1" Grid.RowSpan="2" Grid.Column="0"
+                                                   HorizontalAlignment="Right" VerticalAlignment="Center"
+                                                   Content="Start:" />
+                                            <TextBox Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch"
+                                                     VerticalAlignment="Center"
+                                                     Text="{Binding Path=Ocr_OrtStart, UpdateSourceTrigger=PropertyChanged}"
+                                                     ToolTip="{Binding Path=., Converter={StaticResource DisplayAttributeConverter}, ConverterParameter=Ocr_OrtStart}" />
+                                            <CheckBox Grid.Row="2" Grid.Column="1" HorizontalAlignment="Stretch"
+                                                      VerticalAlignment="Center"
+                                                      IsChecked="{Binding Path=Ocr_OrtStart_FirstWord, UpdateSourceTrigger=PropertyChanged}"
+                                                      ToolTip="{Binding Path=., Converter={StaticResource DisplayAttributeConverter}, ConverterParameter=Ocr_OrtStart_FirstWord}"
+                                                      Content="Erstes Wort in Zeile" />
+                                            <Label Grid.Row="4" Grid.Column="0" HorizontalAlignment="Right"
+                                                   VerticalAlignment="Center" Content="Stop:" />
+                                            <TextBox Grid.Row="4" Grid.Column="1" HorizontalAlignment="Stretch"
+                                                     VerticalAlignment="Center"
+                                                     Text="{Binding Path=Ocr_OrtStop, UpdateSourceTrigger=PropertyChanged}"
+                                                     ToolTip="{Binding Path=., Converter={StaticResource DisplayAttributeConverter}, ConverterParameter=Ocr_OrtStop}" />
+                                        </Grid>
+                                    </Border>
+
+                                    <Label Grid.Row="3" Content="Straße" Background="{StaticResource ColorbrushLight}" />
+                                    <Border Grid.Row="4" BorderBrush="{StaticResource ColorbrushLight}"
+                                            BorderThickness="1">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="5" />
+                                                <RowDefinition />
+                                                <RowDefinition />
+                                                <RowDefinition Height="5" />
+                                                <RowDefinition />
+                                                <RowDefinition Height="5" />
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="1*" />
+                                                <ColumnDefinition Width="3*" />
+                                                <ColumnDefinition Width="5" />
+                                            </Grid.ColumnDefinitions>
+                                            <Label Grid.Row="1" Grid.RowSpan="2" Grid.Column="0"
+                                                   HorizontalAlignment="Right" VerticalAlignment="Center"
+                                                   Content="Start:" />
+                                            <TextBox Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch"
+                                                     VerticalAlignment="Center"
+                                                     Text="{Binding Path=Ocr_StraßeStart, UpdateSourceTrigger=PropertyChanged}"
+                                                     ToolTip="{Binding Path=., Converter={StaticResource DisplayAttributeConverter}, ConverterParameter=Ocr_StraßeStart}" />
+                                            <CheckBox Grid.Row="2" Grid.Column="1" HorizontalAlignment="Stretch"
+                                                      VerticalAlignment="Center"
+                                                      IsChecked="{Binding Path=Ocr_StraßeStart_FirstWord, UpdateSourceTrigger=PropertyChanged}"
+                                                      ToolTip="{Binding Path=., Converter={StaticResource DisplayAttributeConverter}, ConverterParameter=Ocr_StraßeStart_FirstWord}"
+                                                      Content="Erstes Wort in Zeile" />
+                                            <Label Grid.Row="4" Grid.Column="0" HorizontalAlignment="Right"
+                                                   VerticalAlignment="Center" Content="Stop:" />
+                                            <TextBox Grid.Row="4" Grid.Column="1" HorizontalAlignment="Stretch"
+                                                     VerticalAlignment="Center"
+                                                     Text="{Binding Path=Ocr_StraßeStop, UpdateSourceTrigger=PropertyChanged}"
+                                                     ToolTip="{Binding Path=., Converter={StaticResource DisplayAttributeConverter}, ConverterParameter=Ocr_StraßeStop}" />
+                                        </Grid>
+                                    </Border>
+
+                                    <Label Grid.Row="6" Content="Hausnummer"
+                                           Background="{StaticResource ColorbrushLight}" />
+                                    <Border Grid.Row="7" BorderBrush="{StaticResource ColorbrushLight}"
+                                            BorderThickness="1">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="5" />
+                                                <RowDefinition />
+                                                <RowDefinition />
+                                                <RowDefinition Height="5" />
+                                                <RowDefinition />
+                                                <RowDefinition Height="5" />
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="1*" />
+                                                <ColumnDefinition Width="3*" />
+                                                <ColumnDefinition Width="5" />
+                                            </Grid.ColumnDefinitions>
+                                            <Label Grid.Row="1" Grid.RowSpan="2" Grid.Column="0"
+                                                   HorizontalAlignment="Right" VerticalAlignment="Center"
+                                                   Content="Start:" />
+                                            <TextBox Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch"
+                                                     VerticalAlignment="Center"
+                                                     Text="{Binding Path=Ocr_HausnummerStart, UpdateSourceTrigger=PropertyChanged}"
+                                                     ToolTip="{Binding Path=., Converter={StaticResource DisplayAttributeConverter}, ConverterParameter=Ocr_HausnummerStart}" />
+                                            <CheckBox Grid.Row="2" Grid.Column="1" HorizontalAlignment="Stretch"
+                                                      VerticalAlignment="Center"
+                                                      IsChecked="{Binding Path=Ocr_HausnummerStart_FirstWord, UpdateSourceTrigger=PropertyChanged}"
+                                                      ToolTip="{Binding Path=., Converter={StaticResource DisplayAttributeConverter}, ConverterParameter=Ocr_HausnummerStart_FirstWord}"
+                                                      Content="Erstes Wort in Zeile" />
+                                            <Label Grid.Row="4" Grid.Column="0" HorizontalAlignment="Right"
+                                                   VerticalAlignment="Center" Content="Stop:" />
+                                            <TextBox Grid.Row="4" Grid.Column="1" HorizontalAlignment="Stretch"
+                                                     VerticalAlignment="Center"
+                                                     Text="{Binding Path=Ocr_HausnummerStop, UpdateSourceTrigger=PropertyChanged}"
+                                                     ToolTip="{Binding Path=., Converter={StaticResource DisplayAttributeConverter}, ConverterParameter=Ocr_HausnummerStop}" />
+                                        </Grid>
+                                    </Border>
+
+                                    <Label Grid.Row="9" Content="Koordinaten"
+                                           Background="{StaticResource ColorbrushLight}" />
+                                    <Border Grid.Row="10" BorderBrush="{StaticResource ColorbrushLight}"
+                                            BorderThickness="1">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="5" />
+                                                <RowDefinition />
+                                                <RowDefinition />
+                                                <RowDefinition />
+                                                <RowDefinition Height="5" />
+                                                <RowDefinition />
+                                                <RowDefinition />
+                                                <RowDefinition />
+                                                <RowDefinition Height="5" />
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="1*" />
+                                                <ColumnDefinition Width="3*" />
+                                                <ColumnDefinition Width="5" />
+                                            </Grid.ColumnDefinitions>
+                                            <Label Grid.Row="1" Grid.RowSpan="4">
+                                                <TextBlock Text="Rechtswert">
+                                                    <TextBlock.LayoutTransform>
+                                                        <RotateTransform Angle="270" />
+                                                    </TextBlock.LayoutTransform>
+                                                </TextBlock>
+                                            </Label>
+                                            <Label Grid.Row="1" Grid.RowSpan="2" Grid.Column="0"
+                                                   HorizontalAlignment="Right" VerticalAlignment="Center"
+                                                   Content="Start:" />
+                                            <TextBox Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch"
+                                                     VerticalAlignment="Center"
+                                                     Text="{Binding Path=Ocr_KoordinatenRWStart, UpdateSourceTrigger=PropertyChanged}"
+                                                     ToolTip="{Binding Path=., Converter={StaticResource DisplayAttributeConverter}, ConverterParameter=Ocr_KoordinatenRWStart}" />
+                                            <CheckBox Grid.Row="2" Grid.Column="1" HorizontalAlignment="Stretch"
+                                                      VerticalAlignment="Center"
+                                                      IsChecked="{Binding Path=Ocr_KoordinatenRWStart_FirstWord, UpdateSourceTrigger=PropertyChanged}"
+                                                      ToolTip="{Binding Path=., Converter={StaticResource DisplayAttributeConverter}, ConverterParameter=Ocr_KoordinatenRWStart_FirstWord}"
+                                                      Content="Erstes Wort in Zeile" />
+                                            <Label Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right"
+                                                   Content="Stop:" VerticalAlignment="Center" />
+                                            <TextBox Grid.Row="3" Grid.Column="1" HorizontalAlignment="Stretch"
+                                                     VerticalAlignment="Center"
+                                                     Text="{Binding Path=Ocr_KoordinatenRWStop, UpdateSourceTrigger=PropertyChanged}"
+                                                     ToolTip="{Binding Path=., Converter={StaticResource DisplayAttributeConverter}, ConverterParameter=Ocr_KoordinatenRWStop}" />
+
+                                            <Label Grid.Row="5" Grid.RowSpan="4">
+                                                <TextBlock Text="Hochwert">
+                                                    <TextBlock.LayoutTransform>
+                                                        <RotateTransform Angle="270" />
+                                                    </TextBlock.LayoutTransform>
+                                                </TextBlock>
+                                            </Label>
+                                            <Label Grid.Row="5" Grid.RowSpan="2" Grid.Column="0"
+                                                   HorizontalAlignment="Right" VerticalAlignment="Center"
+                                                   Content="Start:" />
+                                            <TextBox Grid.Row="5" Grid.Column="1" HorizontalAlignment="Stretch"
+                                                     VerticalAlignment="Center"
+                                                     Text="{Binding Path=Ocr_KoordinatenHWStart, UpdateSourceTrigger=PropertyChanged}"
+                                                     ToolTip="{Binding Path=., Converter={StaticResource DisplayAttributeConverter}, ConverterParameter=Ocr_KoordinatenHWStart}" />
+                                            <CheckBox Grid.Row="6" Grid.Column="1" HorizontalAlignment="Stretch"
+                                                      VerticalAlignment="Center"
+                                                      IsChecked="{Binding Path=Ocr_KoordinatenHWStart_FirstWord, UpdateSourceTrigger=PropertyChanged}"
+                                                      ToolTip="{Binding Path=., Converter={StaticResource DisplayAttributeConverter}, ConverterParameter=Ocr_KoordinatenHWStart_FirstWord}"
+                                                      Content="Erstes Wort in Zeile" />
+                                            <Label Grid.Row="7" Grid.Column="0" HorizontalAlignment="Right"
+                                                   VerticalAlignment="Center" Content="Stop:" />
+                                            <TextBox Grid.Row="7" Grid.Column="1" HorizontalAlignment="Stretch"
+                                                     VerticalAlignment="Center"
+                                                     Text="{Binding Path=Ocr_KoordinatenHWStop, UpdateSourceTrigger=PropertyChanged}"
+                                                     ToolTip="{Binding Path=., Converter={StaticResource DisplayAttributeConverter}, ConverterParameter=Ocr_KoordinatenHWStop}" />
+                                        </Grid>
+                                    </Border>
+                                </Grid>
+                            </TabItem>
+
+                            <TabItem Header="Einsatzort II" Background="{x:Null}">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="5" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="5" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="5" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+
+                                    <Label Grid.Row="0" Content="Objekt" Background="{StaticResource ColorbrushLight}" />
+                                    <Border Grid.Row="1" BorderBrush="{StaticResource ColorbrushLight}"
+                                            BorderThickness="1">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="5" />
+                                                <RowDefinition />
+                                                <RowDefinition />
+                                                <RowDefinition Height="5" />
+                                                <RowDefinition />
+                                                <RowDefinition Height="5" />
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="1*" />
+                                                <ColumnDefinition Width="3*" />
+                                                <ColumnDefinition Width="5" />
+                                            </Grid.ColumnDefinitions>
+                                            <Label Grid.Row="1" Grid.RowSpan="2" HorizontalAlignment="Right"
+                                                   VerticalAlignment="Center" Content="Start:" />
+                                            <TextBox Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch"
+                                                     VerticalAlignment="Center"
+                                                     Text="{Binding Path=Ocr_ObjektStart, UpdateSourceTrigger=PropertyChanged}"
+                                                     ToolTip="{Binding Path=., Converter={StaticResource DisplayAttributeConverter}, ConverterParameter=Ocr_ObjektStart}" />
+                                            <CheckBox Grid.Row="2" Grid.Column="1" HorizontalAlignment="Stretch"
+                                                      VerticalAlignment="Center"
+                                                      IsChecked="{Binding Path=Ocr_ObjektStart_FirstWord, UpdateSourceTrigger=PropertyChanged}"
+                                                      ToolTip="{Binding Path=., Converter={StaticResource DisplayAttributeConverter}, ConverterParameter=Ocr_ObjektStart_FirstWord}"
+                                                      Content="Erstes Wort in Zeile" />
+                                            <Label Grid.Row="4" Grid.Column="0" HorizontalAlignment="Right"
+                                                   VerticalAlignment="Center" Content="Stop:" />
+                                            <TextBox Grid.Row="4" Grid.Column="1" HorizontalAlignment="Stretch"
+                                                     VerticalAlignment="Center"
+                                                     Text="{Binding Path=Ocr_ObjektStop, UpdateSourceTrigger=PropertyChanged}"
+                                                     ToolTip="{Binding Path=., Converter={StaticResource DisplayAttributeConverter}, ConverterParameter=Ocr_ObjektStop}" />
+                                        </Grid>
+                                    </Border>
+
+                                    <Label Grid.Row="3" Content="Abschnitt"
+                                           Background="{StaticResource ColorbrushLight}" />
+                                    <Border Grid.Row="4" BorderBrush="{StaticResource ColorbrushLight}"
+                                            BorderThickness="1">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="5" />
+                                                <RowDefinition />
+                                                <RowDefinition />
+                                                <RowDefinition Height="5" />
+                                                <RowDefinition />
+                                                <RowDefinition Height="5" />
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="1*" />
+                                                <ColumnDefinition Width="3*" />
+                                                <ColumnDefinition Width="5" />
+                                            </Grid.ColumnDefinitions>
+                                            <Label Grid.Row="1" Grid.RowSpan="2" Grid.Column="0"
+                                                   HorizontalAlignment="Right" VerticalAlignment="Center"
+                                                   Content="Start:" />
+                                            <TextBox Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch"
+                                                     VerticalAlignment="Center"
+                                                     Text="{Binding Path=Ocr_AbschnittStart, UpdateSourceTrigger=PropertyChanged}"
+                                                     ToolTip="{Binding Path=., Converter={StaticResource DisplayAttributeConverter}, ConverterParameter=Ocr_AbschnittStart}" />
+                                            <CheckBox Grid.Row="2" Grid.Column="1" HorizontalAlignment="Stretch"
+                                                      VerticalAlignment="Center"
+                                                      IsChecked="{Binding Path=Ocr_AbschnittStart_FirstWord, UpdateSourceTrigger=PropertyChanged}"
+                                                      ToolTip="{Binding Path=., Converter={StaticResource DisplayAttributeConverter}, ConverterParameter=Ocr_AbschnittStart_FirstWord}"
+                                                      Content="Erstes Wort in Zeile" />
+                                            <Label Grid.Row="4" Grid.Column="0" HorizontalAlignment="Right"
+                                                   VerticalAlignment="Center" Content="Stop:" />
+                                            <TextBox Grid.Row="4" Grid.Column="1" HorizontalAlignment="Stretch"
+                                                     VerticalAlignment="Center"
+                                                     Text="{Binding Path=Ocr_AbschnittStop, UpdateSourceTrigger=PropertyChanged}"
+                                                     ToolTip="{Binding Path=., Converter={StaticResource DisplayAttributeConverter}, ConverterParameter=Ocr_AbschnittStop}" />
+                                        </Grid>
+                                    </Border>
+
+                                    <Label Grid.Row="6" Content="Kreuzung"
+                                           Background="{StaticResource ColorbrushLight}" />
+                                    <Border Grid.Row="7" BorderBrush="{StaticResource ColorbrushLight}"
+                                            BorderThickness="1">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="5" />
+                                                <RowDefinition />
+                                                <RowDefinition />
+                                                <RowDefinition Height="5" />
+                                                <RowDefinition />
+                                                <RowDefinition Height="5" />
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="1*" />
+                                                <ColumnDefinition Width="3*" />
+                                                <ColumnDefinition Width="5" />
+                                            </Grid.ColumnDefinitions>
+                                            <Label Grid.Row="1" Grid.RowSpan="2" Grid.Column="0"
+                                                   HorizontalAlignment="Right" VerticalAlignment="Center"
+                                                   Content="Start:" />
+                                            <TextBox Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch"
+                                                     VerticalAlignment="Center"
+                                                     Text="{Binding Path=Ocr_KreuzungStart, UpdateSourceTrigger=PropertyChanged}"
+                                                     ToolTip="{Binding Path=., Converter={StaticResource DisplayAttributeConverter}, ConverterParameter=Ocr_KreuzungStart}" />
+                                            <CheckBox Grid.Row="2" Grid.Column="1" HorizontalAlignment="Stretch"
+                                                      VerticalAlignment="Center"
+                                                      IsChecked="{Binding Path=Ocr_KreuzungStart_FirstWord, UpdateSourceTrigger=PropertyChanged}"
+                                                      ToolTip="{Binding Path=., Converter={StaticResource DisplayAttributeConverter}, ConverterParameter=Ocr_KreuzungStart_FirstWord}"
+                                                      Content="Erstes Wort in Zeile" />
+                                            <Label Grid.Row="4" Grid.Column="0" HorizontalAlignment="Right"
+                                                   VerticalAlignment="Center" Content="Stop:" />
+                                            <TextBox Grid.Row="4" Grid.Column="1" HorizontalAlignment="Stretch"
+                                                     VerticalAlignment="Center"
+                                                     Text="{Binding Path=Ocr_KreuzungStop, UpdateSourceTrigger=PropertyChanged}"
+                                                     ToolTip="{Binding Path=., Converter={StaticResource DisplayAttributeConverter}, ConverterParameter=Ocr_KreuzungStop}" />
+                                        </Grid>
+                                    </Border>
+
+                                    <Label Grid.Row="9" Content="Station" Background="{StaticResource ColorbrushLight}" />
+                                    <Border Grid.Row="10" BorderBrush="{StaticResource ColorbrushLight}"
+                                            BorderThickness="1">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="5" />
+                                                <RowDefinition />
+                                                <RowDefinition />
+                                                <RowDefinition Height="5" />
+                                                <RowDefinition />
+                                                <RowDefinition Height="5" />
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="1*" />
+                                                <ColumnDefinition Width="3*" />
+                                                <ColumnDefinition Width="5" />
+                                            </Grid.ColumnDefinitions>
+                                            <Label Grid.Row="1" Grid.RowSpan="2" Grid.Column="0"
+                                                   HorizontalAlignment="Right" VerticalAlignment="Center"
+                                                   Content="Start:" />
+                                            <TextBox Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch"
+                                                     VerticalAlignment="Center"
+                                                     Text="{Binding Path=Ocr_StationStart, UpdateSourceTrigger=PropertyChanged}"
+                                                     ToolTip="{Binding Path=., Converter={StaticResource DisplayAttributeConverter}, ConverterParameter=Ocr_StationStart}" />
+                                            <CheckBox Grid.Row="2" Grid.Column="1" HorizontalAlignment="Stretch"
+                                                      VerticalAlignment="Center"
+                                                      IsChecked="{Binding Path=Ocr_StationStart_FirstWord, UpdateSourceTrigger=PropertyChanged}"
+                                                      ToolTip="{Binding Path=., Converter={StaticResource DisplayAttributeConverter}, ConverterParameter=Ocr_StationStart_FirstWord}"
+                                                      Content="Erstes Wort in Zeile" />
+                                            <Label Grid.Row="4" Grid.Column="0" HorizontalAlignment="Right"
+                                                   VerticalAlignment="Center" Content="Stop:" />
+                                            <TextBox Grid.Row="4" Grid.Column="1" HorizontalAlignment="Stretch"
+                                                     VerticalAlignment="Center"
+                                                     Text="{Binding Path=Ocr_StationStop, UpdateSourceTrigger=PropertyChanged}"
+                                                     ToolTip="{Binding Path=., Converter={StaticResource DisplayAttributeConverter}, ConverterParameter=Ocr_StationStop}" />
+                                        </Grid>
+                                    </Border>
+                                </Grid>
+                            </TabItem>
+
+                            <TabItem Header="Einsatzgrund" Background="{x:Null}">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="5" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="5" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="5" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+
+                                    <Label Grid.Row="0" Content="Schlagwort"
+                                           Background="{StaticResource ColorbrushLight}" />
+                                    <Border Grid.Row="1" BorderBrush="{StaticResource ColorbrushLight}"
+                                            BorderThickness="1">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="5" />
+                                                <RowDefinition />
+                                                <RowDefinition />
+                                                <RowDefinition Height="5" />
+                                                <RowDefinition />
+                                                <RowDefinition Height="5" />
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="1*" />
+                                                <ColumnDefinition Width="3*" />
+                                                <ColumnDefinition Width="5" />
+                                            </Grid.ColumnDefinitions>
+                                            <Label Grid.Row="1" Grid.RowSpan="2" Grid.Column="0"
+                                                   HorizontalAlignment="Right" VerticalAlignment="Center"
+                                                   Content="Start:" />
+                                            <TextBox Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch"
+                                                     VerticalAlignment="Center"
+                                                     Text="{Binding Path=Ocr_SchlagwortStart, UpdateSourceTrigger=PropertyChanged}"
+                                                     ToolTip="{Binding Path=., Converter={StaticResource DisplayAttributeConverter}, ConverterParameter=Ocr_SchlagwortStart}" />
+                                            <CheckBox Grid.Row="2" Grid.Column="1" HorizontalAlignment="Stretch"
+                                                      VerticalAlignment="Center"
+                                                      IsChecked="{Binding Path=Ocr_SchlagwortStart_FirstWord, UpdateSourceTrigger=PropertyChanged}"
+                                                      ToolTip="{Binding Path=., Converter={StaticResource DisplayAttributeConverter}, ConverterParameter=Ocr_SchlagwortStart_FirstWord}"
+                                                      Content="Erstes Wort in Zeile" />
+                                            <Label Grid.Row="4" Grid.Column="0" HorizontalAlignment="Right"
+                                                   VerticalAlignment="Center" Content="Stop:" />
+                                            <TextBox Grid.Row="4" Grid.Column="1" HorizontalAlignment="Stretch"
+                                                     VerticalAlignment="Center"
+                                                     Text="{Binding Path=Ocr_SchlagwortStop, UpdateSourceTrigger=PropertyChanged}"
+                                                     ToolTip="{Binding Path=., Converter={StaticResource DisplayAttributeConverter}, ConverterParameter=Ocr_SchlagwortStop}" />
+                                        </Grid>
+                                    </Border>
+
+                                    <Label Grid.Row="3" Content="Stichwort 1"
+                                           Background="{StaticResource ColorbrushLight}" />
+                                    <Border Grid.Row="4" BorderBrush="{StaticResource ColorbrushLight}"
+                                            BorderThickness="1">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="5" />
+                                                <RowDefinition />
+                                                <RowDefinition />
+                                                <RowDefinition Height="5" />
+                                                <RowDefinition />
+                                                <RowDefinition Height="5" />
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="1*" />
+                                                <ColumnDefinition Width="3*" />
+                                                <ColumnDefinition Width="5" />
+                                            </Grid.ColumnDefinitions>
+                                            <Label Grid.Row="1" Grid.RowSpan="2" Grid.Column="0"
+                                                   HorizontalAlignment="Right" VerticalAlignment="Center"
+                                                   Content="Start:" />
+                                            <TextBox Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch"
+                                                     VerticalAlignment="Center"
+                                                     Text="{Binding Path=Ocr_Stichwort1Start, UpdateSourceTrigger=PropertyChanged}"
+                                                     ToolTip="{Binding Path=., Converter={StaticResource DisplayAttributeConverter}, ConverterParameter=Ocr_Stichwort1Start}" />
+                                            <CheckBox Grid.Row="2" Grid.Column="1" HorizontalAlignment="Stretch"
+                                                      VerticalAlignment="Center"
+                                                      IsChecked="{Binding Path=Ocr_Stichwort1Start_FirstWord, UpdateSourceTrigger=PropertyChanged}"
+                                                      ToolTip="{Binding Path=., Converter={StaticResource DisplayAttributeConverter}, ConverterParameter=Ocr_Stichwort1Start_FirstWord}"
+                                                      Content="Erstes Wort in Zeile" />
+                                            <Label Grid.Row="4" Grid.Column="0" HorizontalAlignment="Right"
+                                                   VerticalAlignment="Center" Content="Stop:" />
+                                            <TextBox Grid.Row="4" Grid.Column="1" HorizontalAlignment="Stretch"
+                                                     VerticalAlignment="Center"
+                                                     Text="{Binding Path=Ocr_Stichwort1Stop, UpdateSourceTrigger=PropertyChanged}"
+                                                     ToolTip="{Binding Path=., Converter={StaticResource DisplayAttributeConverter}, ConverterParameter=Ocr_Stichwort1Stop}" />
+                                        </Grid>
+                                    </Border>
+
+                                    <Label Grid.Row="6" Content="Stichwort 2"
+                                           Background="{StaticResource ColorbrushLight}" />
+                                    <Border Grid.Row="7" BorderBrush="{StaticResource ColorbrushLight}"
+                                            BorderThickness="1">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="5" />
+                                                <RowDefinition />
+                                                <RowDefinition />
+                                                <RowDefinition Height="5" />
+                                                <RowDefinition />
+                                                <RowDefinition Height="5" />
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="1*" />
+                                                <ColumnDefinition Width="3*" />
+                                                <ColumnDefinition Width="5" />
+                                            </Grid.ColumnDefinitions>
+                                            <Label Grid.Row="1" Grid.RowSpan="2" Grid.Column="0"
+                                                   HorizontalAlignment="Right" VerticalAlignment="Center"
+                                                   Content="Start:" />
+                                            <TextBox Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch"
+                                                     VerticalAlignment="Center"
+                                                     Text="{Binding Path=Ocr_Stichwort2Start, UpdateSourceTrigger=PropertyChanged}"
+                                                     ToolTip="{Binding Path=., Converter={StaticResource DisplayAttributeConverter}, ConverterParameter=Ocr_Stichwort2Start}" />
+                                            <CheckBox Grid.Row="2" Grid.Column="1" HorizontalAlignment="Stretch"
+                                                      VerticalAlignment="Center"
+                                                      IsChecked="{Binding Path=Ocr_Stichwort2Start_FirstWord, UpdateSourceTrigger=PropertyChanged}"
+                                                      ToolTip="{Binding Path=., Converter={StaticResource DisplayAttributeConverter}, ConverterParameter=Ocr_Stichwort2Start_FirstWord}"
+                                                      Content="Erstes Wort in Zeile" />
+                                            <Label Grid.Row="4" Grid.Column="0" HorizontalAlignment="Right"
+                                                   VerticalAlignment="Center" Content="Stop:" />
+                                            <TextBox Grid.Row="4" Grid.Column="1" HorizontalAlignment="Stretch"
+                                                     VerticalAlignment="Center"
+                                                     Text="{Binding Path=Ocr_Stichwort2Stop, UpdateSourceTrigger=PropertyChanged}"
+                                                     ToolTip="{Binding Path=., Converter={StaticResource DisplayAttributeConverter}, ConverterParameter=Ocr_Stichwort2Stop}" />
+                                        </Grid>
+                                    </Border>
+
+                                    <Label Grid.Row="9" Content="Stichwort 3"
+                                           Background="{StaticResource ColorbrushLight}" />
+                                    <Border Grid.Row="10" BorderBrush="{StaticResource ColorbrushLight}"
+                                            BorderThickness="1">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="5" />
+                                                <RowDefinition />
+                                                <RowDefinition />
+                                                <RowDefinition Height="5" />
+                                                <RowDefinition />
+                                                <RowDefinition Height="5" />
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="1*" />
+                                                <ColumnDefinition Width="3*" />
+                                                <ColumnDefinition Width="5" />
+                                            </Grid.ColumnDefinitions>
+                                            <Label Grid.Row="1" Grid.RowSpan="2" Grid.Column="0"
+                                                   HorizontalAlignment="Right" VerticalAlignment="Center"
+                                                   Content="Start:" />
+                                            <TextBox Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch"
+                                                     VerticalAlignment="Center"
+                                                     Text="{Binding Path=Ocr_Stichwort3Start, UpdateSourceTrigger=PropertyChanged}"
+                                                     ToolTip="{Binding Path=., Converter={StaticResource DisplayAttributeConverter}, ConverterParameter=Ocr_Stichwort3Start}" />
+                                            <CheckBox Grid.Row="2" Grid.Column="1" HorizontalAlignment="Stretch"
+                                                      VerticalAlignment="Center"
+                                                      IsChecked="{Binding Path=Ocr_Stichwort3Start_FirstWord, UpdateSourceTrigger=PropertyChanged}"
+                                                      ToolTip="{Binding Path=., Converter={StaticResource DisplayAttributeConverter}, ConverterParameter=Ocr_Stichwort3Start_FirstWord}"
+                                                      Content="Erstes Wort in Zeile" />
+                                            <Label Grid.Row="4" Grid.Column="0" HorizontalAlignment="Right"
+                                                   VerticalAlignment="Center" Content="Stop:" />
+                                            <TextBox Grid.Row="4" Grid.Column="1" HorizontalAlignment="Stretch"
+                                                     VerticalAlignment="Center"
+                                                     Text="{Binding Path=Ocr_Stichwort3Stop, UpdateSourceTrigger=PropertyChanged}"
+                                                     ToolTip="{Binding Path=., Converter={StaticResource DisplayAttributeConverter}, ConverterParameter=Ocr_Stichwort3Stop}" />
+                                        </Grid>
+                                    </Border>
+                                </Grid>
+                            </TabItem>
+                        </TabControl>
+                    </DockPanel>
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="Filter" Background="{x:Null}" Width="150" Height="30">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <DataGrid Grid.Row="0" Name="gridFilter" HeadersVisibility="Column"
+                              ItemsSource="{Binding FilterList}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Ausdruck" Binding="{Binding Path=SearchExpression}" Width="*" />
+                            <DataGridTextColumn Header="Ersetzen durch" Binding="{Binding Path=ReplaceExpression}"
+                                                Width="*" />
+                            <DataGridTextColumn Header="Feld" Binding="{Binding Path=Field.Name}" Width="*" />
+                            <DataGridTemplateColumn Width="Auto">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Button Background="{x:Null}"
+                                                    Command="{Binding DataContext.EditFilterCommand, ElementName=gridFilter}"
+                                                    CommandParameter="{Binding Path=.}">
+                                                <Image Source="/Resources/Image.Edit.png" Width="25" Height="25" />
+                                            </Button>
+                                            <Button Background="{x:Null}"
+                                                    Command="{Binding DataContext.DeleteFilterCommand, ElementName=gridFilter}"
+                                                    CommandParameter="{Binding Path=.}">
+                                                <Image Source="/Resources/Image.Delete.png" Width="25" Height="25" />
+                                            </Button>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+                    <Button Grid.Row="1" Height="35" Content="Filter hinzufügen"
+                            Command="{Binding Path=AddFilterCommand}" />
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="AAO" Background="{x:Null}" Width="150" Height="30">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <DataGrid Grid.Row="0" Name="gridAao" HeadersVisibility="Column" ItemsSource="{Binding AaoList}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Name" Binding="{Binding Path=Name}" Width="*" />
+                            <DataGridTextColumn Header="Bedingung" Binding="{Binding Path=Condition.Name}" Width="*" />
+                            <DataGridTextColumn Header="Ausdruck" Binding="{Binding Path=Expression}" Width="*" />
+                            <DataGridTemplateColumn Width="Auto">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Button Background="{x:Null}"
+                                                    Command="{Binding DataContext.EditAaoCommand, ElementName=gridAao}"
+                                                    CommandParameter="{Binding Path=.}">
+                                                <Image Source="/Resources/Image.Edit.png" Width="25" Height="25" />
+                                            </Button>
+                                            <Button Background="{x:Null}"
+                                                    Command="{Binding DataContext.DeleteAaoCommand, ElementName=gridAao}"
+                                                    CommandParameter="{Binding Path=.}">
+                                                <Image Source="/Resources/Image.Delete.png" Width="25" Height="25" />
+                                            </Button>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+                    <Button Grid.Row="1" Height="35" Content="Regel hinzufügen" Command="{Binding Path=AddAaoCommand}" />
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</UserControl>

@@ -1,0 +1,390 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="RIS.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="SettingsUpdated" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="LogLevel" Type="SRS.Utilities.LogLevel" Scope="User">
+      <Value Profile="(Default)">DEBUG</Value>
+    </Setting>
+    <Setting Name="WorkingFolder" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\ProgramData\RIS\</Value>
+    </Setting>
+    <Setting Name="AdminPassword" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="Decoder1_Server" Type="System.String" Scope="User">
+      <Value Profile="(Default)">127.0.0.1</Value>
+    </Setting>
+    <Setting Name="Decoder1_Port" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">9300</Value>
+    </Setting>
+    <Setting Name="Vehicles_Rows" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">4</Value>
+    </Setting>
+    <Setting Name="Vehicles_Columns" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">2</Value>
+    </Setting>
+    <Setting Name="Ticker_Text" Type="System.String" Scope="User">
+      <Value Profile="(Default)">+++LIVE-Ticker+++  Der Text kann in den Optionen bearbeitet werden   +++LIVE-Ticker+++</Value>
+    </Setting>
+    <Setting Name="Vehicles_AutoDisponieren" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="Vehicles_Statusbox" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="Monitor_AlarmTime" Type="System.TimeSpan" Scope="User">
+      <Value Profile="(Default)">00:30:00</Value>
+    </Setting>
+    <Setting Name="Monitor_AlarmDelayTime" Type="System.TimeSpan" Scope="User">
+      <Value Profile="(Default)">00:15:00</Value>
+    </Setting>
+    <Setting Name="Monitor_WakeupStatusTime" Type="System.TimeSpan" Scope="User">
+      <Value Profile="(Default)">00:05:00</Value>
+    </Setting>
+    <Setting Name="Monitor_WakeupAlarmTime" Type="System.TimeSpan" Scope="User">
+      <Value Profile="(Default)">00:05:00</Value>
+    </Setting>
+    <Setting Name="MailOutput_Server" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="MailOutput_Port" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="MailOutput_SSL" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="MailOutput_User" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="MailOutput_Password" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="MailOutput_Sender" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Rescue-Information-System</Value>
+    </Setting>
+    <Setting Name="MailOutput_Subject" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Fax-Message-Service</Value>
+    </Setting>
+    <Setting Name="MailInput_Server" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="MailInput_Port" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="MailInput_SSL" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="MailInput_User" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="MailInput_Password" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="MailInput_Subject" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="MailAms_Subject" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Alarm-Message-Service</Value>
+    </Setting>
+    <Setting Name="Route_Zip" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="Route_City" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="Route_Street" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="Route_Housenumber" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="Route_StartLocation" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="Fax_PathInput" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\ProgramData\RIS\Inbox</Value>
+    </Setting>
+    <Setting Name="Fax_PathArchive" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\ProgramData\RIS\Archives</Value>
+    </Setting>
+    <Setting Name="SettingsVersion" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="Decoder1_Mode" Type="RIS.Core.DecoderMode" Scope="User">
+      <Value Profile="(Default)">OFF</Value>
+    </Setting>
+    <Setting Name="Route_ImageSize" Type="System.Drawing.Point" Scope="User">
+      <Value Profile="(Default)">1024, 768</Value>
+    </Setting>
+    <Setting Name="Pagers_InsertItem" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="Decoder2_Mode" Type="RIS.Core.DecoderMode" Scope="User">
+      <Value Profile="(Default)">OFF</Value>
+    </Setting>
+    <Setting Name="Decoder2_Port" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">10322</Value>
+    </Setting>
+    <Setting Name="Decoder2_Server" Type="System.String" Scope="User">
+      <Value Profile="(Default)">127.0.0.1</Value>
+    </Setting>
+    <Setting Name="ForegroundColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">Black</Value>
+    </Setting>
+    <Setting Name="Route_HighQuality" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="Route_ModeTruck" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="AppExecute_OnStatus" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="AlarmData_Width" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="Ticker_IsFile" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="Ticker_Speed" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">200</Value>
+    </Setting>
+    <Setting Name="Alarmapp_ApiToken" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="Alarmapp_OrganisationId" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="Alarmapp_WebserviceUrl2" Type="System.String" Scope="User">
+      <Value Profile="(Default)">https://api.app.ad-sys.de/</Value>
+    </Setting>
+    <Setting Name="Warnweather_ImageSize" Type="System.Drawing.Point" Scope="User">
+      <Value Profile="(Default)">1024, 768</Value>
+    </Setting>
+    <Setting Name="Reboot_On" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="Riverlevel_Messstelle" Type="System.String" Scope="User">
+      <Value Profile="(Default)">18481006</Value>
+    </Setting>
+    <Setting Name="Riverlevel_Mode" Type="RIS.Core.RiverlevelMode" Scope="User">
+      <Value Profile="(Default)">HndBayern</Value>
+    </Setting>
+    <Setting Name="Webbrowser_Url" Type="System.String" Scope="User">
+      <Value Profile="(Default)">https://client-mvc.rescue-information-system.de/</Value>
+    </Setting>
+    <Setting Name="Monitor_WeekplanDisabled" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="Riverlevel_ImageSize" Type="System.Drawing.Point" Scope="User">
+      <Value Profile="(Default)">1024, 768</Value>
+    </Setting>
+    <Setting Name="Fax_LockTime" Type="System.TimeSpan" Scope="User">
+      <Value Profile="(Default)">00:00:00</Value>
+    </Setting>
+    <Setting Name="Fireboard_AuthKey" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="Fireboard_WebserviceUrl" Type="System.String" Scope="User">
+      <Value Profile="(Default)">https://login.fireboard.net/</Value>
+    </Setting>
+    <Setting Name="Route_ModeFastest" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="Route_ModeTraffic" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="Warnweather_Url" Type="System.String" Scope="User">
+      <Value Profile="(Default)">https://maps.dwd.de/geoproxy_warnungen/service?VERSION=1.3.0&amp;REQUEST=GetMap&amp;LAYERS=GRAY_HR_SR_OB_DR,DLM1000_Bundeslaender_Landkreise_gruen,Warnungen_Gemeinden_vereinigt,DLM1000_Landkreise,DLM1000_Gemeinden_Text&amp;STYLES=&amp;CRS=EPSG:3857&amp;BBOX=614360.8293587392,5933210.01991552,1713821.866597408,7423590.537061271&amp;FORMAT=image/png</Value>
+    </Setting>
+    <Setting Name="Monitor_Weekplan" Type="System.String" Scope="User">
+      <Value Profile="(Default)">
+          {
+          "Monday": [],
+          "Tuesday": [],
+          "Wednesday": [],
+          "Thursday": [],
+          "Friday": [],
+          "Saturday": [],
+          "Sunday": []
+          }
+        </Value>
+    </Setting>
+    <Setting Name="Fax_OcrSettings" Type="System.String" Scope="User">
+      <Value Profile="(Default)">
+          {
+          "Absender": null,
+          "Schlagwort": {
+          "Start": null,
+          "Start_FirstWord": false,
+          "Stop": null
+          },
+          "Stichwort1": {
+          "Start": null,
+          "Start_FirstWord": false,
+          "Stop": null
+          },
+          "Stichwort2": {
+          "Start": null,
+          "Start_FirstWord": false,
+          "Stop": null
+          },
+          "Stichwort3": {
+          "Start": null,
+          "Start_FirstWord": false,
+          "Stop": null
+          },
+          "Ort": {
+          "Start": null,
+          "Start_FirstWord": false,
+          "Stop": null
+          },
+          "Straße": {
+          "Start": null,
+          "Start_FirstWord": false,
+          "Stop": null
+          },
+          "Hausnummer": {
+          "Start": null,
+          "Start_FirstWord": false,
+          "Stop": null
+          },
+          "KoordinatenHW": {
+          "Start": null,
+          "Start_FirstWord": false,
+          "Stop": null
+          },
+          "KoordinatenRW": {
+          "Start": null,
+          "Start_FirstWord": false,
+          "Stop": null
+          },
+          "Objekt": {
+          "Start": null,
+          "Start_FirstWord": false,
+          "Stop": null
+          },
+          "Station": {
+          "Start": null,
+          "Start_FirstWord": false,
+          "Stop": null
+          },
+          "Kreuzung": {
+          "Start": null,
+          "Start_FirstWord": false,
+          "Stop": null
+          },
+          "Abschnitt": {
+          "Start": null,
+          "Start_FirstWord": false,
+          "Stop": null
+          },
+          "Bemerkung": {
+          "Start": null,
+          "Start_FirstWord": false,
+          "Stop": null
+          }
+          }
+        </Value>
+    </Setting>
+    <Setting Name="FmsSettings" Type="System.String" Scope="User">
+      <Value Profile="(Default)">
+          {
+          "Status1": {
+          "MainOn": true,
+          "AlarmOn": true,
+          "Color": "#FF00FF00"
+          },
+          "Status2": {
+          "MainOn": true,
+          "AlarmOn": true,
+          "Color": "#FF008000"
+          },
+          "Status3": {
+          "MainOn": true,
+          "AlarmOn": true,
+          "Color": "#FFFFA500"
+          },
+          "Status4": {
+          "MainOn": true,
+          "AlarmOn": true,
+          "Color": "#FFFF0000"
+          },
+          "Status5": {
+          "MainOn": false,
+          "AlarmOn": false,
+          "Color": "#00FFFFFF"
+          },
+          "Status6": {
+          "MainOn": true,
+          "AlarmOn": true,
+          "Color": "#FF808080"
+          },
+          "Status7": {
+          "MainOn": false,
+          "AlarmOn": false,
+          "Color": "#00FFFFFF"
+          },
+          "Status8": {
+          "MainOn": false,
+          "AlarmOn": false,
+          "Color": "#00FFFFFF"
+          },
+          "Status9": {
+          "MainOn": false,
+          "AlarmOn": false,
+          "Color": "#00FFFFFF"
+          },
+          "StatusA": {
+          "MainOn": false,
+          "AlarmOn": false,
+          "Color": "#00FFFFFF"
+          },
+          "StatusC": {
+          "MainOn": true,
+          "AlarmOn": true,
+          "Color": "#FFFFFFFF"
+          },
+          "StatusE": {
+          "MainOn": false,
+          "AlarmOn": false,
+          "Color": "#00FFFFFF"
+          },
+          "StatusF": {
+          "MainOn": false,
+          "AlarmOn": false,
+          "Color": "#00FFFFFF"
+          },
+          "StatusH": {
+          "MainOn": false,
+          "AlarmOn": false,
+          "Color": "#00FFFFFF"
+          },
+          "StatusJ": {
+          "MainOn": false,
+          "AlarmOn": false,
+          "Color": "#00FFFFFF"
+          },
+          "StatusL": {
+          "MainOn": false,
+          "AlarmOn": false,
+          "Color": "#00FFFFFF"
+          },
+          "StatusP": {
+          "MainOn": false,
+          "AlarmOn": false,
+          "Color": "#00FFFFFF"
+          },
+          "StatusU": {
+          "MainOn": false,
+          "AlarmOn": false,
+          "Color": "#00FFFFFF"
+          }
+          }
+        </Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

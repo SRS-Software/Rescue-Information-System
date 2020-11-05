@@ -1,0 +1,497 @@
+﻿<UserControl
+    x:Class="RIS.Views.SettingsDatenschnittstelleUserControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+
+    mc:Ignorable="d"
+    d:DesignHeight="550" d:DesignWidth="800">
+
+    <TabControl Background="{x:Null}" TabStripPlacement="Left">
+        <TabControl.Resources>
+            <Style TargetType="TabItem">
+                <Setter Property="HeaderTemplate">
+                    <Setter.Value>
+                        <DataTemplate>
+                            <TextBlock TextWrapping="Wrap" Text="{TemplateBinding Content}" IsEnabled="True"
+                                       Background="{x:Null}" TextAlignment="Center" />
+                        </DataTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </TabControl.Resources>
+
+        <TabItem Header="Decoder" Background="{x:Null}" Width="150" Height="30">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="5" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <!-- Decoder1 -->
+                <Label Grid.Row="0" Content="Decoder 1" Background="{StaticResource ColorbrushLight}" />
+                <Border Grid.Row="1" BorderBrush="{StaticResource ColorbrushLight}" BorderThickness="1">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="5" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="5" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="5" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="5" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+
+                        <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"
+                               Content="Server:" />
+                        <TextBox Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                                 Text="{Binding Path=Decoder1_Server, UpdateSourceTrigger=PropertyChanged}"
+                                 ToolTip="{Binding Path=., Converter={StaticResource DisplayAttributeConverter}, ConverterParameter=Decoder1_Server}" />
+
+                        <Label Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"
+                               Content="Port:" />
+                        <TextBox Grid.Row="3" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                                 Text="{Binding Path=Decoder1_Port, UpdateSourceTrigger=PropertyChanged}"
+                                 ToolTip="{Binding Path=., Converter={StaticResource DisplayAttributeConverter}, ConverterParameter=Decoder1_Port}" />
+
+                        <Label Grid.Row="5" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"
+                               Content="Mode:" />
+                        <ComboBox Grid.Row="5" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                                  ItemsSource="{Binding Decoder_ModeList}"
+                                  SelectedItem="{Binding Path=Decoder1_Mode, UpdateSourceTrigger=PropertyChanged}"
+                                  ToolTip="{Binding Path=., Converter={StaticResource DisplayAttributeConverter}, ConverterParameter=Decoder1_Mode}" />
+                    </Grid>
+                </Border>
+
+                <!-- Decoder2 -->
+                <Label Grid.Row="3" Content="Decoder 2" Background="{StaticResource ColorbrushLight}" />
+                <Border Grid.Row="4" BorderBrush="{StaticResource ColorbrushLight}" BorderThickness="1">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="5" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="5" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="5" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="5" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+
+                        <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"
+                               Content="Server:" />
+                        <TextBox Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                                 Text="{Binding Path=Decoder2_Server, UpdateSourceTrigger=PropertyChanged}"
+                                 ToolTip="{Binding Path=., Converter={StaticResource DisplayAttributeConverter}, ConverterParameter=Decoder2_Server}" />
+
+                        <Label Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"
+                               Content="Port:" />
+                        <TextBox Grid.Row="3" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                                 Text="{Binding Path=Decoder2_Port, UpdateSourceTrigger=PropertyChanged}"
+                                 ToolTip="{Binding Path=., Converter={StaticResource DisplayAttributeConverter}, ConverterParameter=Decoder2_Port}" />
+
+                        <Label Grid.Row="5" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"
+                               Content="Mode:" />
+                        <ComboBox Grid.Row="5" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                                  ItemsSource="{Binding Decoder_ModeList}"
+                                  SelectedItem="{Binding Path=Decoder2_Mode, UpdateSourceTrigger=PropertyChanged}"
+                                  ToolTip="{Binding Path=., Converter={StaticResource DisplayAttributeConverter}, ConverterParameter=Decoder2_Mode}" />
+                    </Grid>
+                </Border>
+            </Grid>
+        </TabItem>
+
+        <TabItem Header="Dateien" Background="{x:Null}" Width="150" Height="30">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <DataGrid Grid.Row="0" Name="gridFileprint" HeadersVisibility="Column"
+                          ItemsSource="{Binding FileprintList}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Name" Binding="{Binding Path=Name}" Width="*" />
+                        <DataGridTextColumn Header="Bedingung" Binding="{Binding Path=Condition.Name}" Width="*" />
+                        <DataGridTextColumn Header="Ausdruck" Binding="{Binding Path=Expression}" Width="*" />
+                        <DataGridTemplateColumn Width="Auto">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Button Background="{x:Null}"
+                                                Command="{Binding DataContext.EditFileprintCommand, ElementName=gridFileprint}"
+                                                CommandParameter="{Binding Path=.}">
+                                            <Image Source="/Resources/Image.Edit.png" Width="25" Height="25" />
+                                        </Button>
+                                        <Button Background="{x:Null}"
+                                                Command="{Binding DataContext.DeleteFileprintCommand, ElementName=gridFileprint}"
+                                                CommandParameter="{Binding Path=.}">
+                                            <Image Source="/Resources/Image.Delete.png" Width="25" Height="25" />
+                                        </Button>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+
+                <Button Grid.Row="1" Height="35" Content="Datei hinzufügen"
+                        Command="{Binding Path=AddFileprintCommand}" />
+            </Grid>
+        </TabItem>
+
+        <TabItem Header="Drucken" Background="{x:Null}" Width="150" Height="30">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <DataGrid Grid.Row="0" Name="gridPrinter" HeadersVisibility="Column"
+                          ItemsSource="{Binding PrinterList}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Name" Binding="{Binding Path=PrinterName}" Width="3*" />
+                        <DataGridTextColumn Header="Fax" Binding="{Binding Path=FaxCopies}" Width="*" />
+                        <DataGridCheckBoxColumn Binding="{Binding Path=FaxNumberOfVehiclesOn}" Width="*" />
+                        <DataGridTextColumn Header="Report" Binding="{Binding Path=ReportCopies}" Width="*" />
+                        <DataGridCheckBoxColumn Binding="{Binding Path=ReportNumberOfVehiclesOn}" Width="*" />
+                        <DataGridTextColumn Header="Datei" Binding="{Binding Path=FileprintCopies}" Width="*" />
+                        <DataGridCheckBoxColumn Binding="{Binding Path=FileprintNumberOfVehiclesOn}" Width="*" />
+                        <DataGridTemplateColumn Width="Auto">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Button Background="{x:Null}"
+                                                Command="{Binding DataContext.EditPrinterCommand, ElementName=gridPrinter}"
+                                                CommandParameter="{Binding Path=.}">
+                                            <Image Source="/Resources/Image.Edit.png" Width="25" Height="25" />
+                                        </Button>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+
+                <Button Grid.Row="1" Height="35" Content="Drucker initialisieren"
+                        Command="{Binding Path=InitializePrintersCommand}"
+                        ToolTip="{Binding Path=., Converter={StaticResource DisplayAttributeConverter}, ConverterParameter=InitializePrintersCommand}" />
+            </Grid>
+        </TabItem>
+
+        <TabItem Header="E-Mail" Background="{x:Null}" Width="150" Height="30">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="5" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <!-- E-Mail -->
+                <Label Grid.Row="0" Content="Mailausgang" Background="{StaticResource ColorbrushLight}" />
+                <Border Grid.Row="1" BorderBrush="{StaticResource ColorbrushLight}" BorderThickness="1">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="5" />
+                            <RowDefinition />
+                            <RowDefinition Height="5" />
+                            <RowDefinition />
+                            <RowDefinition Height="5" />
+                            <RowDefinition />
+                            <RowDefinition Height="5" />
+                            <RowDefinition />
+                            <RowDefinition Height="5" />
+                            <RowDefinition />
+                            <RowDefinition Height="5" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="5" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+
+                        <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"
+                               Content="SMTP-Server:" />
+                        <TextBox Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                                 Text="{Binding Path=MailOutput_Server, UpdateSourceTrigger=PropertyChanged}"
+                                 ToolTip="{Binding Path=., Converter={StaticResource DisplayAttributeConverter}, ConverterParameter=MailOutput_Server}" />
+                        <CheckBox Grid.Row="1" Grid.Column="3" HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                                  Content="SSL" IsChecked="{Binding Path=MailOutput_SSL}"
+                                  ToolTip="{Binding Path=., Converter={StaticResource DisplayAttributeConverter}, ConverterParameter=MailOutput_SSL}" />
+
+                        <Label Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"
+                               Content="Port:" />
+                        <TextBox Grid.Row="3" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                                 Text="{Binding Path=MailOutput_Port, UpdateSourceTrigger=PropertyChanged}"
+                                 ToolTip="{Binding Path=., Converter={StaticResource DisplayAttributeConverter}, ConverterParameter=MailOutput_Port}" />
+
+                        <Label Grid.Row="5" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"
+                               Content="Mail-Adresse:" />
+                        <TextBox Grid.Row="5" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                                 Text="{Binding Path=MailOutput_Sender, UpdateSourceTrigger=PropertyChanged}"
+                                 ToolTip="{Binding Path=., Converter={StaticResource DisplayAttributeConverter}, ConverterParameter=MailOutput_Sender}" />
+
+                        <Label Grid.Row="7" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"
+                               Content="Benutzer:" />
+                        <TextBox Grid.Row="7" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                                 Text="{Binding Path=MailOutput_User, UpdateSourceTrigger=PropertyChanged}"
+                                 ToolTip="{Binding Path=., Converter={StaticResource DisplayAttributeConverter}, ConverterParameter=MailOutput_User}" />
+
+                        <Label Grid.Row="9" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"
+                               Content="Passwort:" />
+                        <PasswordBox x:Name="uxMailOutput_Password" Grid.Row="9" Grid.Column="1"
+                                     HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                                     PasswordChanged="uxMailOutput_Password_PasswordChanged"
+                                     ToolTip="{Binding Path=., Converter={StaticResource DisplayAttributeConverter}, ConverterParameter=MailOutput_Password}" />
+                    </Grid>
+                </Border>
+
+                <!-- Fax-Message-Service -->
+                <Label Grid.Row="3" Content="Fax-Message-Service" Background="{StaticResource ColorbrushLight}" />
+                <Border Grid.Row="4" BorderBrush="{StaticResource ColorbrushLight}" BorderThickness="1">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="5" />
+                            <RowDefinition />
+                            <RowDefinition Height="5" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+
+                        <Label Grid.Row="1" Grid.Column="0" Content="Betreff:" HorizontalAlignment="Right"
+                               VerticalAlignment="Center" />
+                        <TextBox Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                                 Text="{Binding Path=MailOutput_Subject, UpdateSourceTrigger=PropertyChanged}"
+                                 ToolTip="{Binding Path=., Converter={StaticResource DisplayAttributeConverter}, ConverterParameter=MailOutput_Subject}" />
+                    </Grid>
+                </Border>
+            </Grid>
+        </TabItem>
+
+        <TabItem Header="Benutzer" Background="{x:Null}" Width="150" Height="30">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <DataGrid Grid.Row="0" Name="gridUser" HeadersVisibility="Column" ItemsSource="{Binding UserList}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Name" Binding="{Binding Path=Name}" Width="*" />
+                        <DataGridTextColumn Header="Mail" Binding="{Binding Path=MailAdresse}" Width="*" />
+                        <!--<DataGridCheckBoxColumn Header="Faxtext" Binding="{Binding Path=FaxMessageService_MailOn}" Width="Auto" />
+                        <DataGridCheckBoxColumn Header="Faxbild" Binding="{Binding Path=FaxMessageService_FaxOn}" Width="Auto" />
+                        <DataGridCheckBoxColumn Header="Audio" Binding="{Binding Path=AlarmMessageService_RecordOn}" Width="Auto" />-->
+                        <DataGridTemplateColumn Width="Auto">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Button Background="{x:Null}"
+                                                Command="{Binding DataContext.EditUserCommand, ElementName=gridFileprint}"
+                                                CommandParameter="{Binding Path=.}">
+                                            <Image Source="/Resources/Image.Edit.png" Width="25" Height="25" />
+                                        </Button>
+                                        <Button Background="{x:Null}"
+                                                Command="{Binding DataContext.DeleteUserCommand, ElementName=gridFileprint}"
+                                                CommandParameter="{Binding Path=.}">
+                                            <Image Source="/Resources/Image.Delete.png" Width="25" Height="25" />
+                                        </Button>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+
+                <Button Grid.Row="1" Height="35" Content="User hinzufügen" Command="{Binding Path=AddUserCommand}" />
+            </Grid>
+        </TabItem>
+
+        <TabItem Header="AMS" Background="{x:Null}" Width="150" Height="30">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="5" />
+                    <RowDefinition />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <!-- Fax-Message-Service -->
+                <Label Grid.Row="0" Content="Alarm-Message-Service" Background="{StaticResource ColorbrushLight}" />
+                <Border Grid.Row="1" BorderBrush="{StaticResource ColorbrushLight}" BorderThickness="1">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="5" />
+                            <RowDefinition />
+                            <RowDefinition Height="5" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+
+                        <Label Grid.Row="1" Grid.Column="0" Content="Betreff:" HorizontalAlignment="Right"
+                               VerticalAlignment="Center" />
+                        <TextBox Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                                 Text="{Binding Path=MailAms_Subject, UpdateSourceTrigger=PropertyChanged}"
+                                 ToolTip="{Binding Path=., Converter={StaticResource DisplayAttributeConverter}, ConverterParameter=MailAms_Subject}" />
+                    </Grid>
+                </Border>
+
+                <DataGrid Grid.Row="3" Name="gridAms" HeadersVisibility="Column" ItemsSource="{Binding AmsList}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Name" Binding="{Binding Path=Name}" Width="*" />
+                        <DataGridTemplateColumn Width="Auto">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Button Background="{x:Null}"
+                                                Command="{Binding DataContext.EditAmsCommand, ElementName=gridAms}"
+                                                CommandParameter="{Binding Path=.}">
+                                            <Image Source="/Resources/Image.Edit.png" Width="25" Height="25" />
+                                        </Button>
+                                        <Button Background="{x:Null}"
+                                                Command="{Binding DataContext.DeleteAmsCommand, ElementName=gridAms}"
+                                                CommandParameter="{Binding Path=.}">
+                                            <Image Source="/Resources/Image.Delete.png" Width="25" Height="25" />
+                                        </Button>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+                <Button Grid.Row="4" Height="35" Content="Liste hinzufügen" Command="{Binding Path=AddAmsCommand}" />
+            </Grid>
+        </TabItem>
+
+        <TabItem Header="AlarmDispatcher" Background="{x:Null}" Width="150" Height="30">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="5" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <!-- Allgemein -->
+                <Border Grid.Row="0" BorderBrush="{StaticResource ColorbrushLight}" BorderThickness="1">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="5" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="5" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="5" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+
+                        <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right"
+                               VerticalAlignment="Center" Content="Organisation-ID:" />
+                        <TextBox Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch"
+                                 VerticalAlignment="Center"
+                                 Text="{Binding Path=AlarmappOrganisationId, UpdateSourceTrigger=PropertyChanged}"
+                                 ToolTip="{Binding Path=., Converter={StaticResource DisplayAttributeConverter}, ConverterParameter=AlarmappOrganisationId}" />
+
+                        <Label Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right"
+                               VerticalAlignment="Center" Content="API-Token:" />
+                        <TextBox Grid.Row="3" Grid.Column="1" HorizontalAlignment="Stretch"
+                                 VerticalAlignment="Center"
+                                 Text="{Binding Path=AlarmappApiToken, UpdateSourceTrigger=PropertyChanged}"
+                                 ToolTip="{Binding Path=., Converter={StaticResource DisplayAttributeConverter}, ConverterParameter=AlarmappApiToken}" />
+
+                        <Button Grid.Row="1" Grid.Column="2" Content="Alle Gruppen löschen"
+                                Command="{Binding Path=AlarmappClearCommand}" />
+                        <Button Grid.Row="3" Grid.Column="2" Content="Aktualisieren"
+                                Command="{Binding Path=AlarmappRefreshCommand}" />
+                    </Grid>
+                </Border>
+
+                <!-- Alarmgruppen -->
+                <Label Grid.Row="2" Content="Alarmgruppen" Background="{StaticResource ColorbrushLight}" />
+                <Border Grid.Row="3" BorderBrush="{StaticResource ColorbrushLight}" BorderThickness="1">
+                    <DataGrid Name="gridAlarmappGroup" HeadersVisibility="None"
+                              ItemsSource="{Binding AlarmappGroupList}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding Path=Department.DepartmentName}" Width="Auto" />
+                            <DataGridTextColumn Binding="{Binding Path=GroupName}" Width="*" />
+                            <DataGridTemplateColumn Width="Auto">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Button Background="{x:Null}"
+                                                    Command="{Binding DataContext.EditAlarmappGroupCommand, ElementName=gridAlarmappGroup}"
+                                                    CommandParameter="{Binding Path=.}">
+                                                <Image Source="/Resources/Image.Edit.png" Width="25"
+                                                       Height="25" />
+                                            </Button>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Border>
+            </Grid>
+        </TabItem>
+
+        <TabItem Header="Fireboard" Background="{x:Null}" Width="150" Height="30">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="5" />
+                    <RowDefinition />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <!-- Fax-Message-Service -->
+                <Label Grid.Row="0" Content="Anmeldung" Background="{StaticResource ColorbrushLight}" />
+                <Border Grid.Row="1" BorderBrush="{StaticResource ColorbrushLight}" BorderThickness="1">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="5" />
+                            <RowDefinition />
+                            <RowDefinition Height="5" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+
+                        <Label Grid.Row="1" Grid.Column="0" Content="AuthKey:" HorizontalAlignment="Right"
+                               VerticalAlignment="Center" />
+                        <TextBox Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                                 Text="{Binding Path=FireboardAuthKey, UpdateSourceTrigger=PropertyChanged}"
+                                 ToolTip="{Binding Path=., Converter={StaticResource DisplayAttributeConverter}, ConverterParameter=FireboardAuthKey}" />
+                    </Grid>
+                </Border>
+            </Grid>
+        </TabItem>
+    </TabControl>
+</UserControl>

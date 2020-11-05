@@ -1,0 +1,19 @@
+﻿<UserControl
+    x:Class="RIS.Views.MainTickerUserControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+
+    mc:Ignorable="d"
+    d:DesignHeight="25" d:DesignWidth="250"
+
+    DataContext="{Binding MainTickerVM, Source={StaticResource ViewModelLocator}}">
+
+    <StackPanel x:Name="uxStack" Orientation="Horizontal">
+        <Canvas x:Name="uxCanvas">
+            <TextBlock x:Name="uxText" Text="{Binding Path=TickerText}" Canvas.Left="0" Margin="10,0"
+                       FontFamily="Segoe UI" />
+        </Canvas>
+    </StackPanel>
+</UserControl>

@@ -1,0 +1,154 @@
+﻿<Window
+    x:Class="RIS.Views.AlarmWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+
+    xmlns:views="clr-namespace:RIS.Views"
+    xmlns:avalonDock="http://schemas.xceed.com/wpf/xaml/avalondock"
+
+    mc:Ignorable="d" d:DesignHeight="550" d:DesignWidth="800"
+
+    Title="RIS - Emergency" Icon="/Resources/Icon.RIS.ico" Background="{StaticResource ColorbrushDark}"
+    Foreground="{Binding ForegroundColor, Converter={StaticResource DrawingColorToSolidBrushConverter}}"
+    WindowStartupLocation="CenterScreen" WindowStyle="None" WindowState="Maximized" FontSize="14" FontWeight="Bold"
+    PreviewKeyDown="Window_PreviewKeyDown">
+
+    <!-- Content -->
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- Menubar -->
+        <Menu Grid.Row="0" x:Name="uxMenu" Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Top"
+              Width="Auto" Grid.ColumnSpan="2" Background="{x:Null}">
+            <MenuItem x:Name="uxMenu_Close" Header="Schließen" Command="{Binding CloseCommand}" />
+            <MenuItem x:Name="uxMenu_Admin" Header="Fenster" IsEnabled="{Binding IsAdminMode}">
+                <MenuItem Header="Layout">
+                    <MenuItem x:Name="uxMenu_LayoutReset" Header="Layout zurücksetzen" Click="uxMenu_LayoutReset_Click" />
+                    <MenuItem x:Name="uxMenu_LayoutSave" Header="Layout speichern" Click="uxMenu_LayoutSave_Click" />
+                </MenuItem>
+                <Separator />
+                <MenuItem x:Name="uxMenu_MainVehicles" Header="Fahrzeuge"
+                          DataContext="{Binding ElementName=uxDock_MainVehicles}" IsCheckable="True"
+                          IsChecked="{Binding Path=IsVisible, Mode=OneWay}" Click="MenuDockItem_Click" />
+                <MenuItem x:Name="uxMenu_Vehicles" Header="Einsatzmittel"
+                          DataContext="{Binding ElementName=uxDock_Vehicles}" IsCheckable="True"
+                          IsChecked="{Binding Path=IsVisible, Mode=OneWay}" Click="MenuDockItem_Click" />
+                <MenuItem x:Name="uxMenu_MainTime" Header="Uhrzeit" DataContext="{Binding ElementName=uxDock_MainTime}"
+                          IsCheckable="True" IsChecked="{Binding Path=IsVisible, Mode=OneWay}"
+                          Click="MenuDockItem_Click" />
+                <MenuItem x:Name="uxMenu_Timer" Header="Alarmtimer" DataContext="{Binding ElementName=uxDock_Timer}"
+                          IsCheckable="True" IsChecked="{Binding Path=IsVisible, Mode=OneWay}"
+                          Click="MenuDockItem_Click" />
+                <MenuItem x:Name="uxMenu_Data" Header="Einsatzdaten" DataContext="{Binding ElementName=uxDock_Data}"
+                          IsCheckable="True" IsChecked="{Binding Path=IsVisible, Mode=OneWay}"
+                          Click="MenuDockItem_Click" />
+                <MenuItem x:Name="uxMenu_Route" Header="Route" DataContext="{Binding ElementName=uxDock_Route}"
+                          IsCheckable="True" IsChecked="{Binding Path=IsVisible, Mode=OneWay}"
+                          Click="MenuDockItem_Click" />
+                <MenuItem x:Name="uxMenu_AlarmappOverview" Header="Alarmapp - Overview"
+                          DataContext="{Binding ElementName=uxDock_AlarmappOverview}" IsCheckable="True"
+                          IsChecked="{Binding Path=IsVisible, Mode=OneWay}" Click="MenuDockItem_Click" />
+                <MenuItem x:Name="uxMenu_AlarmappUsers" Header="Alarmapp - Users"
+                          DataContext="{Binding ElementName=uxDock_AlarmappUsers}" IsCheckable="True"
+                          IsChecked="{Binding Path=IsVisible, Mode=OneWay}" Click="MenuDockItem_Click" />
+            </MenuItem>
+        </Menu>
+
+        <!-- Content -->
+        <avalonDock:DockingManager Grid.Row="1" x:Name="uxDockManager_Alarm" AllowMixedOrientation="True"
+                                   Background="{StaticResource ColorbrushLight}">
+            <avalonDock:DockingManager.Theme>
+                <avalonDock:MetroTheme />
+            </avalonDock:DockingManager.Theme>
+
+            <avalonDock:LayoutRoot>
+                <avalonDock:LayoutRoot.RootPanel>
+                    <avalonDock:LayoutPanel Orientation="Horizontal">
+                        <avalonDock:LayoutAnchorablePaneGroup Orientation="Vertical">
+
+                            <avalonDock:LayoutAnchorablePane DockHeight="0.2*">
+                                <avalonDock:LayoutAnchorable x:Name="uxDock_MainTime" ContentId="uxDock_MainTime"
+                                                             Title="Uhrzeit" CanAutoHide="False" CanClose="False"
+                                                             FloatingHeight="100" FloatingWidth="100">
+                                    <views:MainTimeUserControl x:Name="uxView_MainTime" />
+                                </avalonDock:LayoutAnchorable>
+                            </avalonDock:LayoutAnchorablePane>
+
+                            <avalonDock:LayoutAnchorablePane DockHeight="1.8*">
+                                <avalonDock:LayoutAnchorable x:Name="uxDock_MainVehicles"
+                                                             ContentId="uxDock_MainVehicles" Title="Fahrzeuge"
+                                                             CanAutoHide="False" CanClose="False" FloatingHeight="100"
+                                                             FloatingWidth="100">
+                                    <views:MainVehiclesUserControl x:Name="uxView_MainVehicles" />
+                                </avalonDock:LayoutAnchorable>
+                            </avalonDock:LayoutAnchorablePane>
+                        </avalonDock:LayoutAnchorablePaneGroup>
+
+                        <avalonDock:LayoutAnchorablePaneGroup Orientation="Vertical">
+                            <avalonDock:LayoutAnchorablePane DockHeight="0.2*">
+                                <avalonDock:LayoutAnchorable x:Name="uxDock_Timer" ContentId="uxDock_Timer"
+                                                             Title="Timer" CanAutoHide="False" CanClose="False"
+                                                             FloatingHeight="100" FloatingWidth="100">
+                                    <views:AlarmTimerUserControl x:Name="uxView_Timer" DataContext="{Binding TimerVM}" />
+                                </avalonDock:LayoutAnchorable>
+                            </avalonDock:LayoutAnchorablePane>
+
+                            <avalonDock:LayoutAnchorablePane DockHeight="1.8*">
+                                <avalonDock:LayoutAnchorable x:Name="uxDock_Vehicles" ContentId="uxDock_AlarmVehicles"
+                                                             Title="Einsatzmittel" CanAutoHide="False" CanClose="True"
+                                                             FloatingHeight="100" FloatingWidth="100">
+                                    <views:AlarmVehiclesUserControl x:Name="uxView_Vehicles"
+                                                                    DataContext="{Binding VehiclesVM}" />
+                                </avalonDock:LayoutAnchorable>
+                            </avalonDock:LayoutAnchorablePane>
+
+                        </avalonDock:LayoutAnchorablePaneGroup>
+                        <avalonDock:LayoutAnchorablePaneGroup Orientation="Vertical">
+
+
+                            <avalonDock:LayoutAnchorablePane DockHeight="1.0*">
+                                <avalonDock:LayoutAnchorable x:Name="uxDock_Data" ContentId="uxDock_Data"
+                                                             Title="Einsatzdaten" CanAutoHide="False" CanClose="False"
+                                                             FloatingHeight="100" FloatingWidth="100">
+                                    <views:AlarmDataUserControl x:Name="uxView_Data" DataContext="{Binding DataVM}" />
+                                </avalonDock:LayoutAnchorable>
+                            </avalonDock:LayoutAnchorablePane>
+
+                            <avalonDock:LayoutAnchorablePane DockHeight="1.0*">
+                                <avalonDock:LayoutAnchorable x:Name="uxDock_Route" ContentId="uxDock_Route"
+                                                             Title="Route" CanAutoHide="False" CanClose="False"
+                                                             FloatingHeight="100" FloatingWidth="100">
+                                    <views:AlarmRouteUserControl x:Name="uxView_Route" DataContext="{Binding RouteVM}" />
+                                </avalonDock:LayoutAnchorable>
+                            </avalonDock:LayoutAnchorablePane>
+
+                            <avalonDock:LayoutAnchorablePane DockHeight="1.0*">
+                                <avalonDock:LayoutAnchorable x:Name="uxDock_AlarmappOverview"
+                                                             ContentId="uxDock_AlarmappOverview"
+                                                             Title="Alarmapp - Overview" CanAutoHide="False"
+                                                             CanClose="False" FloatingHeight="100" FloatingWidth="100">
+                                    <views:AlarmAlarmappOverviewUserControl x:Name="uxView_AlarmappOverview"
+                                                                            DataContext="{Binding AlarmappVM}" />
+                                </avalonDock:LayoutAnchorable>
+                                <avalonDock:LayoutAnchorable x:Name="uxDock_AlarmappUsers"
+                                                             ContentId="uxDock_AlarmappUsers" Title="Alarmapp - Users"
+                                                             CanAutoHide="False" CanClose="False" FloatingHeight="100"
+                                                             FloatingWidth="100">
+                                    <views:AlarmAlarmappUsersUserControl x:Name="uxView_AlarmappUsers"
+                                                                         DataContext="{Binding AlarmappVM}" />
+                                </avalonDock:LayoutAnchorable>
+                            </avalonDock:LayoutAnchorablePane>
+
+                        </avalonDock:LayoutAnchorablePaneGroup>
+                    </avalonDock:LayoutPanel>
+                </avalonDock:LayoutRoot.RootPanel>
+            </avalonDock:LayoutRoot>
+        </avalonDock:DockingManager>
+    </Grid>
+</Window>

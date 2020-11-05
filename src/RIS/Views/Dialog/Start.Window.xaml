@@ -1,0 +1,44 @@
+﻿<Window
+    x:Class="RIS.Views.StartWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:views="clr-namespace:RIS.Views"
+
+    Title="RIS - Start"
+    WindowStartupLocation="CenterScreen" WindowStyle="None" ShowInTaskbar="False" HorizontalAlignment="Center"
+    VerticalAlignment="Center" ResizeMode="NoResize" Width="350" Height="350" Foreground="{x:Null}"
+    AllowsTransparency="True">
+
+    <Window.Background>
+        <SolidColorBrush />
+    </Window.Background>
+    <Grid>
+        <Viewbox Margin="60">
+            <DockPanel LastChildFill="False">
+                <Label FontSize="30" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                       Content="Rescue" DockPanel.Dock="Top" FontFamily="Eras ITC" Foreground="Black" FontWeight="Bold">
+                    <Label.Effect>
+                        <DropShadowEffect ShadowDepth="7" Direction="350" Color="#FFA0A0A0" BlurRadius="7" />
+                    </Label.Effect>
+                </Label>
+                <Label FontSize="30" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                       Content="Information" DockPanel.Dock="Top" FontFamily="Eras ITC" Foreground="Black"
+                       FontWeight="Bold">
+                    <Label.Effect>
+                        <DropShadowEffect ShadowDepth="7" Direction="350" Color="#FFA0A0A0" BlurRadius="7" />
+                    </Label.Effect>
+                </Label>
+                <Label FontSize="30" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                       Content="System" DockPanel.Dock="Top" FontFamily="Eras ITC" Foreground="Black" FontWeight="Bold">
+                    <Label.Effect>
+                        <DropShadowEffect ShadowDepth="7" Direction="350" Color="#FFA0A0A0" BlurRadius="7" />
+                    </Label.Effect>
+                </Label>
+            </DockPanel>
+        </Viewbox>
+        <Viewbox Margin="20">
+            <views:LoadingControl HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15"
+                                  Foreground="Black" />
+        </Viewbox>
+    </Grid>
+</Window>

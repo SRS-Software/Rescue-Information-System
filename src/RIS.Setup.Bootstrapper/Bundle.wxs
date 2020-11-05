@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi" xmlns:bal="http://schemas.microsoft.com/wix/BalExtension"
+     xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
+  <?define ProductVersion="!(bind.packageVersion.RIS)" ?>
+  <Bundle
+    UpgradeCode="{46ED2CB6-2D40-4A47-A2E5-154703DFEF21}"
+    Name="Rescue-Information-System"
+    Manufacturer="SpecialRescueSolutions UG(haftungsbeschränkt)"
+    HelpUrl="https://github.com/SRS-Software/Rescue-Information-System/wiki"
+    AboutUrl="https://github.com/SRS-Software/Rescue-Information-System"
+    Version="$(var.ProductVersion)"
+    DisableModify="yes"
+    DisableRemove="no">
+
+    <BootstrapperApplicationRef Id="WixStandardBootstrapperApplication.HyperlinkLicense">
+      <bal:WixStandardBootstrapperApplication
+        LicenseUrl=""
+        LogoFile="..\RIS\Resources\Image.Logo.png"
+        SuppressOptionsUI="yes" />
+    </BootstrapperApplicationRef>
+
+    <Chain>
+      <PackageGroupRef Id="Netfx45" />
+      <PackageGroupRef Id="SqlCE4x86" />
+      <PackageGroupRef Id="SqlCE4x64" />
+      <PackageGroupRef Id="ReportViewer" />
+      <MsiPackage Id="RIS"
+                  DisplayName="Rescue-Information-System"
+                  SourceFile="$(var.RIS.Setup.TargetPath)"
+                  Cache="no"
+                  Compressed="yes"
+                  Vital="yes"
+                  Visible="no"
+                  ForcePerMachine="yes" />
+    </Chain>
+  </Bundle>
+
+
+  <Fragment>
+    <!-- .NET 4.5 only installed if Vista or higher AND it's not already installed-->
+    <PackageGroup Id="Netfx45">
+      <ExePackage Id="Netfx45"
+                  DisplayName="Microsoft .NET Framework 4.5 Web" InstallCommand="/passive"
+                  SourceFile="dotNetFx45_Full_setup.exe"
+                  Cache="no"
+                  Compressed="yes"
+                  Vital="yes"
+                  Permanent="yes"
+                  PerMachine="yes"
+                  DetectCondition="(Netfx4FullVersion=&quot;4.5.50709&quot;) AND (NOT VersionNT64 OR (Netfx4x64FullVersion=&quot;4.5.50709&quot;))"
+                  InstallCondition="(VersionNT >= v6.0 OR VersionNT64 >= v6.0) AND (NOT (Netfx4FullVersion=&quot;4.5.50709&quot; OR Netfx4x64FullVersion=&quot;4.5.50709&quot;))" />
+    </PackageGroup>
+
+    <!-- .NET 4.0 only installed if XP AND it's not already installed -->
+    <util:RegistrySearch Root="HKLM" Key="SOFTWARE\Microsoft\Net Framework Setup\NDP\v4\Full" Value="Version"
+                         Variable="Netfx4FullVersion" />
+    <util:RegistrySearch Root="HKLM" Key="SOFTWARE\Microsoft\Net Framework Setup\NDP\v4\Full" Value="Version"
+                         Variable="Netfx4x64FullVersion" Win64="yes" />
+    <PackageGroup Id="Netfx4Full">
+      <ExePackage Id="Netfx4Full"
+                  DisplayName="Microsoft .NET Framework 4 Web" InstallCommand="/passive"
+                  SourceFile="dotNetFx40_Full_setup.exe"
+                  Cache="no"
+                  Compressed="yes"
+                  Vital="yes"
+                  Permanent="yes"
+                  PerMachine="yes"
+                  DetectCondition="Netfx4FullVersion AND (NOT VersionNT64 OR Netfx4x64FullVersion)"
+                  InstallCondition="(VersionNT &lt; v6.0 OR VersionNT64 &lt; v6.0) AND (NOT (Netfx4FullVersion OR Netfx4x64FullVersion))" />
+    </PackageGroup>
+
+    <!-- Sql Compact 4 x86  -->
+    <util:RegistrySearch Root="HKLM" Key="SOFTWARE\Microsoft\Microsoft SQL Server Compact Edition\v4.0\DEU"
+                         Value="DesktopRuntimeVersion" Variable="SqlCE4_x86" />
+    <PackageGroup Id="SqlCE4x86">
+      <ExePackage Id="SqlCE4x86"
+                  DisplayName="Microsoft SQL Server Compact 4 (x86)"
+                  SourceFile="SSCERuntime_x86-DEU.exe"
+                  Cache="no"
+                  Compressed="yes"
+                  Vital="yes"
+                  Permanent="yes"
+                  PerMachine="yes"
+                  DetectCondition="SqlCE4_x86 OR VersionNT64" />
+    </PackageGroup>
+
+    <!-- Sql Compact 4 x64 -->
+    <util:RegistrySearch Root="HKLM" Key="SOFTWARE\Microsoft\Microsoft SQL Server Compact Edition\v4.0\DEU"
+                         Value="DesktopRuntimeVersion" Win64="yes" Variable="SqlCE4_x64" />
+    <PackageGroup Id="SqlCE4x64">
+      <ExePackage Id="SqlCE4x64"
+                  DisplayName="Microsoft SQL Server Compact 4 (x64)"
+                  SourceFile="SSCERuntime_x64-DEU.exe"
+                  Cache="no"
+                  Compressed="yes"
+                  Vital="yes"
+                  Permanent="yes"
+                  PerMachine="yes"
+                  DetectCondition="SqlCE4_x64 OR NOT VersionNT64" />
+    </PackageGroup>
+
+    <!-- Report Viewer -->
+    <util:RegistrySearch Root="HKLM" Key="SOFTWARE\Microsoft\DevDiv\VB\Servicing\10.0\ROS" Value="Install"
+                         Variable="Report_Viewer" />
+    <PackageGroup Id="ReportViewer">
+      <ExePackage Id="ReportViewer"
+                  DisplayName="Microsoft Report Viewer 2010 SP1"
+                  SourceFile="ReportViewer2010SP1.exe" InstallCommand="/passive"
+                  Cache="no"
+                  Compressed="yes"
+                  Vital="yes"
+                  Permanent="yes"
+                  PerMachine="yes"
+                  DetectCondition="Report_Viewer" />
+    </PackageGroup>
+
+  </Fragment>
+</Wix>

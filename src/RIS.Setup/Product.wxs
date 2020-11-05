@@ -1,0 +1,624 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi" xmlns:netfx="http://schemas.microsoft.com/wix/NetFxExtension"
+     xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
+  <?define UpgradeGuid="3B563A68-99BC-4528-9356-295ADB67909A" ?>
+  <?define ProductName="Rescue-Information-System" ?>
+  <?define CompanyName="SpecialRescueSolutions UG(haftungsbeschränkt)" ?>
+  <?define ProductVersion="!(bind.FileVersion.RIS.exe)" ?>
+  <Product Id="*" Name="$(var.ProductName)" Version="$(var.ProductVersion)" Manufacturer="$(var.CompanyName)"
+           Language="1031" UpgradeCode="$(var.UpgradeGuid)" Codepage="1250">
+    <Package InstallerVersion="200" Compressed="yes" Description="Installiert das Rescue-Information-System"
+             Manufacturer="$(var.CompanyName)" />
+    <Property Id="ARPHELPLINK" Value="https://github.com/SRS-Software/Rescue-Information-System/wiki" />
+    <Property Id="ARPURLINFOABOUT" Value="https://github.com/SRS-Software/Rescue-Information-System" />
+    <Property Id="ARPPRODUCTICON" Value="RIS.ico" />
+    <Media Id="1" Cabinet="media1.cab" EmbedCab="yes" />
+    <Icon Id="RIS.ico" SourceFile="..\RIS\Resources\Icon.RIS.ico" />
+
+    <!-- Requirements -->
+    <PropertyRef Id="NETFRAMEWORK45" />
+    <Condition
+      Message='This setup requires Microsoft .NET Framework 4.5 package or greater needs to be installed for this installation to continue.'>
+      <![CDATA[Installed OR NETFRAMEWORK45]]>
+    </Condition>
+
+    <!-- Upgrade -->
+    <Upgrade Id="$(var.UpgradeGuid)">
+      <UpgradeVersion Minimum="$(var.ProductVersion)" IncludeMinimum="no" OnlyDetect="yes"
+                      Property="NEWERVERSIONDETECTED" />
+      <UpgradeVersion Minimum="0.0.0" Maximum="$(var.ProductVersion)" IncludeMinimum="yes" IncludeMaximum="no"
+                      Property="OLDERVERSIONBEINGUPGRADED" />
+    </Upgrade>
+    <InstallExecuteSequence>
+      <RemoveExistingProducts After="InstallInitialize" />
+      <Custom Action="NewerVersion" After="FindRelatedProducts">NEWERVERSIONDETECTED</Custom>
+    </InstallExecuteSequence>
+    <CustomAction Id="NewerVersion" Error="A later version of [ProductName] is already installed." />
+
+
+    <!-- Folders -->
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramFilesFolder">
+        <Directory Id="COMPANYFOLDER" Name="SRS-Software">
+          <Directory Id="INSTALLFOLDER" Name="Rescue-Information-System">
+            <Directory Id="DWDFOLDER" Name="DWD" />
+            <Directory Id="OCRFOLDER" Name="OCR">
+              <Directory Id="OCRBINFOLDER" Name="BIN" />
+            </Directory>
+            <Directory Id="TOOLSFOLDER" Name="Tools">
+              <Directory Id="TOOLSPDF2TIFFOLDER" Name="PDF2TIF" />
+              <Directory Id="TOOLSSFF2TIFFOLDER" Name="SFF2TIF" />
+            </Directory>
+          </Directory>
+        </Directory>
+      </Directory>
+      
+      <Directory Id="ProgramMenuFolder">
+        <Directory Id="MENUFOLDERUser_COMPANY" Name="SRS-Software">
+        </Directory>
+      </Directory>
+
+      <Directory Id="CommonAppDataFolder">
+        <Directory Id="APPDATAFOLDER_RIS" Name="RIS">
+          <Directory Id="APPDATAFOLDER_RIS_INBOX" Name="Inbox" />
+          <Directory Id="APPDATAFOLDER_RIS_ARCHIVES" Name="Archives" />
+        </Directory>
+      </Directory>
+
+      <Directory Id="DesktopFolder" />
+    </Directory>
+      
+    <!-- Files -->
+    <DirectoryRef Id="INSTALLFOLDER">
+      <Component Id="COMP_RIS_COMMONSERVICELOCATOR" Guid="EE0F92C9-A873-44A3-AB30-193C86971B30">
+        <File Id="CommonServiceLocator.dll" Name="CommonServiceLocator.dll" Source="$(var.RIS.TargetDir)CommonServiceLocator.dll" KeyPath="yes" />
+      </Component>      
+      <Component Id="COMP_RIS_DIBAPI" Guid="CD5A5281-DB46-4A07-B76D-2006294DA342">
+        <File Id="dibapi.dll" Name="dibapi.dll" Source="$(var.RIS.TargetDir)dibapi.dll" KeyPath="yes" />
+      </Component>
+      <Component Id="COMP_RIS_ENTITYFRAMEWORK" Guid="EC19B16C-9996-4B7C-88AD-EB029CF46E02">
+        <File Id="EntityFramework.dll" Name="EntityFramework.dll" Source="$(var.RIS.TargetDir)EntityFramework.dll" KeyPath="yes" />
+        <File Id="EntityFramework.SqlServer.dll" Name="EntityFramework.SqlServer.dll" Source="$(var.RIS.TargetDir)EntityFramework.SqlServer.dll" />
+        <File Id="EntityFramework.SqlServer.xml" Name="EntityFramework.SqlServer.xml" Source="$(var.RIS.TargetDir)EntityFramework.SqlServer.xml" />
+        <File Id="EntityFramework.SqlServerCompact.dll" Name="EntityFramework.SqlServerCompact.dll" Source="$(var.RIS.TargetDir)EntityFramework.SqlServerCompact.dll" />
+        <File Id="EntityFramework.SqlServerCompact.xml" Name="EntityFramework.SqlServerCompact.xml" Source="$(var.RIS.TargetDir)EntityFramework.SqlServerCompact.xml" />
+        <File Id="EntityFramework.xml" Name="EntityFramework.xml" Source="$(var.RIS.TargetDir)EntityFramework.xml" />
+      </Component>
+      <Component Id="COMP_RIS_MVVM" Guid="2AB35A6E-97DE-4034-BFA4-CF29C901F435">
+        <File Id="GalaSoft.MvvmLight.dll" Name="GalaSoft.MvvmLight.dll" Source="$(var.RIS.TargetDir)GalaSoft.MvvmLight.dll" KeyPath="yes" />
+        <File Id="GalaSoft.MvvmLight.Extras.dll" Name="GalaSoft.MvvmLight.Extras.dll" Source="$(var.RIS.TargetDir)GalaSoft.MvvmLight.Extras.dll" />
+        <File Id="GalaSoft.MvvmLight.Extras.pdb" Name="GalaSoft.MvvmLight.Extras.pdb" Source="$(var.RIS.TargetDir)GalaSoft.MvvmLight.Extras.pdb" />
+        <File Id="GalaSoft.MvvmLight.Extras.xml" Name="GalaSoft.MvvmLight.Extras.xml" Source="$(var.RIS.TargetDir)GalaSoft.MvvmLight.Extras.xml" />
+        <File Id="GalaSoft.MvvmLight.pdb" Name="GalaSoft.MvvmLight.pdb" Source="$(var.RIS.TargetDir)GalaSoft.MvvmLight.pdb" />
+        <File Id="GalaSoft.MvvmLight.Platform.dll" Name="GalaSoft.MvvmLight.Platform.dll" Source="$(var.RIS.TargetDir)GalaSoft.MvvmLight.Platform.dll" />
+        <File Id="GalaSoft.MvvmLight.Platform.pdb" Name="GalaSoft.MvvmLight.Platform.pdb" Source="$(var.RIS.TargetDir)GalaSoft.MvvmLight.Platform.pdb" />
+        <File Id="GalaSoft.MvvmLight.Platform.xml" Name="GalaSoft.MvvmLight.Platform.xml" Source="$(var.RIS.TargetDir)GalaSoft.MvvmLight.Platform.xml" />
+        <File Id="GalaSoft.MvvmLight.xml" Name="GalaSoft.MvvmLight.xml" Source="$(var.RIS.TargetDir)GalaSoft.MvvmLight.xml" />
+      </Component>
+      <Component Id="COMP_RIS_HTMLAGILITY" Guid="29A8A5D1-6C56-4A3E-96BF-93BB042CA40B">
+        <File Id="HtmlAgilityPack.dll" Name="HtmlAgilityPack.dll" Source="$(var.RIS.TargetDir)HtmlAgilityPack.dll" KeyPath="yes" />
+        <File Id="HtmlAgilityPack.xml" Name="HtmlAgilityPack.xml" Source="$(var.RIS.TargetDir)HtmlAgilityPack.xml" />
+      </Component>
+      <Component Id="COMP_RIS_IDENTITYMODEL" Guid="BBE9A0C5-8D1A-4FE3-88C9-AF7F39B781DC">
+        <File Id="IdentityModel.dll" Name="IdentityModel.dll" Source="$(var.RIS.TargetDir)IdentityModel.dll" KeyPath="yes" />
+        <File Id="IdentityModel.xml" Name="IdentityModel.xml" Source="$(var.RIS.TargetDir)IdentityModel.xml" />
+        <File Id="IdentityModel.pdb" Name="IdentityModel.pdb" Source="$(var.RIS.TargetDir)IdentityModel.pdb" />
+      </Component>      
+      <Component Id="COMP_RIS_LAME" Guid="15D28227-A224-442E-80CC-A083188CD723">
+        <File Id="libmp3lame.32.dll" Name="libmp3lame.32.dll" Source="$(var.RIS.TargetDir)libmp3lame.32.dll" KeyPath="yes" />
+        <File Id="libmp3lame.64.dll" Name="libmp3lame.64.dll" Source="$(var.RIS.TargetDir)libmp3lame.64.dll" />
+      </Component>
+      <Component Id="COMP_RIS_MAIL" Guid="89F83D1F-61C0-48EA-BCC6-8E990A7D2147">
+        <File Id="Mail.dll" Name="Mail.dll" Source="$(var.RIS.TargetDir)Mail.dll" KeyPath="yes" />
+        <File Id="Mail.xml" Name="Mail.xml" Source="$(var.RIS.TargetDir)Mail.xml" />
+      </Component>
+      <Component Id="COMP_RIS_MICROSOFT_IDENTITY" Guid="EC06A809-A8D1-4934-A564-FF1F73228902">
+        <File Id="Microsoft.IdentityModel.JsonWebTokens.dll" Name="Microsoft.IdentityModel.JsonWebTokens.dll" Source="$(var.RIS.TargetDir)Microsoft.IdentityModel.JsonWebTokens.dll" KeyPath="yes" />
+        <File Id="Microsoft.IdentityModel.JsonWebTokens.xml" Name="Microsoft.IdentityModel.JsonWebTokens.xml" Source="$(var.RIS.TargetDir)Microsoft.IdentityModel.JsonWebTokens.xml" />
+        <File Id="Microsoft.IdentityModel.Logging.dll" Name="Microsoft.IdentityModel.Logging.dll" Source="$(var.RIS.TargetDir)Microsoft.IdentityModel.Logging.dll" />
+        <File Id="Microsoft.IdentityModel.Logging.xml" Name="Microsoft.IdentityModel.Logging.xml" Source="$(var.RIS.TargetDir)Microsoft.IdentityModel.Logging.xml" />
+        <File Id="Microsoft.IdentityModel.Tokens.dll" Name="Microsoft.IdentityModel.Tokens.dll" Source="$(var.RIS.TargetDir)Microsoft.IdentityModel.Tokens.dll" />
+        <File Id="Microsoft.IdentityModel.Tokens.xml" Name="Microsoft.IdentityModel.Tokens.xml" Source="$(var.RIS.TargetDir)Microsoft.IdentityModel.Tokens.xml" />
+      </Component>
+      <Component Id="COMP_RIS_REPORTVIEWER" Guid="8B5AF4DE-9030-4799-9D62-6F1D5130176D">
+        <File Id="Microsoft.ReportViewer.WinForms.dll" Name="Microsoft.ReportViewer.WinForms.dll" Source="$(var.RIS.TargetDir)Microsoft.ReportViewer.WinForms.dll" />
+        <File Id="Microsoft.Win32.Primitives.dll" Name="Microsoft.Win32.Primitives.dll" Source="$(var.RIS.TargetDir)Microsoft.Win32.Primitives.dll" />        
+      </Component>
+      <Component Id="COMP_RIS_NAUDIO" Guid="7EFE594C-330A-4F17-BD6D-0C588F816822">
+        <File Id="NAudio.dll" Name="NAudio.dll" Source="$(var.RIS.TargetDir)NAudio.dll" KeyPath="yes" />
+        <File Id="NAudio.Lame.dll" Name="NAudio.Lame.dll" Source="$(var.RIS.TargetDir)NAudio.Lame.dll" />
+        <File Id="NAudio.xml" Name="NAudio.xml" Source="$(var.RIS.TargetDir)NAudio.xml" />
+      </Component>
+      <Component Id="COMP_RIS_NETCORE" Guid="2BB76CAB-D05C-4FAC-A481-31F7D9D4AC18">
+        <File Id="netstandard.dll" Name="netstandard.dll" Source="$(var.RIS.TargetDir)netstandard.dll" KeyPath="yes" />
+        <File Id="NETCore.Encrypt.dll" Name="NETCore.Encrypt.dll" Source="$(var.RIS.TargetDir)NETCore.Encrypt.dll" />
+        <File Id="Newtonsoft.Json.dll" Name="Newtonsoft.Json.dll" Source="$(var.RIS.TargetDir)Newtonsoft.Json.dll" />
+        <File Id="Newtonsoft.Json.xml" Name="Newtonsoft.Json.xml" Source="$(var.RIS.TargetDir)Newtonsoft.Json.xml" />
+      </Component>
+      <Component Id="COMP_RIS_PUMA" Guid="97DC8571-E98A-4B45-BBE8-AE712D0B7AB1">
+        <File Id="puma.interop.dll" Name="puma.interop.dll" Source="$(var.RIS.TargetDir)puma.interop.dll" />
+        <File Id="Puma.Net.dll" Name="Puma.Net.dll" Source="$(var.RIS.TargetDir)Puma.Net.dll" KeyPath="yes" />
+      </Component>
+      <Component Id="COMP_RIS_GRAPHDIFF" Guid="C84644EE-7A95-4C86-A820-4D704D6CFCEA">
+        <File Id="RefactorThis.GraphDiff.dll" Name="RefactorThis.GraphDiff.dll" Source="$(var.RIS.TargetDir)RefactorThis.GraphDiff.dll" KeyPath="yes" />
+        <File Id="RefactorThis.GraphDiff.pdb" Name="RefactorThis.GraphDiff.pdb" Source="$(var.RIS.TargetDir)RefactorThis.GraphDiff.pdb" />
+      </Component>
+      <Component Id="COMP_RIS_RESTSHARP" Guid="0E9DAB86-DCF1-4413-96C5-4A7542FB2737">
+        <File Id="RestSharp.dll" Name="RestSharp.dll" Source="$(var.RIS.TargetDir)RestSharp.dll" KeyPath="yes" />
+        <File Id="RestSharp.xml" Name="RestSharp.xml" Source="$(var.RIS.TargetDir)RestSharp.xml" />
+      </Component>
+      <Component Id="COMP_RIS_BUSINESS" Guid="29571DF3-7AA5-4F08-AF10-79CAC9B9EC19">
+        <File Id="RIS.Business.dll" Name="RIS.Business.dll" Source="$(var.RIS.TargetDir)RIS.Business.dll" />
+        <File Id="RIS.Business.pdb" Name="RIS.Business.pdb" Source="$(var.RIS.TargetDir)RIS.Business.pdb" />
+      </Component>
+      <Component Id="COMP_RIS_DATA" Guid="CB098F21-728F-47FF-A32F-A4497358DE1F">
+        <File Id="RIS.Data.dll" Name="RIS.Data.dll" Source="$(var.RIS.TargetDir)RIS.Data.dll" />
+        <File Id="RIS.Data.pdb" Name="RIS.Data.pdb" Source="$(var.RIS.TargetDir)RIS.Data.pdb" />
+      </Component>
+      <Component Id="COMP_RIS_EXE" Guid="65F440E2-7B52-4F93-9E24-70329627752B">
+        <File Id="RIS.exe" Name="RIS.exe" Source="$(var.RIS.TargetDir)RIS.exe" KeyPath="yes" Checksum="yes" />
+        <File Id="RIS.pdb" Name="RIS.pdb" Source="$(var.RIS.TargetDir)RIS.pdb" />
+        <File Id="RIS.exe.config" Name="RIS.exe.config" Source="$(var.RIS.TargetDir)RIS.exe.config" />
+      </Component>
+      <Component Id="COMP_RIS_MODEL" Guid="95F66139-BF40-4189-A096-0BC3DF5CEA2B">
+        <File Id="RIS.Model.dll" Name="RIS.Model.dll" Source="$(var.RIS.TargetDir)RIS.Model.dll" KeyPath="yes" />
+        <File Id="RIS.Model.pdb" Name="RIS.Model.pdb" Source="$(var.RIS.TargetDir)RIS.Model.pdb" />
+      </Component>
+      <Component Id="COMP_RIS_SHARPHTTP" Guid="3C455C56-8A84-419B-A3D5-B1CD048D06A4">
+        <File Id="RIS.SharpHttpServer.dll" Name="RIS.SharpHttpServer.dll" Source="$(var.RIS.TargetDir)RIS.SharpHttpServer.dll" KeyPath="yes" />
+      </Component>
+      <Component Id="COMP_RIS_UTILITIES" Guid="324CFE9D-5CC9-4967-94DC-2F4305658F07">
+        <File Id="SRS.Utilities.dll" Name="SRS.Utilities.dll" Source="$(var.RIS.TargetDir)SRS.Utilities.dll" KeyPath="yes" />
+      </Component>
+      <Component Id="COMP_RIS_SYSTEM" Guid="F95F90EA-83DC-49BD-A12E-24EFD58C2600">
+        <File Id="System.AppContext.dll" Name="System.AppContext.dll" Source="$(var.RIS.TargetDir)System.AppContext.dll" />
+        <File Id="System.Collections.Concurrent.dll" Name="System.Collections.Concurrent.dll" Source="$(var.RIS.TargetDir)System.Collections.Concurrent.dll" />
+        <File Id="System.Collections.dll" Name="System.Collections.dll" Source="$(var.RIS.TargetDir)System.Collections.dll" />
+        <File Id="System.Collections.NonGeneric.dll" Name="System.Collections.NonGeneric.dll" Source="$(var.RIS.TargetDir)System.Collections.NonGeneric.dll" />
+        <File Id="System.Collections.Specialized.dll" Name="System.Collections.Specialized.dll" Source="$(var.RIS.TargetDir)System.Collections.Specialized.dll" />
+        <File Id="System.ComponentModel.dll" Name="System.ComponentModel.dll" Source="$(var.RIS.TargetDir)System.ComponentModel.dll" />
+        <File Id="System.ComponentModel.EventBasedAsync.dll" Name="System.ComponentModel.EventBasedAsync.dll" Source="$(var.RIS.TargetDir)System.ComponentModel.EventBasedAsync.dll" />
+        <File Id="System.ComponentModel.Primitives.dll" Name="System.ComponentModel.Primitives.dll" Source="$(var.RIS.TargetDir)System.ComponentModel.Primitives.dll" />
+        <File Id="System.ComponentModel.TypeConverter.dll" Name="System.ComponentModel.TypeConverter.dll" Source="$(var.RIS.TargetDir)System.ComponentModel.TypeConverter.dll" />
+        <File Id="System.Console.dll" Name="System.Console.dll" Source="$(var.RIS.TargetDir)System.Console.dll" />
+        <File Id="System.Data.Common.dll" Name="System.Data.Common.dll" Source="$(var.RIS.TargetDir)System.Data.Common.dll" />
+        <File Id="System.Data.SqlServerCe.dll" Name="System.Data.SqlServerCe.dll" Source="$(var.RIS.TargetDir)System.Data.SqlServerCe.dll" />
+        <File Id="System.Diagnostics.Contracts.dll" Name="System.Diagnostics.Contracts.dll" Source="$(var.RIS.TargetDir)System.Diagnostics.Contracts.dll" />
+        <File Id="System.Diagnostics.Debug.dll" Name="System.Diagnostics.Debug.dll" Source="$(var.RIS.TargetDir)System.Diagnostics.Debug.dll" />
+        <File Id="System.Diagnostics.FileVersionInfo.dll" Name="System.Diagnostics.FileVersionInfo.dll" Source="$(var.RIS.TargetDir)System.Diagnostics.FileVersionInfo.dll" />
+        <File Id="System.Diagnostics.Process.dll" Name="System.Diagnostics.Process.dll" Source="$(var.RIS.TargetDir)System.Diagnostics.Process.dll" />
+        <File Id="System.Diagnostics.StackTrace.dll" Name="System.Diagnostics.StackTrace.dll" Source="$(var.RIS.TargetDir)System.Diagnostics.StackTrace.dll" />
+        <File Id="System.Diagnostics.TextWriterTraceListener.dll" Name="System.Diagnostics.TextWriterTraceListener.dll" Source="$(var.RIS.TargetDir)System.Diagnostics.TextWriterTraceListener.dll" />
+        <File Id="System.Diagnostics.Tools.dll" Name="System.Diagnostics.Tools.dll" Source="$(var.RIS.TargetDir)System.Diagnostics.Tools.dll" />
+        <File Id="System.Diagnostics.TraceSource.dll" Name="System.Diagnostics.TraceSource.dll" Source="$(var.RIS.TargetDir)System.Diagnostics.TraceSource.dll" />
+        <File Id="System.Diagnostics.Tracing.dll" Name="System.Diagnostics.Tracing.dll" Source="$(var.RIS.TargetDir)System.Diagnostics.Tracing.dll" />
+        <File Id="System.Drawing.Primitives.dll" Name="System.Drawing.Primitives.dll" Source="$(var.RIS.TargetDir)System.Drawing.Primitives.dll" />
+        <File Id="System.Dynamic.Runtime.dll" Name="System.Dynamic.Runtime.dll" Source="$(var.RIS.TargetDir)System.Dynamic.Runtime.dll" />
+        <File Id="System.Globalization.Calendars.dll" Name="System.Globalization.Calendars.dll" Source="$(var.RIS.TargetDir)System.Globalization.Calendars.dll" />
+        <File Id="System.Globalization.dll" Name="System.Globalization.dll" Source="$(var.RIS.TargetDir)System.Globalization.dll" />
+        <File Id="System.Globalization.Extensions.dll" Name="System.Globalization.Extensions.dll" Source="$(var.RIS.TargetDir)System.Globalization.Extensions.dll" />       
+        <File Id="System.IdentityModel.Tokens.Jwt.dll" Name="System.IdentityModel.Tokens.Jwt.dll" Source="$(var.RIS.TargetDir)System.IdentityModel.Tokens.Jwt.dll" />
+        <File Id="System.IdentityModel.Tokens.Jwt.xml" Name="System.IdentityModel.Tokens.Jwt.xml" Source="$(var.RIS.TargetDir)System.IdentityModel.Tokens.Jwt.xml" />
+        <File Id="System.IO.Compression.dll" Name="System.IO.Compression.dll" Source="$(var.RIS.TargetDir)System.IO.Compression.dll" />
+        <File Id="System.IO.Compression.ZipFile.dll" Name="System.IO.Compression.ZipFile.dll" Source="$(var.RIS.TargetDir)System.IO.Compression.ZipFile.dll" />
+        <File Id="System.IO.dll" Name="System.IO.dll" Source="$(var.RIS.TargetDir)System.IO.dll" />
+        <File Id="System.IO.FileSystem.dll" Name="System.IO.FileSystem.dll" Source="$(var.RIS.TargetDir)System.IO.FileSystem.dll" />
+        <File Id="System.IO.FileSystem.DriveInfo.dll" Name="System.IO.FileSystem.DriveInfo.dll" Source="$(var.RIS.TargetDir)System.IO.FileSystem.DriveInfo.dll" />
+        <File Id="System.IO.FileSystem.Primitives.dll" Name="System.IO.FileSystem.Primitives.dll" Source="$(var.RIS.TargetDir)System.IO.FileSystem.Primitives.dll" />
+        <File Id="System.IO.FileSystem.Watcher.dll" Name="System.IO.FileSystem.Watcher.dll" Source="$(var.RIS.TargetDir)System.IO.FileSystem.Watcher.dll" />
+        <File Id="System.IO.IsolatedStorage.dll" Name="System.IO.IsolatedStorage.dll" Source="$(var.RIS.TargetDir)System.IO.IsolatedStorage.dll" />
+        <File Id="System.IO.MemoryMappedFiles.dll" Name="System.IO.MemoryMappedFiles.dll" Source="$(var.RIS.TargetDir)System.IO.MemoryMappedFiles.dll" />
+        <File Id="System.IO.Pipes.dll" Name="System.IO.Pipes.dll" Source="$(var.RIS.TargetDir)System.IO.Pipes.dll" />
+        <File Id="System.IO.UnmanagedMemoryStream.dll" Name="System.IO.UnmanagedMemoryStream.dll" Source="$(var.RIS.TargetDir)System.IO.UnmanagedMemoryStream.dll" />
+        <File Id="System.Linq.dll" Name="System.Linq.dll" Source="$(var.RIS.TargetDir)System.Linq.dll" />
+        <File Id="System.Linq.Expressions.dll" Name="System.Linq.Expressions.dll" Source="$(var.RIS.TargetDir)System.Linq.Expressions.dll" />
+        <File Id="System.Linq.Parallel.dll" Name="System.Linq.Parallel.dll" Source="$(var.RIS.TargetDir)System.Linq.Parallel.dll" />
+        <File Id="System.Linq.Queryable.dll" Name="System.Linq.Queryable.dll" Source="$(var.RIS.TargetDir)System.Linq.Queryable.dll" />
+        <File Id="System.Net.Http.dll" Name="System.Net.Http.dll" Source="$(var.RIS.TargetDir)System.Net.Http.dll" />
+        <File Id="System.Net.NameResolution.dll" Name="System.Net.NameResolution.dll" Source="$(var.RIS.TargetDir)System.Net.NameResolution.dll" />
+        <File Id="System.Net.NetworkInformation.dll" Name="System.Net.NetworkInformation.dll" Source="$(var.RIS.TargetDir)System.Net.NetworkInformation.dll" />
+        <File Id="System.Net.Ping.dll" Name="System.Net.Ping.dll" Source="$(var.RIS.TargetDir)System.Net.Ping.dll" />
+        <File Id="System.Net.Primitives.dll" Name="System.Net.Primitives.dll" Source="$(var.RIS.TargetDir)System.Net.Primitives.dll" />
+        <File Id="System.Net.Requests.dll" Name="System.Net.Requests.dll" Source="$(var.RIS.TargetDir)System.Net.Requests.dll" />
+        <File Id="System.Net.Security.dll" Name="System.Net.Security.dll" Source="$(var.RIS.TargetDir)System.Net.Security.dll" />
+        <File Id="System.Net.Sockets.dll" Name="System.Net.Sockets.dll" Source="$(var.RIS.TargetDir)System.Net.Sockets.dll" />
+        <File Id="System.Net.WebHeaderCollection.dll" Name="System.Net.WebHeaderCollection.dll" Source="$(var.RIS.TargetDir)System.Net.WebHeaderCollection.dll" />
+        <File Id="System.Net.WebSockets.Client.dll" Name="System.Net.WebSockets.Client.dll" Source="$(var.RIS.TargetDir)System.Net.WebSockets.Client.dll" />
+        <File Id="System.Net.WebSockets.dll" Name="System.Net.WebSockets.dll" Source="$(var.RIS.TargetDir)System.Net.WebSockets.dll" />
+        <File Id="System.ObjectModel.dll" Name="System.ObjectModel.dll" Source="$(var.RIS.TargetDir)System.ObjectModel.dll" />
+        <File Id="System.Reflection.dll" Name="System.Reflection.dll" Source="$(var.RIS.TargetDir)System.Reflection.dll" />
+        <File Id="System.Reflection.Extensions.dll" Name="System.Reflection.Extensions.dll" Source="$(var.RIS.TargetDir)System.Reflection.Extensions.dll" />
+        <File Id="System.Reflection.Primitives.dll" Name="System.Reflection.Primitives.dll" Source="$(var.RIS.TargetDir)System.Reflection.Primitives.dll" />
+        <File Id="System.Resources.Reader.dll" Name="System.Resources.Reader.dll" Source="$(var.RIS.TargetDir)System.Resources.Reader.dll" />
+        <File Id="System.Resources.ResourceManager.dll" Name="System.Resources.ResourceManager.dll" Source="$(var.RIS.TargetDir)System.Resources.ResourceManager.dll" />
+        <File Id="System.Resources.Writer.dll" Name="System.Resources.Writer.dll" Source="$(var.RIS.TargetDir)System.Resources.Writer.dll" />
+        <File Id="System.Runtime.CompilerServices.VisualC.dll" Name="System.Runtime.CompilerServices.VisualC.dll" Source="$(var.RIS.TargetDir)System.Runtime.CompilerServices.VisualC.dll" />
+        <File Id="System.Runtime.dll" Name="System.Runtime.dll" Source="$(var.RIS.TargetDir)System.Runtime.dll" />
+        <File Id="System.Runtime.Extensions.dll" Name="System.Runtime.Extensions.dll" Source="$(var.RIS.TargetDir)System.Runtime.Extensions.dll" />
+        <File Id="System.Runtime.Handles.dll" Name="System.Runtime.Handles.dll" Source="$(var.RIS.TargetDir)System.Runtime.Handles.dll" />
+        <File Id="System.Runtime.InteropServices.dll" Name="System.Runtime.InteropServices.dll" Source="$(var.RIS.TargetDir)System.Runtime.InteropServices.dll" />
+        <File Id="System.Runtime.InteropServices.RuntimeInformation.dll" Name="System.Runtime.InteropServices.RuntimeInformation.dll" Source="$(var.RIS.TargetDir)System.Runtime.InteropServices.RuntimeInformation.dll" />
+        <File Id="System.Runtime.Numerics.dll" Name="System.Runtime.Numerics.dll" Source="$(var.RIS.TargetDir)System.Runtime.Numerics.dll" />
+        <File Id="System.Runtime.Serialization.Formatters.dll" Name="System.Runtime.Serialization.Formatters.dll" Source="$(var.RIS.TargetDir)System.Runtime.Serialization.Formatters.dll" />
+        <File Id="System.Runtime.Serialization.Json.dll" Name="System.Runtime.Serialization.Json.dll" Source="$(var.RIS.TargetDir)System.Runtime.Serialization.Json.dll" />
+        <File Id="System.Runtime.Serialization.Primitives.dll" Name="System.Runtime.Serialization.Primitives.dll" Source="$(var.RIS.TargetDir)System.Runtime.Serialization.Primitives.dll" />
+        <File Id="System.Runtime.Serialization.Xml.dll" Name="System.Runtime.Serialization.Xml.dll" Source="$(var.RIS.TargetDir)System.Runtime.Serialization.Xml.dll" />
+        <File Id="System.Security.Claims.dll" Name="System.Security.Claims.dll" Source="$(var.RIS.TargetDir)System.Security.Claims.dll" />
+        <File Id="System.Security.Cryptography.Algorithms.dll" Name="System.Security.Cryptography.Algorithms.dll" Source="$(var.RIS.TargetDir)System.Security.Cryptography.Algorithms.dll" />
+        <File Id="System.Security.Cryptography.Csp.dll" Name="System.Security.Cryptography.Csp.dll" Source="$(var.RIS.TargetDir)System.Security.Cryptography.Csp.dll" />
+        <File Id="System.Security.Cryptography.Encoding.dll" Name="System.Security.Cryptography.Encoding.dll" Source="$(var.RIS.TargetDir)System.Security.Cryptography.Encoding.dll" />
+        <File Id="System.Security.Cryptography.Primitives.dll" Name="System.Security.Cryptography.Primitives.dll" Source="$(var.RIS.TargetDir)System.Security.Cryptography.Primitives.dll" />
+        <File Id="System.Security.Cryptography.X509Certificates.dll" Name="System.Security.Cryptography.X509Certificates.dll" Source="$(var.RIS.TargetDir)System.Security.Cryptography.X509Certificates.dll" />
+        <File Id="System.Security.Principal.dll" Name="System.Security.Principal.dll" Source="$(var.RIS.TargetDir)System.Security.Principal.dll" />
+        <File Id="System.Security.SecureString.dll" Name="System.Security.SecureString.dll" Source="$(var.RIS.TargetDir)System.Security.SecureString.dll" />
+        <File Id="System.Text.Encoding.dll" Name="System.Text.Encoding.dll" Source="$(var.RIS.TargetDir)System.Text.Encoding.dll" />
+        <File Id="System.Text.Encoding.Extensions.dll" Name="System.Text.Encoding.Extensions.dll" Source="$(var.RIS.TargetDir)System.Text.Encoding.Extensions.dll" />
+        <File Id="System.Text.Encodings.Web.dll" Name="System.Text.Encodings.Web.dll" Source="$(var.RIS.TargetDir)System.Text.Encodings.Web.dll" />
+        <File Id="System.Text.Encodings.Web.xml" Name="System.Text.Encodings.Web.xml" Source="$(var.RIS.TargetDir)System.Text.Encodings.Web.xml" />
+        <File Id="System.Text.RegularExpressions.dll" Name="System.Text.RegularExpressions.dll" Source="$(var.RIS.TargetDir)System.Text.RegularExpressions.dll" />
+        <File Id="System.Threading.dll" Name="System.Threading.dll" Source="$(var.RIS.TargetDir)System.Threading.dll" />
+        <File Id="System.Threading.Overlapped.dll" Name="System.Threading.Overlapped.dll" Source="$(var.RIS.TargetDir)System.Threading.Overlapped.dll" />
+        <File Id="System.Threading.Tasks.dll" Name="System.Threading.Tasks.dll" Source="$(var.RIS.TargetDir)System.Threading.Tasks.dll" />
+        <File Id="System.Threading.Tasks.Parallel.dll" Name="System.Threading.Tasks.Parallel.dll" Source="$(var.RIS.TargetDir)System.Threading.Tasks.Parallel.dll" />
+        <File Id="System.Threading.Thread.dll" Name="System.Threading.Thread.dll" Source="$(var.RIS.TargetDir)System.Threading.Thread.dll" />
+        <File Id="System.Threading.ThreadPool.dll" Name="System.Threading.ThreadPool.dll" Source="$(var.RIS.TargetDir)System.Threading.ThreadPool.dll" />
+        <File Id="System.Threading.Timer.dll" Name="System.Threading.Timer.dll" Source="$(var.RIS.TargetDir)System.Threading.Timer.dll" />
+        <File Id="System.ValueTuple.dll" Name="System.ValueTuple.dll" Source="$(var.RIS.TargetDir)System.ValueTuple.dll" />
+        <File Id="System.Windows.Interactivity.dll" Name="System.Windows.Interactivity.dll" Source="$(var.RIS.TargetDir)System.Windows.Interactivity.dll" />
+        <File Id="System.Xml.ReaderWriter.dll" Name="System.Xml.ReaderWriter.dll" Source="$(var.RIS.TargetDir)System.Xml.ReaderWriter.dll" />
+        <File Id="System.Xml.XDocument.dll" Name="System.Xml.XDocument.dll" Source="$(var.RIS.TargetDir)System.Xml.XDocument.dll" />
+        <File Id="System.Xml.XmlDocument.dll" Name="System.Xml.XmlDocument.dll" Source="$(var.RIS.TargetDir)System.Xml.XmlDocument.dll" />
+        <File Id="System.Xml.XmlSerializer.dll" Name="System.Xml.XmlSerializer.dll" Source="$(var.RIS.TargetDir)System.Xml.XmlSerializer.dll" />
+        <File Id="System.Xml.XPath.dll" Name="System.Xml.XPath.dll" Source="$(var.RIS.TargetDir)System.Xml.XPath.dll" />
+        <File Id="System.Xml.XPath.XDocument.dll" Name="System.Xml.XPath.XDocument.dll" Source="$(var.RIS.TargetDir)System.Xml.XPath.XDocument.dll" />
+      </Component>
+      <Component Id="COMP_RIS_WPFTOOLKIT" Guid="A76BAAB1-316D-44B8-93E2-4BD3DFDBD9A1">
+        <File Id="Xceed.Wpf.AvalonDock.dll" Name="Xceed.Wpf.AvalonDock.dll" Source="$(var.RIS.TargetDir)Xceed.Wpf.AvalonDock.dll" KeyPath="yes" />
+        <File Id="Xceed.Wpf.AvalonDock.Themes.Aero.dll" Name="Xceed.Wpf.AvalonDock.Themes.Aero.dll" Source="$(var.RIS.TargetDir)Xceed.Wpf.AvalonDock.Themes.Aero.dll" />
+        <File Id="Xceed.Wpf.AvalonDock.Themes.Metro.dll" Name="Xceed.Wpf.AvalonDock.Themes.Metro.dll" Source="$(var.RIS.TargetDir)Xceed.Wpf.AvalonDock.Themes.Metro.dll" />
+        <File Id="Xceed.Wpf.AvalonDock.Themes.VS2010.dll" Name="Xceed.Wpf.AvalonDock.Themes.VS2010.dll" Source="$(var.RIS.TargetDir)Xceed.Wpf.AvalonDock.Themes.VS2010.dll" />
+        <File Id="Xceed.Wpf.Toolkit.dll" Name="Xceed.Wpf.Toolkit.dll" Source="$(var.RIS.TargetDir)Xceed.Wpf.Toolkit.dll" />
+      </Component>
+      <Component Id="COMP_SHORTCUT_DESKTOP" Guid="54588D55-F1EE-41F9-9187-99D5135ACE85">
+        <Shortcut Id="SHORTCUT_DESKTOP" Name="RIS" Target="[INSTALLFOLDER]RIS.exe" Directory="DesktopFolder" WorkingDirectory="INSTALLFOLDER" />
+        <RegistryValue Id="REG_SHORTCUT_DESKTOP" Root="HKCU" Key="Software\RIS\settings" Name="DesktopShortcut" Type="integer" Value="1" KeyPath="yes" />
+      </Component>
+    </DirectoryRef>
+
+    <DirectoryRef Id="OCRFOLDER">
+      <Component Id="COMP_OCR" Guid="4543A197-4273-40CC-B2B3-6D3ECAB8BD56">
+        <Class Id="{84E06770-9FD3-11D2-BAA9-0000E8D9FDF6}" Context="InprocServer32" Description="Cognitive OCR Puma" Advertise="yes">
+          <ProgId Id="Cognitive.Puma" Description="Cognitive OCR Puma" Advertise="yes" />
+        </Class>
+        <File Id="APuma.dll" Name="APuma.dll" Source="$(var.RIS.TargetDir)OCR\APuma.dll" DiskId="1" KeyPath="yes" />
+        <File Id="ccom.dll" Name="ccom.dll" Source="$(var.RIS.TargetDir)OCR\ccom.dll" />
+        <File Id="ced.dll" Name="ced.dll" Source="$(var.RIS.TargetDir)OCR\ced.dll" />
+        <File Id="CFIO.dll" Name="CFIO.dll" Source="$(var.RIS.TargetDir)OCR\CFIO.dll" />
+        <File Id="CImage.dll" Name="CImage.dll" Source="$(var.RIS.TargetDir)OCR\CImage.dll" />
+        <File Id="CLINE.dll" Name="CLINE.dll" Source="$(var.RIS.TargetDir)OCR\CLINE.dll" />
+        <File Id="cpage.dll" Name="cpage.dll" Source="$(var.RIS.TargetDir)OCR\cpage.dll" />
+        <File Id="Cpu32.dll" Name="Cpu32.dll" Source="$(var.RIS.TargetDir)OCR\Cpu32.dll" />
+        <File Id="cstr.dll" Name="cstr.dll" Source="$(var.RIS.TargetDir)OCR\cstr.dll" />
+        <File Id="Ctb32.dll" Name="Ctb32.dll" Source="$(var.RIS.TargetDir)OCR\Ctb32.dll" />
+        <File Id="CTWWW.dll" Name="CTWWW.dll" Source="$(var.RIS.TargetDir)OCR\CTWWW.dll" />
+        <File Id="dif32.dll" Name="dif32.dll" Source="$(var.RIS.TargetDir)OCR\dif32.dll" />
+        <File Id="evn32.dll" Name="evn32.dll" Source="$(var.RIS.TargetDir)OCR\evn32.dll" />
+        <File Id="Exc.dll" Name="Exc.dll" Source="$(var.RIS.TargetDir)OCR\Exc.dll" />
+        <File Id="fon32.dll" Name="fon32.dll" Source="$(var.RIS.TargetDir)OCR\fon32.dll" />
+        <File Id="Gbw32.dll" Name="Gbw32.dll" Source="$(var.RIS.TargetDir)OCR\Gbw32.dll" />
+        <File Id="gra32.dll" Name="gra32.dll" Source="$(var.RIS.TargetDir)OCR\gra32.dll" />
+        <File Id="leo32.dll" Name="leo32.dll" Source="$(var.RIS.TargetDir)OCR\leo32.dll" />
+        <File Id="lns32.dll" Name="lns32.dll" Source="$(var.RIS.TargetDir)OCR\lns32.dll" />
+        <File Id="Lns32.ini" Name="Lns32.ini" Source="$(var.RIS.TargetDir)OCR\Lns32.ini" />
+        <File Id="loc32.dll" Name="loc32.dll" Source="$(var.RIS.TargetDir)OCR\loc32.dll" />
+        <File Id="Mdt.dll" Name="Mdt.dll" Source="$(var.RIS.TargetDir)OCR\Mdt.dll" />
+        <File Id="mmx32.dll" Name="mmx32.dll" Source="$(var.RIS.TargetDir)OCR\mmx32.dll" />
+        <File Id="msk32.dll" Name="msk32.dll" Source="$(var.RIS.TargetDir)OCR\msk32.dll" />
+        <File Id="MZoning.dll" Name="MZoning.dll" Source="$(var.RIS.TargetDir)OCR\MZoning.dll" />
+        <File Id="Pass2.dll" Name="Pass2.dll" Source="$(var.RIS.TargetDir)OCR\Pass2.dll" />
+        <File Id="Pln.dll" Name="Pln.dll" Source="$(var.RIS.TargetDir)OCR\Pln.dll" />
+        <File Id="puma.dll" Name="puma.dll" Source="$(var.RIS.TargetDir)OCR\puma.dll" />
+        <File Id="r3532.dll" Name="r3532.dll" Source="$(var.RIS.TargetDir)OCR\r3532.dll" />
+        <File Id="RAGR.dll" Name="RAGR.dll" Source="$(var.RIS.TargetDir)OCR\RAGR.dll" />
+        <File Id="RAnalFrm.dll" Name="RAnalFrm.dll" Source="$(var.RIS.TargetDir)OCR\RAnalFrm.dll" />
+        <File Id="rbal.dll" Name="rbal.dll" Source="$(var.RIS.TargetDir)OCR\rbal.dll" />
+        <File Id="RBLOCK.dll" Name="RBLOCK.dll" Source="$(var.RIS.TargetDir)OCR\RBLOCK.dll" />
+        <File Id="RCorrKegl.dll" Name="RCorrKegl.dll" Source="$(var.RIS.TargetDir)OCR\RCorrKegl.dll" />
+        <File Id="RCUTP.dll" Name="RCUTP.dll" Source="$(var.RIS.TargetDir)OCR\RCUTP.dll" />
+        <File Id="RDib.dll" Name="RDib.dll" Source="$(var.RIS.TargetDir)OCR\RDib.dll" />
+        <File Id="Register.bat" Name="Register.bat" Source="$(var.RIS.TargetDir)OCR\Register.bat" />
+        <File Id="regsvr32.exe" Name="regsvr32.exe" Source="$(var.RIS.TargetDir)OCR\regsvr32.exe" />
+        <File Id="rfrmt.dll" Name="rfrmt.dll" Source="$(var.RIS.TargetDir)OCR\rfrmt.dll" />
+        <File Id="RImage.dll" Name="RImage.dll" Source="$(var.RIS.TargetDir)OCR\RImage.dll" />
+        <File Id="rline.dll" Name="rline.dll" Source="$(var.RIS.TargetDir)OCR\rline.dll" />
+        <File Id="Rling.dll" Name="Rling.dll" Source="$(var.RIS.TargetDir)OCR\Rling.dll" />
+        <File Id="RLings.dll" Name="RLings.dll" Source="$(var.RIS.TargetDir)OCR\RLings.dll" />
+        <File Id="Rltable.dll" Name="Rltable.dll" Source="$(var.RIS.TargetDir)OCR\Rltable.dll" />
+        <File Id="RMarker.dll" Name="RMarker.dll" Source="$(var.RIS.TargetDir)OCR\RMarker.dll" />
+        <File Id="RNEG.dll" Name="RNEG.dll" Source="$(var.RIS.TargetDir)OCR\RNEG.dll" />
+        <File Id="RNorm.dll" Name="RNorm.dll" Source="$(var.RIS.TargetDir)OCR\RNorm.dll" />
+        <File Id="Rout.dll" Name="Rout.dll" Source="$(var.RIS.TargetDir)OCR\Rout.dll" />
+        <File Id="rpic.dll" Name="rpic.dll" Source="$(var.RIS.TargetDir)OCR\rpic.dll" />
+        <File Id="rpstr.dll" Name="rpstr.dll" Source="$(var.RIS.TargetDir)OCR\rpstr.dll" />
+        <File Id="RRecCom.dll" Name="RRecCom.dll" Source="$(var.RIS.TargetDir)OCR\RRecCom.dll" />
+        <File Id="rsadd.dll" Name="rsadd.dll" Source="$(var.RIS.TargetDir)OCR\rsadd.dll" />
+        <File Id="RSELSTR.dll" Name="RSELSTR.dll" Source="$(var.RIS.TargetDir)OCR\RSELSTR.dll" />
+        <File Id="RShellLines.dll" Name="RShellLines.dll" Source="$(var.RIS.TargetDir)OCR\RShellLines.dll" />
+        <File Id="Rstr.dll" Name="Rstr.dll" Source="$(var.RIS.TargetDir)OCR\Rstr.dll" />
+        <File Id="RStuff.dll" Name="RStuff.dll" Source="$(var.RIS.TargetDir)OCR\RStuff.dll" />
+        <File Id="Scanmkn.dll" Name="Scanmkn.dll" Source="$(var.RIS.TargetDir)OCR\Scanmkn.dll" />
+        <File Id="Scanner.dll" Name="Scanner.dll" Source="$(var.RIS.TargetDir)OCR\Scanner.dll" />
+        <File Id="SLineDot.dll" Name="SLineDot.dll" Source="$(var.RIS.TargetDir)OCR\SLineDot.dll" />
+        <File Id="SMetric.dll" Name="SMetric.dll" Source="$(var.RIS.TargetDir)OCR\SMetric.dll" />
+        <File Id="SStreak.dll" Name="SStreak.dll" Source="$(var.RIS.TargetDir)OCR\SStreak.dll" />
+        <File Id="Std32.dll" Name="Std32.dll" Source="$(var.RIS.TargetDir)OCR\Std32.dll" />
+        <File Id="Unregister.bat" Name="Unregister.bat" Source="$(var.RIS.TargetDir)OCR\Unregister.bat" />
+        <File Id="vec32.dll" Name="vec32.dll" Source="$(var.RIS.TargetDir)OCR\vec32.dll" />
+      </Component>
+      <Component Id="COMP_OCR_REGISTRY" Guid="4976C04A-ED30-417F-9F76-03B661FA6EBB">
+        <RegistryValue Id="CLSID_InprocServer32" Root="HKCR"
+                       Key="CLSID\{84E06770-9FD3-11d2-BAA9-0000E8D9FDF6}\InprocServer32" Name="ThreadingModel"
+                       Value="Free" Type="string" />
+        <RegistryValue Id="CLSID_Programmable" Root="HKCR"
+                       Key="CLSID\{84E06770-9FD3-11d2-BAA9-0000E8D9FDF6}\Programmable" Value="" Type="string" />
+        <RegistryValue Id="CLSID_TypeLib" Root="HKCR" Key="CLSID\{84E06770-9FD3-11d2-BAA9-0000E8D9FDF6}\TypeLib"
+                       Value="{A7A44FF0-9FD6-11d2-BAA9-0000E8D9FDF6}" Type="string" />
+        <RegistryValue Id="Interface" Root="HKCR" Key="Interface\{229C106F-829F-11D2-BA6E-0000E8D9FDF6}"
+                       Value="IRecognition" Type="string" />
+        <RegistryValue Id="Interface_ProxyStubClsid32" Root="HKCR"
+                       Key="Interface\{229C106F-829F-11D2-BA6E-0000E8D9FDF6}\ProxyStubClsid32"
+                       Value="{00020424-0000-0000-C000-000000000046}" Type="string" />
+        <RegistryValue Id="Interface_TypeLib" Root="HKCR"
+                       Key="Interface\{229C106F-829F-11D2-BA6E-0000E8D9FDF6}\TypeLib"
+                       Value="{A7A44FF0-9FD6-11D2-BAA9-0000E8D9FDF6}" Type="string" />
+        <RegistryValue Id="Interface_Version" Root="HKCR"
+                       Key="Interface\{229C106F-829F-11D2-BA6E-0000E8D9FDF6}\TypeLib" Name="Version" Value="1.0"
+                       Type="string" />
+        <RegistryValue Id="Interface_IRecognitionEvents" Root="HKCR"
+                       Key="Interface\{229C1071-829F-11D2-BA6E-0000E8D9FDF6}" Value="_IRecognitionEvents" Type="string" />
+        <RegistryValue Id="Interface_ProxyStubClsid322" Root="HKCR"
+                       Key="Interface\{229C1071-829F-11D2-BA6E-0000E8D9FDF6}\ProxyStubClsid32"
+                       Value="{00020420-0000-0000-C000-000000000046}" Type="string" />
+        <RegistryValue Id="Interface_TypeLib2" Root="HKCR"
+                       Key="Interface\{229C1071-829F-11D2-BA6E-0000E8D9FDF6}\TypeLib"
+                       Value="{A7A44FF0-9FD6-11D2-BAA9-0000E8D9FDF6}" Type="string" />
+        <RegistryValue Id="Interface_Version2" Root="HKCR"
+                       Key="Interface\{229C1071-829F-11D2-BA6E-0000E8D9FDF6}\TypeLib" Name="Version" Value="1.0"
+                       Type="string" />
+        <RegistryValue Id="Interface_Puma" Root="HKCR" Key="TypeLib\{A7A44FF0-9FD6-11D2-BAA9-0000E8D9FDF6}\1.0"
+                       Value="Puma 1.0 Type Library" Type="string" />
+        <RegistryValue Id="TypeLib_win32" Root="HKCR" Key="TypeLib\{A7A44FF0-9FD6-11D2-BAA9-0000E8D9FDF6}\1.0\0\win32"
+                       Value="[!apuma.dll]" Type="string" />
+        <RegistryValue Id="TypeLib_FLAGS" Root="HKCR" Key="TypeLib\{A7A44FF0-9FD6-11D2-BAA9-0000E8D9FDF6}\1.0\FLAGS"
+                       Value="0" Type="string" />
+        <RegistryValue Id="TypeLib_HELPDIR" Root="HKCR"
+                       Key="TypeLib\{A7A44FF0-9FD6-11D2-BAA9-0000E8D9FDF6}\1.0\HELPDIR" Value="[$COMP_OCR_REGISTRY]\"
+                       Type="string" />
+      </Component>
+    </DirectoryRef>
+
+    <DirectoryRef Id="OCRBINFOLDER">
+      <Component Id="COMP_OCR_BIN" Guid="47ED8CC2-4555-4249-A3C4-A76F73AC9510">
+        <File Id="CUBE16PD.DAT" Name="CUBE16PD.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\CUBE16PD.DAT" />
+        <File Id="CUBE16PL.DAT" Name="CUBE16PL.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\CUBE16PL.DAT" />
+        <File Id="CUBE16PR.DAT" Name="CUBE16PR.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\CUBE16PR.DAT" />
+        <File Id="CUBE16PS.DAT" Name="CUBE16PS.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\CUBE16PS.DAT" />
+        <File Id="CUBE16PT.DAT" Name="CUBE16PT.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\CUBE16PT.DAT" />
+        <File Id="CUBEABDE.DAT" Name="CUBEABDE.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\CUBEABDE.DAT" />
+        <File Id="DC010101.DAT" Name="DC010101.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\DC010101.DAT" />
+        <File Id="DC0201.DAT" Name="DC0201.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\DC0201.DAT" />
+        <File Id="DC0202.DAT" Name="DC0202.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\DC0202.DAT" />
+        <File Id="DC0203.DAT" Name="DC0203.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\DC0203.DAT" />
+        <File Id="DC0204.DAT" Name="DC0204.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\DC0204.DAT" />
+        <File Id="DC0205.DAT" Name="DC0205.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\DC0205.DAT" />
+        <File Id="DC0206.DAT" Name="DC0206.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\DC0206.DAT" />
+        <File Id="DC1201.DAT" Name="DC1201.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\DC1201.DAT" />
+        <File Id="DC1203.DAT" Name="DC1203.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\DC1203.DAT" />
+        <File Id="DC1204.DAT" Name="DC1204.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\DC1204.DAT" />
+        <File Id="DC2201.DAT" Name="DC2201.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\DC2201.DAT" />
+        <File Id="DC2203.DAT" Name="DC2203.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\DC2203.DAT" />
+        <File Id="DC2204.DAT" Name="DC2204.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\DC2204.DAT" />
+        <File Id="DC_AGR.DAT" Name="DC_AGR.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\DC_AGR.DAT" />
+        <File Id="DC_ETRD.DAT" Name="DC_ETRD.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\DC_ETRD.DAT" />
+        <File Id="DC_RTRD.DAT" Name="DC_RTRD.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\DC_RTRD.DAT" />
+        <File Id="PLN_HPD.DAT" Name="PLN_HPD.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\PLN_HPD.DAT" />
+        <File Id="PLN_PRC.DAT" Name="PLN_PRC.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\PLN_PRC.DAT" />
+        <File Id="rec.dat" Name="rec.dat" Source="$(var.RIS.TargetDir)OCR\BIN\rec.dat" />
+        <File Id="REC1.DAT" Name="REC1.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\REC1.DAT" />
+        <File Id="rec1blt.dat" Name="rec1blt.dat" Source="$(var.RIS.TargetDir)OCR\BIN\rec1blt.dat" />
+        <File Id="REC1CEN.DAT" Name="REC1CEN.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\REC1CEN.DAT" />
+        <File Id="rec1n.dat" Name="rec1n.dat" Source="$(var.RIS.TargetDir)OCR\BIN\rec1n.dat" />
+        <File Id="REC1RE.DAT" Name="REC1R&amp;E.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\REC1R&amp;E.DAT" />
+        <File Id="REC1RUS.DAT" Name="REC1RUS.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\REC1RUS.DAT" />
+        <File Id="REC1TUR.DAT" Name="REC1TUR.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\REC1TUR.DAT" />
+        <File Id="REC2.DAT" Name="REC2.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\REC2.DAT" />
+        <File Id="rec2blt.dat" Name="rec2blt.dat" Source="$(var.RIS.TargetDir)OCR\BIN\rec2blt.dat" />
+        <File Id="REC2CEN.DAT" Name="REC2CEN.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\REC2CEN.DAT" />
+        <File Id="REC2N.DAT" Name="REC2N.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\REC2N.DAT" />
+        <File Id="REC2RE.DAT" Name="REC2R&amp;E.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\REC2R&amp;E.DAT" />
+        <File Id="REC2RUS.DAT" Name="REC2RUS.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\REC2RUS.DAT" />
+        <File Id="REC2TUR.DAT" Name="REC2TUR.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\REC2TUR.DAT" />
+        <File Id="REC3.DAT" Name="REC3.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\REC3.DAT" />
+        <File Id="rec3blt.dat" Name="rec3blt.dat" Source="$(var.RIS.TargetDir)OCR\BIN\rec3blt.dat" />
+        <File Id="REC3CEN.DAT" Name="REC3CEN.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\REC3CEN.DAT" />
+        <File Id="REC3N.DAT" Name="REC3N.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\REC3N.DAT" />
+        <File Id="REC3RE.DAT" Name="REC3R&amp;E.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\REC3R&amp;E.DAT" />
+        <File Id="REC3RUS.DAT" Name="REC3RUS.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\REC3RUS.DAT" />
+        <File Id="rec3tur.dat" Name="rec3tur.dat" Source="$(var.RIS.TargetDir)OCR\BIN\rec3tur.dat" />
+        <File Id="REC4COUR.DAT" Name="REC4COUR.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\REC4COUR.DAT" />
+        <File Id="REC4INC.DAT" Name="REC4INC.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\REC4INC.DAT" />
+        <File Id="REC4MTR.DAT" Name="REC4MTR.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\REC4MTR.DAT" />
+        <File Id="REC4RE.DAT" Name="REC4R&amp;E.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\REC4R&amp;E.DAT" />
+        <File Id="REC6.DAT" Name="REC6.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\REC6.DAT" />
+        <File Id="REC6ALL.DAT" Name="REC6ALL.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\REC6ALL.DAT" />
+        <File Id="rec6bul.dat" Name="rec6bul.dat" Source="$(var.RIS.TargetDir)OCR\BIN\rec6bul.dat" />
+        <File Id="REC6CRO.DAT" Name="REC6CRO.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\REC6CRO.DAT" />
+        <File Id="rec6cze.dat" Name="rec6cze.dat" Source="$(var.RIS.TargetDir)OCR\BIN\rec6cze.dat" />
+        <File Id="REC6DAN.DAT" Name="REC6DAN.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\REC6DAN.DAT" />
+        <File Id="REC6DUT.DAT" Name="REC6DUT.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\REC6DUT.DAT" />
+        <File Id="rec6est.dat" Name="rec6est.dat" Source="$(var.RIS.TargetDir)OCR\BIN\rec6est.dat" />
+        <File Id="REC6FRN.DAT" Name="REC6FRN.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\REC6FRN.DAT" />
+        <File Id="REC6GRM.DAT" Name="REC6GRM.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\REC6GRM.DAT" />
+        <File Id="rec6hun.dat" Name="rec6hun.dat" Source="$(var.RIS.TargetDir)OCR\BIN\rec6hun.dat" />
+        <File Id="REC6ITA.DAT" Name="REC6ITA.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\REC6ITA.DAT" />
+        <File Id="rec6lat.dat" Name="rec6lat.dat" Source="$(var.RIS.TargetDir)OCR\BIN\rec6lat.dat" />
+        <File Id="rec6lit.dat" Name="rec6lit.dat" Source="$(var.RIS.TargetDir)OCR\BIN\rec6lit.dat" />
+        <File Id="REC6POL.DAT" Name="REC6POL.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\REC6POL.DAT" />
+        <File Id="REC6POR.DAT" Name="REC6POR.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\REC6POR.DAT" />
+        <File Id="rec6rom.dat" Name="rec6rom.dat" Source="$(var.RIS.TargetDir)OCR\BIN\rec6rom.dat" />
+        <File Id="REC6RUS.DAT" Name="REC6RUS.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\REC6RUS.DAT" />
+        <File Id="REC6SER.DAT" Name="REC6SER.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\REC6SER.DAT" />
+        <File Id="rec6slo.dat" Name="rec6slo.dat" Source="$(var.RIS.TargetDir)OCR\BIN\rec6slo.dat" />
+        <File Id="REC6SPA.DAT" Name="REC6SPA.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\REC6SPA.DAT" />
+        <File Id="REC6SWE.DAT" Name="REC6SWE.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\REC6SWE.DAT" />
+        <File Id="rec6tur.dat" Name="rec6tur.dat" Source="$(var.RIS.TargetDir)OCR\BIN\rec6tur.dat" />
+        <File Id="REC6UKR.DAT" Name="REC6UKR.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\REC6UKR.DAT" />
+        <File Id="REC7.DAT" Name="REC7.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\REC7.DAT" />
+        <File Id="REC7BUL.DAT" Name="REC7BUL.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\REC7BUL.DAT" />
+        <File Id="REC7CRO.DAT" Name="REC7CRO.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\REC7CRO.DAT" />
+        <File Id="REC7CZE.DAT" Name="REC7CZE.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\REC7CZE.DAT" />
+        <File Id="REC7DAN.DAT" Name="REC7DAN.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\REC7DAN.DAT" />
+        <File Id="REC7DUT.DAT" Name="REC7DUT.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\REC7DUT.DAT" />
+        <File Id="REC7EST.DAT" Name="REC7EST.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\REC7EST.DAT" />
+        <File Id="REC7FRN.DAT" Name="REC7FRN.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\REC7FRN.DAT" />
+        <File Id="REC7GRM.DAT" Name="REC7GRM.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\REC7GRM.DAT" />
+        <File Id="REC7HUN.DAT" Name="REC7HUN.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\REC7HUN.DAT" />
+        <File Id="REC7ITA.DAT" Name="REC7ITA.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\REC7ITA.DAT" />
+        <File Id="REC7LAT.DAT" Name="REC7LAT.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\REC7LAT.DAT" />
+        <File Id="REC7LIT.DAT" Name="REC7LIT.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\REC7LIT.DAT" />
+        <File Id="REC7POL.DAT" Name="REC7POL.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\REC7POL.DAT" />
+        <File Id="REC7POR.DAT" Name="REC7POR.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\REC7POR.DAT" />
+        <File Id="REC7ROM.DAT" Name="REC7ROM.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\REC7ROM.DAT" />
+        <File Id="REC7RUS.DAT" Name="REC7RUS.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\REC7RUS.DAT" />
+        <File Id="REC7SER.DAT" Name="REC7SER.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\REC7SER.DAT" />
+        <File Id="REC7SLO.DAT" Name="REC7SLO.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\REC7SLO.DAT" />
+        <File Id="REC7SPA.DAT" Name="REC7SPA.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\REC7SPA.DAT" />
+        <File Id="REC7SWE.DAT" Name="REC7SWE.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\REC7SWE.DAT" />
+        <File Id="REC7TUR.DAT" Name="REC7TUR.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\REC7TUR.DAT" />
+        <File Id="REC7UKR.DAT" Name="REC7UKR.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\REC7UKR.DAT" />
+        <File Id="REC8.DAT" Name="REC8.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\REC8.DAT" />
+        <File Id="rec8bul.dat" Name="rec8bul.dat" Source="$(var.RIS.TargetDir)OCR\BIN\rec8bul.dat" />
+        <File Id="REC8CRO.DAT" Name="REC8CRO.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\REC8CRO.DAT" />
+        <File Id="rec8cze.dat" Name="rec8cze.dat" Source="$(var.RIS.TargetDir)OCR\BIN\rec8cze.dat" />
+        <File Id="REC8DAN.DAT" Name="REC8DAN.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\REC8DAN.DAT" />
+        <File Id="REC8DUT.DAT" Name="REC8DUT.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\REC8DUT.DAT" />
+        <File Id="REC8EST.DAT" Name="REC8EST.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\REC8EST.DAT" />
+        <File Id="REC8FRN.DAT" Name="REC8FRN.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\REC8FRN.DAT" />
+        <File Id="REC8GRM.DAT" Name="REC8GRM.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\REC8GRM.DAT" />
+        <File Id="rec8hun.dat" Name="rec8hun.dat" Source="$(var.RIS.TargetDir)OCR\BIN\rec8hun.dat" />
+        <File Id="REC8ITA.DAT" Name="REC8ITA.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\REC8ITA.DAT" />
+        <File Id="rec8lat.dat" Name="rec8lat.dat" Source="$(var.RIS.TargetDir)OCR\BIN\rec8lat.dat" />
+        <File Id="rec8lit.dat" Name="rec8lit.dat" Source="$(var.RIS.TargetDir)OCR\BIN\rec8lit.dat" />
+        <File Id="REC8POL.DAT" Name="REC8POL.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\REC8POL.DAT" />
+        <File Id="REC8POR.DAT" Name="REC8POR.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\REC8POR.DAT" />
+        <File Id="rec8rom.dat" Name="rec8rom.dat" Source="$(var.RIS.TargetDir)OCR\BIN\rec8rom.dat" />
+        <File Id="REC8RUS.DAT" Name="REC8RUS.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\REC8RUS.DAT" />
+        <File Id="REC8SER.DAT" Name="REC8SER.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\REC8SER.DAT" />
+        <File Id="rec8slo.dat" Name="rec8slo.dat" Source="$(var.RIS.TargetDir)OCR\BIN\rec8slo.dat" />
+        <File Id="REC8SPA.DAT" Name="REC8SPA.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\REC8SPA.DAT" />
+        <File Id="REC8SWE.DAT" Name="REC8SWE.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\REC8SWE.DAT" />
+        <File Id="rec8tur.dat" Name="rec8tur.dat" Source="$(var.RIS.TargetDir)OCR\BIN\rec8tur.dat" />
+        <File Id="REC8UKR.DAT" Name="REC8UKR.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\REC8UKR.DAT" />
+        <File Id="REC9.DAT" Name="REC9.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\REC9.DAT" />
+        <File Id="rec9bul.dat" Name="rec9bul.dat" Source="$(var.RIS.TargetDir)OCR\BIN\rec9bul.dat" />
+        <File Id="REC9CRO.DAT" Name="REC9CRO.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\REC9CRO.DAT" />
+        <File Id="rec9cze.dat" Name="rec9cze.dat" Source="$(var.RIS.TargetDir)OCR\BIN\rec9cze.dat" />
+        <File Id="REC9DAN.DAT" Name="REC9DAN.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\REC9DAN.DAT" />
+        <File Id="REC9DUT.DAT" Name="REC9DUT.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\REC9DUT.DAT" />
+        <File Id="REC9EST.DAT" Name="REC9EST.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\REC9EST.DAT" />
+        <File Id="REC9FRN.DAT" Name="REC9FRN.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\REC9FRN.DAT" />
+        <File Id="REC9GRM.DAT" Name="REC9GRM.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\REC9GRM.DAT" />
+        <File Id="rec9hun.dat" Name="rec9hun.dat" Source="$(var.RIS.TargetDir)OCR\BIN\rec9hun.dat" />
+        <File Id="REC9ITA.DAT" Name="REC9ITA.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\REC9ITA.DAT" />
+        <File Id="rec9lat.dat" Name="rec9lat.dat" Source="$(var.RIS.TargetDir)OCR\BIN\rec9lat.dat" />
+        <File Id="rec9lit.dat" Name="rec9lit.dat" Source="$(var.RIS.TargetDir)OCR\BIN\rec9lit.dat" />
+        <File Id="REC9POL.DAT" Name="REC9POL.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\REC9POL.DAT" />
+        <File Id="REC9POR.DAT" Name="REC9POR.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\REC9POR.DAT" />
+        <File Id="rec9rom.dat" Name="rec9rom.dat" Source="$(var.RIS.TargetDir)OCR\BIN\rec9rom.dat" />
+        <File Id="REC9RUS.DAT" Name="REC9RUS.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\REC9RUS.DAT" />
+        <File Id="REC9SER.DAT" Name="REC9SER.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\REC9SER.DAT" />
+        <File Id="rec9slo.dat" Name="rec9slo.dat" Source="$(var.RIS.TargetDir)OCR\BIN\rec9slo.dat" />
+        <File Id="REC9SPA.DAT" Name="REC9SPA.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\REC9SPA.DAT" />
+        <File Id="REC9SWE.DAT" Name="REC9SWE.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\REC9SWE.DAT" />
+        <File Id="rec9tur.dat" Name="rec9tur.dat" Source="$(var.RIS.TargetDir)OCR\BIN\rec9tur.dat" />
+        <File Id="REC9UKR.DAT" Name="REC9UKR.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\REC9UKR.DAT" />
+        <File Id="VITAL.DAT" Name="VITAL.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\VITAL.DAT" />
+        <File Id="VITENG.DAT" Name="VITENG.DAT" Source="$(var.RIS.TargetDir)OCR\BIN\VITENG.DAT" />
+      </Component>
+    </DirectoryRef>   
+    
+    <DirectoryRef Id="TOOLSPDF2TIFFOLDER">
+      <Component Id="COMP_PDF2TIF" Guid="EED40EEC-3589-4012-918A-F47EF0005B72">
+        <File Id="gsdll32.dll" Name="gsdll32.dll" Source="$(var.RIS.TargetDir)Tools\PDF2TIF\gsdll32.dll" />
+        <File Id="gsdll32.lib" Name="gsdll32.lib" Source="$(var.RIS.TargetDir)Tools\PDF2TIF\gsdll32.lib" />
+        <File Id="PdfConverter.exe" Name="PdfConverter.exe" Source="$(var.RIS.TargetDir)Tools\PDF2TIF\PdfConverter.exe" />
+      </Component>
+    </DirectoryRef>
+
+    <DirectoryRef Id="TOOLSSFF2TIFFOLDER">
+      <Component Id="COMP_SFF2TIF" Guid="650A33D8-6F56-4F13-9580-2A19A8E3057A">
+        <File Id="SFF2TIF.exe" Name="SFF2TIF.exe" Source="$(var.RIS.TargetDir)Tools\SFF2TIF\SFF2TIF.exe" />
+      </Component>
+    </DirectoryRef>
+
+    <DirectoryRef Id="MENUFOLDERUser_COMPANY">
+      <Component Id="COMP_SHORTCUT_PROGRAMMENU" Guid="*">
+        <RegistryValue Id="REG_SHORTCUT_PROGRAMMENU" Root="HKCU" Key="Software\RIS\settings" Name="ProgrammenuShortcut"
+                       Type="integer" Value="1" KeyPath="yes" />
+        <Shortcut Id="SHORTCUT_PROGRAMMENU" Name="Rescue-Information-System" Target="[INSTALLFOLDER]RIS.exe"
+                  Directory="MENUFOLDERUser_COMPANY" WorkingDirectory="INSTALLFOLDER" />
+        <RemoveFolder Id="REMOVECOMPANYPROGRAMSFOLDER" On="uninstall" Directory="MENUFOLDERUser_COMPANY" />
+      </Component>
+    </DirectoryRef>
+
+    <DirectoryRef Id="APPDATAFOLDER_RIS">
+      <Component Id="COMP_CREATEFOLDER_APPDATA" Guid="92CB4AA5-0384-410F-B23D-0403540F3AF3">
+        <CreateFolder Directory="APPDATAFOLDER_RIS">
+          <util:PermissionEx User="Users" GenericAll="yes" />
+        </CreateFolder> 
+        <CreateFolder Directory="APPDATAFOLDER_RIS_INBOX" />
+        <CreateFolder Directory="APPDATAFOLDER_RIS_ARCHIVES" />
+      </Component>
+    </DirectoryRef>
+
+    <Feature Id="AlwaysInstall" Absent="disallow" ConfigurableDirectory="INSTALLFOLDER" Display="hidden" Level="1" Title="Immer installieren">
+      <ComponentRef Id="COMP_OCR" />
+      <ComponentRef Id="COMP_OCR_REGISTRY" />
+      <ComponentRef Id="COMP_OCR_BIN" />
+      <ComponentRef Id="COMP_PDF2TIF" />
+      <ComponentRef Id="COMP_SFF2TIF" />
+      <ComponentRef Id="COMP_RIS_COMMONSERVICELOCATOR" />      
+      <ComponentRef Id="COMP_RIS_DIBAPI" />
+      <ComponentRef Id="COMP_RIS_ENTITYFRAMEWORK" />
+      <ComponentRef Id="COMP_RIS_MVVM" />
+      <ComponentRef Id="COMP_RIS_HTMLAGILITY" />
+      <ComponentRef Id="COMP_RIS_IDENTITYMODEL" />
+      <ComponentRef Id="COMP_RIS_LAME" />
+      <ComponentRef Id="COMP_RIS_MAIL" />
+      <ComponentRef Id="COMP_RIS_MICROSOFT_IDENTITY" />
+      <ComponentRef Id="COMP_RIS_REPORTVIEWER" />
+      <ComponentRef Id="COMP_RIS_NAUDIO" />      
+      <ComponentRef Id="COMP_RIS_SHARPHTTP" />
+      <ComponentRef Id="COMP_RIS_NETCORE" />
+      <ComponentRef Id="COMP_RIS_PUMA" />
+      <ComponentRef Id="COMP_RIS_GRAPHDIFF" />
+      <ComponentRef Id="COMP_RIS_RESTSHARP" />
+      <ComponentRef Id="COMP_RIS_BUSINESS" />
+      <ComponentRef Id="COMP_RIS_DATA" />
+      <ComponentRef Id="COMP_RIS_EXE" />
+      <ComponentRef Id="COMP_RIS_MODEL" />
+      <ComponentRef Id="COMP_RIS_UTILITIES" />
+      <ComponentRef Id="COMP_RIS_SYSTEM" />
+      <ComponentRef Id="COMP_RIS_WPFTOOLKIT" />
+      <ComponentRef Id="COMP_SHORTCUT_DESKTOP" />
+      <ComponentRef Id="COMP_SHORTCUT_PROGRAMMENU" />
+      <ComponentRef Id="COMP_CREATEFOLDER_APPDATA" />
+    </Feature>
+
+    <UI>
+      <UIRef Id="WixUI_Minimal" />
+    </UI>
+
+  </Product>
+</Wix>

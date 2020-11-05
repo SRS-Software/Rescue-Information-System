@@ -1,0 +1,52 @@
+﻿<Window x:Class="RIS.Views.SettingsWeekplanDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+
+        Width="250" SizeToContent="Height" ResizeMode="NoResize" AllowsTransparency="True" Background="{x:Null}"
+        Title="{Binding WindowTitel}" Icon="/Resources/Icon.RIS.ico"
+        WindowStyle="None" WindowStartupLocation="CenterScreen">
+
+    <Border Background="{StaticResource ColorbrushDark}" BorderBrush="{StaticResource ColorbrushLight}"
+            BorderThickness="2" CornerRadius="7">
+        <DockPanel>
+            <!-- Titel -->
+            <ContentControl DockPanel.Dock="Top" Template="{StaticResource WindowTopbar}" />
+
+            <!-- Content -->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="10" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="10" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="5" />
+                    <RowDefinition />
+                    <RowDefinition Height="5" />
+                    <RowDefinition />
+                    <RowDefinition Height="10" />
+                    <RowDefinition />
+                    <RowDefinition Height="5" />
+                </Grid.RowDefinitions>
+
+                <Label Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center"
+                       Content="Beginn:" />
+                <xctk:DateTimeUpDown Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" Format="ShortTime"
+                                     Value="{Binding Path=Start}" CultureInfo="de-DE" />
+
+                <Label Grid.Row="3" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center"
+                       Content="Ende:" />
+                <xctk:DateTimeUpDown Grid.Row="3" Grid.Column="2" VerticalAlignment="Center" Format="ShortTime"
+                                     Value="{Binding Path=Stop}" CultureInfo="de-DE"
+                                     HorizontalContentAlignment="Center" />
+
+                <!-- Button -->
+                <Button Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" Height="35" Content="Speichern"
+                        Command="{Binding SaveCommand}" />
+            </Grid>
+        </DockPanel>
+    </Border>
+</Window>

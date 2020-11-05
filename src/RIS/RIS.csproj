@@ -1,0 +1,1322 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{0A497927-E214-41D5-8264-FD34AE728016}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>RIS</RootNamespace>
+    <AssemblyName>RIS</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\build\debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\build\release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>RIS.App</StartupObject>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Resources\Icon.RIS.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CommonServiceLocator, Version=2.0.4.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\CommonServiceLocator.2.0.4\lib\net46\CommonServiceLocator.dll</HintPath>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight, Version=5.4.1.0, Culture=neutral, PublicKeyToken=e7570ab207bcb616, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.4.1.1\lib\net45\GalaSoft.MvvmLight.dll</HintPath>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight.Extras, Version=5.4.1.0, Culture=neutral, PublicKeyToken=669f0b5e8f868abf, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.4.1.1\lib\net45\GalaSoft.MvvmLight.Extras.dll</HintPath>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight.Platform, Version=5.4.1.0, Culture=neutral, PublicKeyToken=5f873c45e98af8a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.4.1.1\lib\net45\GalaSoft.MvvmLight.Platform.dll</HintPath>
+    </Reference>
+    <Reference Include="HtmlAgilityPack, Version=1.11.4.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <HintPath>..\packages\HtmlAgilityPack.1.11.4\lib\Net45\HtmlAgilityPack.dll</HintPath>
+    </Reference>
+    <Reference Include="IdentityModel, Version=3.10.10.0, Culture=neutral, PublicKeyToken=e7877f4675df049f, processorArchitecture=MSIL">
+      <HintPath>..\packages\IdentityModel.3.10.10\lib\net452\IdentityModel.dll</HintPath>
+    </Reference>
+    <Reference Include="Mail, Version=3.0.16028.1145, Culture=neutral, PublicKeyToken=6dc438ab78a525b3, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\resources\Mail.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.JsonWebTokens, Version=5.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.JsonWebTokens.5.5.0\lib\net461\Microsoft.IdentityModel.JsonWebTokens.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Logging, Version=5.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Logging.5.5.0\lib\net461\Microsoft.IdentityModel.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Tokens, Version=5.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Tokens.5.5.0\lib\net461\Microsoft.IdentityModel.Tokens.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.ReportViewer.WinForms.10.0.40219.1\lib\Microsoft.ReportViewer.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="NAudio, Version=1.9.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NAudio.1.9.0\lib\net35\NAudio.dll</HintPath>
+    </Reference>
+    <Reference Include="NAudio.Lame, Version=1.0.9.26885, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NAudio.Lame.1.0.9\lib\net40\NAudio.Lame.dll</HintPath>
+    </Reference>
+    <Reference Include="NETCore.Encrypt, Version=2.0.7.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NETCore.Encrypt.2.0.7\lib\netstandard2.0\NETCore.Encrypt.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Puma.Net, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5e8cf038eac46fae, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\resources\Puma.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="RestSharp, Version=106.6.9.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
+      <HintPath>..\packages\RestSharp.106.6.9\lib\net452\RestSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="SRS.Utilities, Version=1.1409.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\resources\SRS.Utilities.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IdentityModel.Tokens.Jwt, Version=5.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IdentityModel.Tokens.Jwt.5.5.0\lib\net461\System.IdentityModel.Tokens.Jwt.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net" />
+    <Reference Include="System.Security.Cryptography.Algorithms, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Algorithms.4.3.1\lib\net461\System.Security.Cryptography.Algorithms.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Text.Encodings.Web, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encodings.Web.4.5.0\lib\netstandard2.0\System.Text.Encodings.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.4.1.1\lib\net45\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="Xceed.Wpf.AvalonDock, Version=3.5.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.5.0\lib\net40\Xceed.Wpf.AvalonDock.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Aero, Version=3.5.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.5.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.Aero.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Metro, Version=3.5.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.5.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.Metro.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.VS2010, Version=3.5.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.5.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.VS2010.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.Toolkit, Version=3.5.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.5.0\lib\net40\Xceed.Wpf.Toolkit.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\SharedAssemblyInfo.cs">
+      <Link>Properties\SharedAssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="Core\AlarmappApi\AlarmappApi.AlarmDTO.cs" />
+    <Compile Include="Core\AlarmappApi\AlarmappApi.FuntiongroupResult.cs" />
+    <Compile Include="Core\AlarmappApi\AlarmappApi.ParticipationsResult.cs" />
+    <Compile Include="Core\AlarmappApi\AlarmappApiService.cs" />
+    <Compile Include="Core\AlarmappApi\AlarmappApi.AlarmgroupsResult.cs" />
+    <Compile Include="Core\AlarmappApi\AlarmappApi.AlarmCreateResult.cs" />
+    <Compile Include="Core\Alarmapp\Alarmapp.AlarmStatus.cs" />
+    <Compile Include="Core\Decoder\Decoder.HttpServer.cs" />
+    <Compile Include="Core\FireboardApi\FireboardApi.AuthKey.cs" />
+    <Compile Include="Core\FireboardApi\FireboardApiService.cs" />
+    <Compile Include="Core\Fireboard\FireboardService.cs" />
+    <Compile Include="Core\Fireboard\IFireboardService.cs" />
+    <Compile Include="Core\Helper\Coordinaten.cs" />
+    <Compile Include="Core\Helper\Encrypt.cs" />
+    <Compile Include="Core\Helper\MessageBox.cs" />
+    <Compile Include="Core\Helper\Screen.cs" />
+    <Compile Include="Core\Helper\Screensaver.cs" />
+    <Compile Include="Core\Helper\Parser.cs" />
+    <Compile Include="Core\Helper\Serializer.cs" />
+    <Compile Include="Core\Helper\UserAccessRights.cs" />
+    <Compile Include="Core\IService.cs" />
+    <Compile Include="Core\Warnweather\IWarnweatherService.cs" />
+    <Compile Include="Core\Warnweather\WarnweatherService.cs" />
+    <Compile Include="Core\Mouse\IMouseService.cs" />
+    <Compile Include="Core\Mouse\MouseService.cs" />
+    <Compile Include="Core\Riverlevel\Riverlevel.Mode.cs" />
+    <Compile Include="Core\Reboot\IRebootService.cs" />
+    <Compile Include="Core\Reboot\RebootService.cs" />
+    <Compile Include="Core\Riverlevel\IRiverlevelService.cs" />
+    <Compile Include="Core\Riverlevel\Riverlevel.EventArgs.cs" />
+    <Compile Include="Core\Riverlevel\RiverlevelService.cs" />
+    <Compile Include="Core\Watchdog\Watchdog.WatchdogResponse.cs" />
+    <Compile Include="Factories\ServiceFactory.cs" />
+    <Compile Include="ViewModels\UserControl\Main\MainRiverlevel.ViewModel.cs" />
+    <Compile Include="ViewModels\UserControl\Main\MainWarnweather.ViewModel.cs" />
+    <Compile Include="ViewModels\UserControl\Main\MainWebbrowser.ViewModel.cs" />
+    <Compile Include="ViewModels\ViewModelLocator.cs" />
+    <Compile Include="Factories\ViewFactory.cs" />
+    <Page Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Classes\SettingsExport.cs" />
+    <Compile Include="Classes\SettingsFms.cs" />
+    <Compile Include="Classes\SettingsMonitor.cs" />
+    <Compile Include="Classes\SettingsOcr.cs" />
+    <Compile Include="Core\Alarmapp\AlarmappService.cs" />
+    <Compile Include="Core\Alarmapp\Alarmapp.EventArgs.cs" />
+    <Compile Include="Core\Alarmapp\IAlarmappService.cs" />
+    <Compile Include="Core\AMS\IAmsService.cs" />
+    <Compile Include="Core\Decoder\Decoder.TcpServer.cs" />
+    <Compile Include="Core\Decoder\Decoder.TcpClient.cs" />
+    <Compile Include="Core\Decoder\IDecoder.Client.cs" />
+    <Compile Include="Core\Decoder\Decoder.Mode.cs" />
+    <Compile Include="Core\Fax\Fax.Einsatz.cs" />
+    <Compile Include="Core\Helper\RestSharpExtensions.cs" />
+    <Compile Include="Core\Helper\Text.cs" />
+    <Compile Include="Core\Mail\Mail.EventArgs.cs" />
+    <Compile Include="Core\Map\Map.EventArgs.cs" />
+    <Compile Include="Core\Map\Map.GeocodeResult.cs" />
+    <Compile Include="Core\Map\Map.Location.cs" />
+    <Compile Include="Core\Map\Map.RoutingResult.cs" />
+    <Compile Include="Core\Decoder\IDecoderService.cs" />
+    <Compile Include="Core\AMS\Ams.Einsatz.cs" />
+    <Compile Include="Core\AMS\Ams.EventArgs.cs" />
+    <Compile Include="Core\AMS\Ams.RecordState.cs" />
+    <Compile Include="Core\AMS\AmsService.cs" />
+    <Compile Include="Core\Decoder\Decoder.EventArgs.cs" />
+    <Compile Include="Core\Decoder\DecoderService.cs" />
+    <Compile Include="Core\Fax\Fax.EventArgs.cs" />
+    <Compile Include="Core\Fax\FaxService.cs" />
+    <Compile Include="Core\Fax\IFaxService.cs" />
+    <Compile Include="Core\Helper\Execute.cs" />
+    <Compile Include="Core\Helper\MoveFile.cs" />
+    <Compile Include="Core\Helper\TiffConverter.cs" />
+    <Compile Include="Core\Helper\WaitFileReady.cs" />
+    <Compile Include="Core\Mail\IMailService.cs" />
+    <Compile Include="Core\Mail\Mail.Message.cs" />
+    <Compile Include="Core\Mail\MailService.cs" />
+    <Compile Include="Core\Map\IMapService.cs" />
+    <Compile Include="Core\Map\MapService.cs" />
+    <Compile Include="Core\Monitor\IMonitorService.cs" />
+    <Compile Include="Core\Monitor\MonitorService.cs" />
+    <Compile Include="Core\Printer\IPrinterService.cs" />
+    <Compile Include="Core\Printer\PdfPrinterHelper.cs" />
+    <Compile Include="Core\Printer\PrinterService.cs" />
+    <Compile Include="Core\Printer\RawPrinterHelper.cs" />
+    <Compile Include="Core\Service.EventArgs.cs" />
+    <Compile Include="Core\Watchdog\IWatchdogService.cs" />
+    <Compile Include="Core\Watchdog\WatchdogService.cs" />
+    <Compile Include="ViewModels\Dialog\Settings\SettingsWeekplan.ViewModel.cs" />
+    <Compile Include="ViewModels\Dialog\Text.ViewModel.cs" />
+    <Compile Include="ViewModels\Dialog\Main\MainAdmin.ViewModel.cs" />
+    <Compile Include="ViewModels\Dialog\Main\MainVehicle.ViewModel.cs" />
+    <Compile Include="ViewModels\Dialog\Settings\SettingsPrinter.ViewModel.cs" />
+    <Compile Include="ViewModels\Dialog\Settings\SettingsAao.ViewModel.cs" />
+    <Compile Include="ViewModels\Dialog\Settings\SettingsAms.ViewModel.cs" />
+    <Compile Include="ViewModels\Dialog\Settings\SettingsAlarmapp.ViewModel.cs" />
+    <Compile Include="ViewModels\Dialog\Settings\SettingsUser.ViewModel.cs" />
+    <Compile Include="ViewModels\Dialog\Settings\SettingsVehicle.ViewModel.cs" />
+    <Compile Include="ViewModels\Dialog\Settings\SettingsFileprint.ViewModel.cs" />
+    <Compile Include="ViewModels\Dialog\Settings\SettingsPager.ViewModel.cs" />
+    <Compile Include="ViewModels\Dialog\Settings\SettingsFilter.ViewModel.cs" />
+    <Compile Include="ViewModels\Main.ViewModel.cs" />
+    <Compile Include="ViewModels\Alarm.ViewModel.cs" />
+    <Compile Include="ViewModels\Settings.ViewModel.cs" />
+    <Compile Include="ViewModels\UserControl\AlarmappUser.ViewModel.cs" />
+    <Compile Include="ViewModels\UserControl\Alarm\AlarmAlarmapp.ViewModel.cs" />
+    <Compile Include="ViewModels\UserControl\AlarmappGroup.ViewModel.cs" />
+    <Compile Include="ViewModels\UserControl\Alarm\AlarmData.ViewModel.cs" />
+    <Compile Include="ViewModels\UserControl\Alarm\AlarmRoute.ViewModel.cs" />
+    <Compile Include="ViewModels\UserControl\Alarm\AlarmTimer.ViewModel.cs" />
+    <Compile Include="ViewModels\UserControl\Alarm\AlarmVehicles.ViewModel.cs" />
+    <Compile Include="ViewModels\UserControl\Pager.ViewModel.cs" />
+    <Compile Include="ViewModels\UserControl\Vehicle.ViewModel.cs" />
+    <Compile Include="ViewModels\UserControl\Settings\SettingsDatenschnittstelle.ViewModel.cs" />
+    <Compile Include="ViewModels\UserControl\Settings\SettingsAnzeige.ViewModel.cs" />
+    <Compile Include="ViewModels\UserControl\Settings\SettingsAlarmfax.ViewModel.cs" />
+    <Compile Include="Factories\ViewModelFactory.cs" />
+    <Compile Include="ViewModels\UserControl\Main\MainTicker.ViewModel.cs" />
+    <Compile Include="ViewModels\UserControl\Main\MainVehicles.ViewModel.cs" />
+    <Compile Include="ViewModels\UserControl\Main\MainPagers.ViewModel.cs" />
+    <Compile Include="Views\Dialog\Main\MainAdmin.Window.xaml.cs">
+      <DependentUpon>MainAdmin.Window.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Dialog\Settings\SettingsWeekplan.Dialog.xaml.cs">
+      <DependentUpon>SettingsWeekplan.Dialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Dialog\Text.Window.xaml.cs">
+      <DependentUpon>Text.Window.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Dialog\Main\MainVehicle.Window.xaml.cs">
+      <DependentUpon>MainVehicle.Window.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Dialog\Settings\SettingsPrinter.Dialog.xaml.cs">
+      <DependentUpon>SettingsPrinter.Dialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Dialog\Settings\SettingsAao.Dialog.xaml.cs">
+      <DependentUpon>SettingsAao.Dialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Dialog\Settings\SettingsAms.Dialog.xaml.cs">
+      <DependentUpon>SettingsAms.Dialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Dialog\Settings\SettingsAlarmapp.Dialog.xaml.cs">
+      <DependentUpon>SettingsAlarmapp.Dialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Dialog\Settings\SettingsUser.Dialog.xaml.cs">
+      <DependentUpon>SettingsUser.Dialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Dialog\Settings\SettingsFileprint.Dialog.xaml.cs">
+      <DependentUpon>SettingsFileprint.Dialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Dialog\Settings\SettingsPager.Dialog.xaml.cs">
+      <DependentUpon>SettingsPager.Dialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Dialog\Settings\SettingsVehicle.Dialog.xaml.cs">
+      <DependentUpon>SettingsVehicle.Dialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Dialog\Settings\SettingsFilter.Dialog.xaml.cs">
+      <DependentUpon>SettingsFilter.Dialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Alarm.Window.xaml.cs">
+      <DependentUpon>Alarm.Window.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Dialog\Wait.Window.xaml.cs">
+      <DependentUpon>Wait.Window.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Dialog\Start.Window.xaml.cs">
+      <DependentUpon>Start.Window.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControl\AlarmappUser.UserControl.xaml.cs">
+      <DependentUpon>AlarmappUser.UserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControl\Alarm\AlarmAlarmappOverview.UserControl.xaml.cs">
+      <DependentUpon>AlarmAlarmappOverview.UserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControl\Alarm\AlarmAlarmappUsers.UserControl.xaml.cs">
+      <DependentUpon>AlarmAlarmappUsers.UserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControl\Alarm\AlarmData.UserControl.xaml.cs">
+      <DependentUpon>AlarmData.UserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControl\Alarm\AlarmRoute.UserControl.xaml.cs">
+      <DependentUpon>AlarmRoute.UserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControl\Alarm\AlarmTimer.UserControl.xaml.cs">
+      <DependentUpon>AlarmTimer.UserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControl\Alarm\AlarmVehicles.UserControl.xaml.cs">
+      <DependentUpon>AlarmVehicles.UserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControl\Block.UserControl.xaml.cs">
+      <DependentUpon>Block.UserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControl\Loading.UserControl.xaml.cs">
+      <DependentUpon>Loading.UserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Settings.Window.xaml.cs">
+      <DependentUpon>Settings.Window.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControl\Main\MainWarnweather.UserControl.xaml.cs">
+      <DependentUpon>MainWarnweather.UserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControl\Main\MainWebbrowser.UserControl.xaml.cs">
+      <DependentUpon>MainWebbrowser.UserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControl\Main\MainRiverlevel.UserControl.xaml.cs">
+      <DependentUpon>MainRiverlevel.UserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControl\Main\MainTicker.UserControl.xaml.cs">
+      <DependentUpon>MainTicker.UserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControl\Main\MainTime.UserControl.xaml.cs">
+      <DependentUpon>MainTime.UserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControl\Main\MainVehicles.UserControl.xaml.cs">
+      <DependentUpon>MainVehicles.UserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControl\Main\MainPagers.UserControl.xaml.cs">
+      <DependentUpon>MainPagers.UserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Main.Window.xaml.cs">
+      <DependentUpon>Main.Window.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControl\Settings\SettingsDatenschnittstelle.UserControl.xaml.cs">
+      <DependentUpon>SettingsDatenschnittstelle.UserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControl\Settings\SettingsAnzeige.UserControl.xaml.cs">
+      <DependentUpon>SettingsAnzeige.UserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControl\Settings\SettingsAlarmfax.UserControl.xaml.cs">
+      <DependentUpon>SettingsAlarmfax.UserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControl\Vehicle.UserControl.xaml.cs">
+      <DependentUpon>Vehicle.UserControl.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report.rdlc" />
+    <None Include="app.manifest">
+      <SubType>Designer</SubType>
+    </None>
+    <Compile Include="Core\FireboardApi\FireboardApi.Operation.cs" />
+    <None Include="OCR\BIN\CUBE16PD.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\CUBE16PL.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\CUBE16PR.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\CUBE16PS.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\CUBE16PT.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\CUBEABDE.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\DC010101.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\DC0201.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\DC0202.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\DC0203.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\DC0204.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\DC0205.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\DC0206.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\DC1201.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\DC1203.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\DC1204.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\DC2201.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\DC2203.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\DC2204.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\DC_AGR.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\DC_ETRD.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\DC_RTRD.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\PLN_HPD.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\PLN_PRC.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\REC1.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\rec1blt.dat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\REC1CEN.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\rec1n.dat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\REC1R&amp;E.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\REC1RUS.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\REC1TUR.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\REC2.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\rec2blt.dat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\REC2CEN.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\REC2N.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\REC2R&amp;E.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\REC2RUS.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\REC2TUR.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\REC3.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\rec3blt.dat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\REC3CEN.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\REC3N.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\REC3R&amp;E.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\REC3RUS.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\rec3tur.dat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\REC4COUR.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\REC4INC.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\REC4MTR.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\REC4R&amp;E.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\REC6.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\REC6ALL.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\rec6bul.dat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\REC6CRO.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\rec6cze.dat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\REC6DAN.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\REC6DUT.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\rec6est.dat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\REC6FRN.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\REC6GRM.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\rec6hun.dat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\REC6ITA.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\rec6lat.dat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\rec6lit.dat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\REC6POL.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\REC6POR.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\rec6rom.dat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\REC6RUS.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\REC6SER.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\rec6slo.dat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\REC6SPA.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\REC6SWE.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\rec6tur.dat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\REC6UKR.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\REC7.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\REC7BUL.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\REC7CRO.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\REC7CZE.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\REC7DAN.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\REC7DUT.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\REC7EST.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\REC7FRN.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\REC7GRM.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\REC7HUN.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\REC7ITA.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\REC7LAT.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\REC7LIT.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\REC7POL.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\REC7POR.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\REC7ROM.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\REC7RUS.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\REC7SER.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\REC7SLO.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\REC7SPA.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\REC7SWE.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\REC7TUR.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\REC7UKR.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\REC8.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\rec8bul.dat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\REC8CRO.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\rec8cze.dat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\REC8DAN.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\REC8DUT.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\REC8EST.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\REC8FRN.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\REC8GRM.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\rec8hun.dat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\REC8ITA.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\rec8lat.dat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\rec8lit.dat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\REC8POL.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\REC8POR.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\rec8rom.dat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\REC8RUS.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\REC8SER.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\rec8slo.dat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\REC8SPA.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\REC8SWE.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\rec8tur.dat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\REC8UKR.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\REC9.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\rec9bul.dat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\REC9CRO.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\rec9cze.dat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\REC9DAN.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\REC9DUT.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\REC9EST.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\REC9FRN.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\REC9GRM.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\rec9hun.dat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\REC9ITA.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\rec9lat.dat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\rec9lit.dat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\REC9POL.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\REC9POR.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\rec9rom.dat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\REC9RUS.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\REC9SER.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\rec9slo.dat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\REC9SPA.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\REC9SWE.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\rec9tur.dat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\REC9UKR.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\VITAL.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\VITENG.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\Lns32.ini">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\BIN\rec.dat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\Register.bat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\Unregister.bat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+    <Content Include="Tools\PDF2TIF\gsdll32.lib">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Core\Web\Operation\DTO\" />
+    <Folder Include="ViewModels\Dialog\Alarm\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Views\Dialog\Main\MainAdmin.Window.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Dialog\Settings\SettingsWeekplan.Dialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Dialog\Text.Window.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Dialog\Main\MainVehicle.Window.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Dialog\Settings\SettingsPrinter.Dialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Dialog\Settings\SettingsAao.Dialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Dialog\Settings\SettingsAms.Dialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Dialog\Settings\SettingsAlarmapp.Dialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Dialog\Settings\SettingsUser.Dialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Dialog\Settings\SettingsFileprint.Dialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Dialog\Settings\SettingsPager.Dialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Dialog\Settings\SettingsVehicle.Dialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Dialog\Settings\SettingsFilter.Dialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Alarm.Window.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Dialog\Wait.Window.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Dialog\Start.Window.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\UserControl\AlarmappUser.UserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\UserControl\Alarm\AlarmAlarmappOverview.UserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\UserControl\Alarm\AlarmAlarmappUsers.UserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\UserControl\Alarm\AlarmData.UserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\UserControl\Alarm\AlarmRoute.UserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\UserControl\Alarm\AlarmTimer.UserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\UserControl\Alarm\AlarmVehicles.UserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\UserControl\Block.UserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\UserControl\Loading.UserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Settings.Window.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\UserControl\Main\MainWarnweather.UserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\UserControl\Main\MainWebbrowser.UserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\UserControl\Main\MainRiverlevel.UserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\UserControl\Main\MainTicker.UserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\UserControl\Main\MainTime.UserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\UserControl\Main\MainVehicles.UserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\UserControl\Main\MainPagers.UserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Main.Window.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\UserControl\Settings\SettingsDatenschnittstelle.UserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\UserControl\Settings\SettingsAnzeige.UserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\UserControl\Settings\SettingsAlarmfax.UserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControl\Vehicle.UserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\RIS.Business\RIS.Business.csproj">
+      <Project>{5389166b-fb0a-417a-a043-143daabf807d}</Project>
+      <Name>RIS.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RIS.Model\RIS.Model.csproj">
+      <Project>{fd86c429-9f70-4021-bc7e-f6dcc9324c5d}</Project>
+      <Name>RIS.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RIS.SharpHttpServer\RIS.SharpHttpServer.csproj">
+      <Project>{89b60354-856a-4f3c-9435-db3cfd31515a}</Project>
+      <Name>RIS.SharpHttpServer</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Image.Delete.png" />
+    <Resource Include="Resources\Image.Ok.png" />
+    <Resource Include="Resources\Icon.RIS.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Image.Close.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Image.Edit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Image.Logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="OCR\puma.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <Resource Include="Resources\Image.LogoWhite.png" />
+    <Content Include="..\resources\SFF2TIF.exe">
+      <Link>Tools\SFF2TIF\SFF2TIF.exe</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="OCR\APuma.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\ccom.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\ced.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\CFIO.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\CImage.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\CLINE.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\cpage.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\Cpu32.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\cstr.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\Ctb32.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\CTWWW.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\dif32.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\evn32.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\Exc.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\fon32.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\Gbw32.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\gra32.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\leo32.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\lns32.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\loc32.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\Mdt.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\mmx32.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\msk32.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\MZoning.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\Pass2.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\Pln.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\r3532.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\RAGR.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\RAnalFrm.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\rbal.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\RBLOCK.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\RCorrKegl.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\RCUTP.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\RDib.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\regsvr32.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\rfrmt.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\RImage.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\rline.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\Rling.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\RLings.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\Rltable.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\RMarker.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\RNEG.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\RNorm.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\Rout.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\rpic.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\rpstr.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\RRecCom.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\rsadd.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\RSELSTR.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\RShellLines.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\Rstr.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\RStuff.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\Scanmkn.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\Scanner.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\SLineDot.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\SMetric.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\SStreak.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\Std32.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OCR\vec32.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="dibapi.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Tools\PDF2TIF\gsdll32.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Tools\PDF2TIF\PdfConverter.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Resource Include="Resources\Image.NoData.png" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+    <Error Condition="!Exists('..\packages\NAudio.Lame.1.0.9\build\NAudio.Lame.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NAudio.Lame.1.0.9\build\NAudio.Lame.targets'))" />
+  </Target>
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+  <Import Project="..\packages\NAudio.Lame.1.0.9\build\NAudio.Lame.targets" Condition="Exists('..\packages\NAudio.Lame.1.0.9\build\NAudio.Lame.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,1317 @@
+﻿<UserControl
+    x:Class="RIS.Views.SettingsAnzeigeUserControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+
+    xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+
+    mc:Ignorable="d"
+    d:DesignHeight="550" d:DesignWidth="800">
+
+    <TabControl Background="{x:Null}" TabStripPlacement="Left">
+        <TabControl.Resources>
+            <Style TargetType="TabItem">
+                <Setter Property="HeaderTemplate">
+                    <Setter.Value>
+                        <DataTemplate>
+                            <TextBlock TextWrapping="Wrap" Text="{TemplateBinding Content}" IsEnabled="True"
+                                       Background="{x:Null}" TextAlignment="Center" />
+                        </DataTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </TabControl.Resources>
+
+        <TabItem Header="Allgemein" Background="{x:Null}" Width="150" Height="30">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="5" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+
+                <!-- Schriftfarbe -->
+                <Label Grid.Row="0" Grid.Column="0" Content="Schriftfarbe"
+                       Background="{StaticResource ColorbrushLight}" />
+                <Border Grid.Row="1" Grid.Column="0" BorderBrush="{StaticResource ColorbrushLight}" BorderThickness="1">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="5" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="5" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="5" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="5" />
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"
+                               Content="Schriftfarbe:" />
+                        <xctk:ColorPicker Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch"
+                                          VerticalAlignment="Center"
+                                          SelectedColor="{Binding Path=ForegroundColor, Converter={StaticResource DrawingColorToSolidColorConverter}}"
+                                          DisplayColorAndName="True" />
+                    </Grid>
+                </Border>
+
+                <!-- Rebbot -->
+                <Label Grid.Row="3" Grid.Column="0" Content="Neustart" Background="{StaticResource ColorbrushLight}" />
+                <Border Grid.Row="4" Grid.Column="0" BorderBrush="{StaticResource ColorbrushLight}" BorderThickness="1">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="5" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="5" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="5" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="5" />
+                        </Grid.ColumnDefinitions>
+
+                        <CheckBox Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center"
+                                  Content="Automatischer Neustart um 0 Uhr" IsChecked="{Binding Path=Reboot_On}"
+                                  ToolTip="{Binding Path=., Converter={StaticResource DisplayAttributeConverter}, ConverterParameter=Reboot_On}" />
+                    </Grid>
+                </Border>
+            </Grid>
+        </TabItem>
+
+        <TabItem Header="Hauptfenster" Background="{x:Null}" Width="150" Height="30">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="5" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="5" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="5" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Border Grid.Row="0" Grid.Column="0" BorderBrush="{StaticResource ColorbrushLight}" BorderThickness="1">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="5" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="5" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="4*" />
+                            <ColumnDefinition Width="5" />
+                        </Grid.ColumnDefinitions>
+
+                        <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"
+                               Content="Pager:" />
+                        <CheckBox Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                                  Content="Neue Meldung an erster Stelle"
+                                  IsChecked="{Binding Path=Pagers_InsertItem, UpdateSourceTrigger=PropertyChanged}"
+                                  ToolTip="{Binding Path=., Converter={StaticResource DisplayAttributeConverter}, ConverterParameter=Pagers_InsertItem}" />
+                    </Grid>
+                </Border>
+
+                <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Content="Ticker"
+                       Background="{StaticResource ColorbrushLight}" />
+                <Border Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" BorderBrush="{StaticResource ColorbrushLight}"
+                        BorderThickness="1">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="5" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="5" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="5" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="4*" />
+                            <ColumnDefinition Width="5" />
+                        </Grid.ColumnDefinitions>
+
+                        <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"
+                               Content="Text:" />
+                        <DockPanel Grid.Row="1" Grid.Column="1">
+                            <Button DockPanel.Dock="Right" Content="..."
+                                    Command="{Binding Path=Ticker_FileBrowseCommand}" />
+                            <TextBox HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                                     Text="{Binding Path=Ticker_Text, UpdateSourceTrigger=PropertyChanged}"
+                                     ToolTip="{Binding Path=., Converter={StaticResource DisplayAttributeConverter}, ConverterParameter=Ticker_Text}" />
+                        </DockPanel>
+
+                        <Label Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"
+                               Content="Geschwindigkeit:" />
+                        <Slider Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" Minimum="10" Maximum="1000"
+                                Value="{Binding Path=Ticker_Speed, UpdateSourceTrigger=PropertyChanged}"
+                                ToolTip="{Binding Path=., Converter={StaticResource DisplayAttributeConverter}, ConverterParameter=Ticker_Speed}"
+                                Interval="100" LargeChange="50" SmallChange="1" />
+
+                    </Grid>
+                </Border>
+
+                <Label Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Content="Pegelstand"
+                       Background="{StaticResource ColorbrushLight}" />
+                <Border Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" BorderBrush="{StaticResource ColorbrushLight}"
+                        BorderThickness="1">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="5" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="5" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="5" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="4*" />
+                            <ColumnDefinition Width="5" />
+                        </Grid.ColumnDefinitions>
+
+                        <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"
+                               Content="Anbieter:" />
+                        <ComboBox Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                                  ItemsSource="{Binding Riverlevel_ModeList}"
+                                  SelectedItem="{Binding Path=Riverlevel_Mode, UpdateSourceTrigger=PropertyChanged}"
+                                  ToolTip="{Binding Path=., Converter={StaticResource DisplayAttributeConverter}, ConverterParameter=Riverlevel_Mode}" />
+
+                        <Label Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"
+                               Content="Messstellen-Nr.:" />
+                        <TextBox Grid.Row="3" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                                 Text="{Binding Path=Riverlevel_Messstelle, UpdateSourceTrigger=PropertyChanged}"
+                                 ToolTip="{Binding Path=., Converter={StaticResource DisplayAttributeConverter}, ConverterParameter=Riverlevel_Messstelle}" />
+                    </Grid>
+                </Border>
+
+                <Label Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2" Content="DWD-GeoWebservice"
+                       Background="{StaticResource ColorbrushLight}" />
+                <Border Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="2"
+                        BorderBrush="{StaticResource ColorbrushLight}" BorderThickness="1">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="5" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="5" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="5" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="5" />
+                        </Grid.ColumnDefinitions>
+
+                        <TextBox Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                                 Text="{Binding Path=Warnweather_Url, UpdateSourceTrigger=PropertyChanged}"
+                                 ToolTip="{Binding Path=., Converter={StaticResource DisplayAttributeConverter}, ConverterParameter=Warnweather_Url}"
+                                 AcceptsReturn="True" AcceptsTab="True" HorizontalScrollBarVisibility="Auto"
+                                 IsManipulationEnabled="True" VerticalScrollBarVisibility="Auto" />
+                    </Grid>
+                </Border>
+            </Grid>
+        </TabItem>
+
+        <TabItem Header="Alarmfenster" Background="{x:Null}" Width="150" Height="30">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="5" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="5" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+
+                <Label Grid.Row="0" Grid.Column="1" Content="Allgemein" Background="{StaticResource ColorbrushLight}" />
+                <Border Grid.Row="1" Grid.Column="1" BorderBrush="{StaticResource ColorbrushLight}" BorderThickness="1">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="5" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="5" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="5" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="5" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="5" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="5" />
+                        </Grid.ColumnDefinitions>
+
+                        <CheckBox Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center"
+                                  Content="Einsatzmittel mit Statusbox" IsChecked="{Binding Path=Vehicles_Statusbox}"
+                                  ToolTip="{Binding Path=., Converter={StaticResource DisplayAttributeConverter}, ConverterParameter=Vehicles_Statusbox}" />
+                        <CheckBox Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center"
+                                  Content="Einsatzmittel bei Status disponieren"
+                                  IsChecked="{Binding Path=Vehicles_AutoDisponieren}"
+                                  ToolTip="{Binding Path=., Converter={StaticResource DisplayAttributeConverter}, ConverterParameter=Vehicles_AutoDisponieren}" />
+                        <CheckBox Grid.Row="5" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center"
+                                  Content="Datei bei Status C ausführen" IsChecked="{Binding Path=AppExecute_OnStatus}"
+                                  ToolTip="{Binding Path=., Converter={StaticResource DisplayAttributeConverter}, ConverterParameter=AppExecute_OnStatus}" />
+                    </Grid>
+                </Border>
+            </Grid>
+        </TabItem>
+
+        <TabItem Header="Monitor" Background="{x:Null}" Width="150" Height="30">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <!-- Allgemein -->
+                <Border Grid.Row="1" BorderBrush="{StaticResource ColorbrushLight}" BorderThickness="1">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="5" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="5" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="5" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="5" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="5" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="5" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="5" />
+                        </Grid.ColumnDefinitions>
+
+                        <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"
+                               Content="Einsatzanzeigezeit:" />
+                        <xctk:TimeSpanUpDown Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left"
+                                             VerticalAlignment="Center" Watermark="Enter text" DefaultValue="00:00:00"
+                                             Value="{Binding Monitor_AlarmTime}"
+                                             ToolTip="{Binding Path=., Converter={StaticResource DisplayAttributeConverter}, ConverterParameter=Monitor_AlarmTime}"
+                                             CultureInfo="de-DE" />
+
+                        <Label Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"
+                               Content="Verzögerung nach einem Einsatz:" />
+                        <xctk:TimeSpanUpDown Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left"
+                                             VerticalAlignment="Center" Watermark="Enter text" DefaultValue="00:00:00"
+                                             Value="{Binding Monitor_AlarmDelayTime}"
+                                             ToolTip="{Binding Path=., Converter={StaticResource DisplayAttributeConverter}, ConverterParameter=Monitor_AlarmDelayTime}"
+                                             CultureInfo="de-DE" />
+
+                        <Label Grid.Row="5" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"
+                               Content="Wake-Up bei Status:" />
+                        <xctk:TimeSpanUpDown Grid.Row="5" Grid.Column="1" HorizontalAlignment="Left"
+                                             VerticalAlignment="Center" Watermark="Enter text" DefaultValue="00:00:00"
+                                             Value="{Binding Monitor_WakeupStatusTime}"
+                                             ToolTip="{Binding Path=., Converter={StaticResource DisplayAttributeConverter}, ConverterParameter=Monitor_WakeupStatusTime}"
+                                             CultureInfo="de-DE" />
+
+                        <Label Grid.Row="7" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"
+                               Content="Wake-Up bei Alarmierung:" />
+                        <xctk:TimeSpanUpDown Grid.Row="7" Grid.Column="1" HorizontalAlignment="Left"
+                                             VerticalAlignment="Center" Watermark="Enter text" DefaultValue="00:00:00"
+                                             Value="{Binding Monitor_WakeupAlarmTime}"
+                                             ToolTip="{Binding Path=., Converter={StaticResource DisplayAttributeConverter}, ConverterParameter=Monitor_WakeupAlarmTime}"
+                                             CultureInfo="de-DE" />
+
+                        <Label Grid.Row="9" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"
+                               Content="Zeitplan deaktivieren" />
+                        <CheckBox Grid.Row="9" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center"
+                                  IsChecked="{Binding Path=Monitor_WeekplanDisabled}"
+                                  ToolTip="{Binding Path=., Converter={StaticResource DisplayAttributeConverter}, ConverterParameter=Monitor_WeekplanDisabled}" />
+                    </Grid>
+                </Border>
+
+                <!-- Zeitplan -->
+                <Border Grid.Row="3" BorderBrush="{StaticResource ColorbrushLight}" BorderThickness="1">
+                    <Grid
+                        IsEnabled="{Binding Path=Monitor_WeekplanDisabled, Converter={StaticResource InvertBooleanConverter}}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Grid Grid.Column="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Content="Montag" Background="{StaticResource ColorbrushLight}"
+                                   Margin="0,5,0,0" HorizontalContentAlignment="Center" />
+
+                            <DataGrid Grid.Row="1" Name="gridWeekplanMonday" HeadersVisibility="None"
+                                      ItemsSource="{Binding MonitorSettings.Monday}">
+                                <DataGrid.Columns>
+                                    <DataGridTemplateColumn>
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock>
+                                                    <TextBlock.Text>
+                                                        <MultiBinding StringFormat="{}{0:HH:mm}-{1:HH:mm}">
+                                                            <Binding Path="Start" />
+                                                            <Binding Path="Stop" />
+                                                        </MultiBinding>
+                                                    </TextBlock.Text>
+                                                </TextBlock>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTemplateColumn Width="Auto">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Button Background="{x:Null}"
+                                                        Command="{Binding DataContext.DeleteTimeMondayCommand, ElementName=gridWeekplanMonday}"
+                                                        CommandParameter="{Binding Path=.}">
+                                                    <Image Source="/Resources/Image.Delete.png" Width="25" Height="25" />
+                                                </Button>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                </DataGrid.Columns>
+                            </DataGrid>
+
+                            <Button Grid.Row="2" Margin="0" Command="{Binding AddTimeMondayCommand}">
+                                <StackPanel>
+                                    <TextBlock Text="Zeit" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    <TextBlock Text="hinzufügen" HorizontalAlignment="Center"
+                                               VerticalAlignment="Center" />
+                                </StackPanel>
+                            </Button>
+                        </Grid>
+
+                        <Grid Grid.Column="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Content="Dienstag" Background="{StaticResource ColorbrushLight}"
+                                   Margin="0,5,0,0" HorizontalContentAlignment="Center" />
+
+                            <DataGrid Grid.Row="1" Name="gridWeekplanTuesday" HeadersVisibility="None"
+                                      ItemsSource="{Binding MonitorSettings.Tuesday}">
+                                <DataGrid.Columns>
+                                    <DataGridTemplateColumn>
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock>
+                                                    <TextBlock.Text>
+                                                        <MultiBinding StringFormat="{}{0:HH:mm}-{1:HH:mm}">
+                                                            <Binding Path="Start" />
+                                                            <Binding Path="Stop" />
+                                                        </MultiBinding>
+                                                    </TextBlock.Text>
+                                                </TextBlock>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTemplateColumn Width="Auto">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Button Background="{x:Null}"
+                                                        Command="{Binding DataContext.DeleteTimeTuesdayCommand, ElementName=gridWeekplanTuesday}"
+                                                        CommandParameter="{Binding Path=.}">
+                                                    <Image Source="/Resources/Image.Delete.png" Width="25" Height="25" />
+                                                </Button>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                </DataGrid.Columns>
+                            </DataGrid>
+
+                            <Button Grid.Row="2" Margin="0" Command="{Binding AddTimeTuesdayCommand}">
+                                <StackPanel>
+                                    <TextBlock Text="Zeit" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    <TextBlock Text="hinzufügen" HorizontalAlignment="Center"
+                                               VerticalAlignment="Center" />
+                                </StackPanel>
+                            </Button>
+                        </Grid>
+
+                        <Grid Grid.Column="2">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Content="Mittwoch" Background="{StaticResource ColorbrushLight}"
+                                   Margin="0,5,0,0" HorizontalContentAlignment="Center" />
+
+                            <DataGrid Grid.Row="1" Name="gridWeekplanWednesday" HeadersVisibility="None"
+                                      ItemsSource="{Binding MonitorSettings.Wednesday}">
+                                <DataGrid.Columns>
+                                    <DataGridTemplateColumn>
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock>
+                                                    <TextBlock.Text>
+                                                        <MultiBinding StringFormat="{}{0:HH:mm}-{1:HH:mm}">
+                                                            <Binding Path="Start" />
+                                                            <Binding Path="Stop" />
+                                                        </MultiBinding>
+                                                    </TextBlock.Text>
+                                                </TextBlock>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTemplateColumn Width="Auto">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Button Background="{x:Null}"
+                                                        Command="{Binding DataContext.DeleteTimeWednesdayCommand, ElementName=gridWeekplanWednesday}"
+                                                        CommandParameter="{Binding Path=.}">
+                                                    <Image Source="/Resources/Image.Delete.png" Width="25" Height="25" />
+                                                </Button>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                </DataGrid.Columns>
+                            </DataGrid>
+
+                            <Button Grid.Row="2" Margin="0" Command="{Binding AddTimeWednesdayCommand}">
+                                <StackPanel>
+                                    <TextBlock Text="Zeit" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    <TextBlock Text="hinzufügen" HorizontalAlignment="Center"
+                                               VerticalAlignment="Center" />
+                                </StackPanel>
+                            </Button>
+                        </Grid>
+
+                        <Grid Grid.Column="3">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Content="Donnerstag" Background="{StaticResource ColorbrushLight}"
+                                   Margin="0,5,0,0" HorizontalContentAlignment="Center" />
+
+                            <DataGrid Grid.Row="1" Name="gridWeekplanThursday" HeadersVisibility="None"
+                                      ItemsSource="{Binding MonitorSettings.Thursday}">
+                                <DataGrid.Columns>
+                                    <DataGridTemplateColumn>
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock>
+                                                    <TextBlock.Text>
+                                                        <MultiBinding StringFormat="{}{0:HH:mm}-{1:HH:mm}">
+                                                            <Binding Path="Start" />
+                                                            <Binding Path="Stop" />
+                                                        </MultiBinding>
+                                                    </TextBlock.Text>
+                                                </TextBlock>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTemplateColumn Width="Auto">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Button Background="{x:Null}"
+                                                        Command="{Binding DataContext.DeleteTimeThursdayCommand, ElementName=gridWeekplanThursday}"
+                                                        CommandParameter="{Binding Path=.}">
+                                                    <Image Source="/Resources/Image.Delete.png" Width="25" Height="25" />
+                                                </Button>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                </DataGrid.Columns>
+                            </DataGrid>
+
+                            <Button Grid.Row="2" Margin="0" Command="{Binding AddTimeThursdayCommand}">
+                                <StackPanel>
+                                    <TextBlock Text="Zeit" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    <TextBlock Text="hinzufügen" HorizontalAlignment="Center"
+                                               VerticalAlignment="Center" />
+                                </StackPanel>
+                            </Button>
+                        </Grid>
+
+                        <Grid Grid.Column="4">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Content="Freitag" Background="{StaticResource ColorbrushLight}"
+                                   Margin="0,5,0,0" HorizontalContentAlignment="Center" />
+
+                            <DataGrid Grid.Row="1" Name="gridWeekplanFriday" HeadersVisibility="None"
+                                      ItemsSource="{Binding MonitorSettings.Friday}">
+                                <DataGrid.Columns>
+                                    <DataGridTemplateColumn>
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock>
+                                                    <TextBlock.Text>
+                                                        <MultiBinding StringFormat="{}{0:HH:mm}-{1:HH:mm}">
+                                                            <Binding Path="Start" />
+                                                            <Binding Path="Stop" />
+                                                        </MultiBinding>
+                                                    </TextBlock.Text>
+                                                </TextBlock>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTemplateColumn Width="Auto">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Button Background="{x:Null}"
+                                                        Command="{Binding DataContext.DeleteTimeFridayCommand, ElementName=gridWeekplanFriday}"
+                                                        CommandParameter="{Binding Path=.}">
+                                                    <Image Source="/Resources/Image.Delete.png" Width="25" Height="25" />
+                                                </Button>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                </DataGrid.Columns>
+                            </DataGrid>
+
+                            <Button Grid.Row="2" Margin="0" Command="{Binding AddTimeFridayCommand}">
+                                <StackPanel>
+                                    <TextBlock Text="Zeit" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    <TextBlock Text="hinzufügen" HorizontalAlignment="Center"
+                                               VerticalAlignment="Center" />
+                                </StackPanel>
+                            </Button>
+                        </Grid>
+
+                        <Grid Grid.Column="5">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Content="Samstag" Background="{StaticResource ColorbrushLight}"
+                                   Margin="0,5,0,0" HorizontalContentAlignment="Center" />
+
+                            <DataGrid Grid.Row="1" Name="gridWeekplanSaturday" HeadersVisibility="None"
+                                      ItemsSource="{Binding MonitorSettings.Saturday}">
+                                <DataGrid.Columns>
+                                    <DataGridTemplateColumn>
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock>
+                                                    <TextBlock.Text>
+                                                        <MultiBinding StringFormat="{}{0:HH:mm}-{1:HH:mm}">
+                                                            <Binding Path="Start" />
+                                                            <Binding Path="Stop" />
+                                                        </MultiBinding>
+                                                    </TextBlock.Text>
+                                                </TextBlock>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTemplateColumn Width="Auto">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Button Background="{x:Null}"
+                                                        Command="{Binding DataContext.DeleteTimeSaturdayCommand, ElementName=gridWeekplanSaturday}"
+                                                        CommandParameter="{Binding Path=.}">
+                                                    <Image Source="/Resources/Image.Delete.png" Width="25" Height="25" />
+                                                </Button>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                </DataGrid.Columns>
+                            </DataGrid>
+
+                            <Button Grid.Row="2" Margin="0" Command="{Binding AddTimeSaturdayCommand}">
+                                <StackPanel>
+                                    <TextBlock Text="Zeit" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    <TextBlock Text="hinzufügen" HorizontalAlignment="Center"
+                                               VerticalAlignment="Center" />
+                                </StackPanel>
+                            </Button>
+                        </Grid>
+
+                        <Grid Grid.Column="6">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Content="Sonntag" Background="{StaticResource ColorbrushLight}"
+                                   Margin="0,5,0,0" HorizontalContentAlignment="Center" />
+
+                            <DataGrid Grid.Row="1" Name="gridWeekplanSunday" HeadersVisibility="None"
+                                      ItemsSource="{Binding MonitorSettings.Sunday}">
+                                <DataGrid.Columns>
+                                    <DataGridTemplateColumn>
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock>
+                                                    <TextBlock.Text>
+                                                        <MultiBinding StringFormat="{}{0:HH:mm}-{1:HH:mm}">
+                                                            <Binding Path="Start" />
+                                                            <Binding Path="Stop" />
+                                                        </MultiBinding>
+                                                    </TextBlock.Text>
+                                                </TextBlock>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTemplateColumn Width="Auto">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Button Background="{x:Null}"
+                                                        Command="{Binding DataContext.DeleteTimeSundayCommand, ElementName=gridWeekplanSunday}"
+                                                        CommandParameter="{Binding Path=.}">
+                                                    <Image Source="/Resources/Image.Delete.png" Width="25" Height="25" />
+                                                </Button>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                </DataGrid.Columns>
+                            </DataGrid>
+
+                            <Button Grid.Row="2" Margin="0" Command="{Binding AddTimeSundayCommand}">
+                                <StackPanel>
+                                    <TextBlock Text="Zeit" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    <TextBlock Text="hinzufügen" HorizontalAlignment="Center"
+                                               VerticalAlignment="Center" />
+                                </StackPanel>
+                            </Button>
+                        </Grid>
+                    </Grid>
+                </Border>
+            </Grid>
+        </TabItem>
+
+        <TabItem Header="Route" Background="{x:Null}" Width="150" Height="30">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="5" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <!-- Startadresse -->
+                <Label Grid.Row="0" Grid.Column="1" Content="Startadresse"
+                       Background="{StaticResource ColorbrushLight}" />
+                <Border Grid.Row="1" BorderBrush="{StaticResource ColorbrushLight}" BorderThickness="1">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="5" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="5" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="5" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="5" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="5" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="5" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="5" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="5" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="5" />
+                        </Grid.ColumnDefinitions>
+
+                        <Label Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center"
+                               Content="Koordinaten:" />
+                        <Label Grid.Row="1" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                               Content="{Binding Path=Route_StartLocation, UpdateSourceTrigger=PropertyChanged}"
+                               ToolTip="{Binding Path=., Converter={StaticResource DisplayAttributeConverter}, ConverterParameter=Route_StartLocation}" />
+
+                        <Label Grid.Row="3" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center"
+                               Content="Postleitzahl:" />
+                        <TextBox Grid.Row="3" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                                 Text="{Binding Path=Route_Zip, UpdateSourceTrigger=PropertyChanged}"
+                                 ToolTip="{Binding Path=., Converter={StaticResource DisplayAttributeConverter}, ConverterParameter=Route_Zip}" />
+
+                        <Label Grid.Row="5" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center"
+                               Content="Ort:" />
+                        <TextBox Grid.Row="5" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                                 Text="{Binding Path=Route_City, UpdateSourceTrigger=PropertyChanged}"
+                                 ToolTip="{Binding Path=., Converter={StaticResource DisplayAttributeConverter}, ConverterParameter=Route_City}" />
+
+                        <Label Grid.Row="7" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center"
+                               Content="Straße:" />
+                        <TextBox Grid.Row="7" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                                 Text="{Binding Path=Route_Street, UpdateSourceTrigger=PropertyChanged}"
+                                 ToolTip="{Binding Path=., Converter={StaticResource DisplayAttributeConverter}, ConverterParameter=Route_Street}" />
+
+                        <Label Grid.Row="9" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center"
+                               Content="Hausnummer:" />
+                        <TextBox Grid.Row="9" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                                 Text="{Binding Path=Route_Housenumber, UpdateSourceTrigger=PropertyChanged}"
+                                 ToolTip="{Binding Path=., Converter={StaticResource DisplayAttributeConverter}, ConverterParameter=Route_Housenumber}" />
+
+                        <Button Grid.Row="11" Grid.Column="1" Grid.ColumnSpan="2" Content="Standort ermitteln"
+                                Command="{Binding Route_GetCoordinatesCommand}"
+                                ToolTip="{Binding Path=., Converter={StaticResource DisplayAttributeConverter}, ConverterParameter=Route_GetCoordinatesCommand}" />
+                    </Grid>
+                </Border>
+
+                <Label Grid.Row="3" Grid.Column="1" Content="Optionen" Background="{StaticResource ColorbrushLight}" />
+                <Border Grid.Row="4" Grid.Column="1" BorderBrush="{StaticResource ColorbrushLight}" BorderThickness="1">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="5" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="5" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="5" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="5" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="5" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="5" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <CheckBox Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center"
+                                  Content="HighQuality Geocode" IsChecked="{Binding Path=Route_HighQuality}"
+                                  ToolTip="{Binding Path=., Converter={StaticResource DisplayAttributeConverter}, ConverterParameter=Route_HighQuality}" />
+                        <CheckBox Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center"
+                                  Content="Schnellste Route" IsChecked="{Binding Path=Route_ModeFastest}"
+                                  ToolTip="{Binding Path=., Converter={StaticResource DisplayAttributeConverter}, ConverterParameter=Route_ModeFastest}" />
+                        <CheckBox Grid.Row="5" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center"
+                                  Content="LKW Route" IsChecked="{Binding Path=Route_ModeTruck}"
+                                  ToolTip="{Binding Path=., Converter={StaticResource DisplayAttributeConverter}, ConverterParameter=Route_ModeTruck}" />
+                        <CheckBox Grid.Row="7" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center"
+                                  Content="Verkehr berücksichtigen" IsChecked="{Binding Path=Route_ModeTraffic}"
+                                  ToolTip="{Binding Path=., Converter={StaticResource DisplayAttributeConverter}, ConverterParameter=Route_ModeTraffic}" />
+                    </Grid>
+                </Border>
+            </Grid>
+        </TabItem>
+
+        <TabItem Header="Pager" Background="{x:Null}" Width="150" Height="30">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="5" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <DataGrid Grid.Row="0" Name="gridPager" HeadersVisibility="Column" ItemsSource="{Binding PagerList}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Kennung" Binding="{Binding Path=Identifier}" Width="Auto" />
+                        <DataGridTextColumn Header="Name" Binding="{Binding Path=Name}" Width="*" />
+                        <DataGridCheckBoxColumn Header="Priorität" Binding="{Binding Path=Priority}" Width="Auto" />
+                        <DataGridTemplateColumn Width="Auto">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Button Background="{x:Null}"
+                                                Command="{Binding DataContext.EditPagerCommand, ElementName=gridPager}"
+                                                CommandParameter="{Binding Path=.}">
+                                            <Image Source="/Resources/Image.Edit.png" Width="25" Height="25" />
+                                        </Button>
+                                        <Button Background="{x:Null}"
+                                                Command="{Binding DataContext.DeletePagerCommand, ElementName=gridPager}"
+                                                CommandParameter="{Binding Path=.}">
+                                            <Image Source="/Resources/Image.Delete.png" Width="25" Height="25" />
+                                        </Button>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+
+                <Button Grid.Row="1" Height="35" Content="Pager hinzufügen" Command="{Binding Path=AddPagerCommand}" />
+
+                <Button Grid.Row="3" Height="35" Content="Import aus FMS32" Command="{Binding Path=ImportPagerCommand}" />
+            </Grid>
+        </TabItem>
+
+        <TabItem Header="Funkmeldesystem" Background="{x:Null}" Width="150" Height="30">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <!-- Darstellung -->
+                <Border Grid.Row="1" BorderBrush="{StaticResource ColorbrushLight}" BorderThickness="1">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="5" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <!-- Fahrzeug/Leitstelle -->
+                        <Label Grid.Row="0" Grid.Column="0" Content="Fahrzeug -> Leitstelle"
+                               Background="{StaticResource ColorbrushLight}" />
+                        <Border Grid.Row="1" Grid.Column="0" BorderBrush="{StaticResource ColorbrushLight}"
+                                BorderThickness="1">
+                            <Grid DataContext="{Binding FmsSettings}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="5" />
+                                    <ColumnDefinition Width="3*" />
+                                    <ColumnDefinition Width="5" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="5" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="5" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="5" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="5" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="5" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="5" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="5" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="5" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="5" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="5" />
+                                </Grid.RowDefinitions>
+
+                                <xctk:DropDownButton Grid.Row="1" Grid.Column="1" Content="Status 1"
+                                                     DataContext="{Binding Status1}" VerticalAlignment="Center">
+                                    <xctk:DropDownButton.DropDownContent>
+                                        <StackPanel>
+                                            <xctk:ColorPicker Margin="5" HorizontalAlignment="Center"
+                                                              VerticalAlignment="Stretch"
+                                                              SelectedColor="{Binding Color, Converter={StaticResource BrushToColorConverter}}"
+                                                              DisplayColorAndName="True" />
+                                            <CheckBox Margin="5,0,5,5" Content="Hauptfenster"
+                                                      HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                                                      IsChecked="{Binding MainOn}" />
+                                            <CheckBox Margin="5,0,5,5" Content="Alarmfenster"
+                                                      HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                                                      IsChecked="{Binding AlarmOn}" />
+                                        </StackPanel>
+                                    </xctk:DropDownButton.DropDownContent>
+                                </xctk:DropDownButton>
+
+                                <xctk:DropDownButton Grid.Row="3" Grid.Column="1" Content="Status 2"
+                                                     DataContext="{Binding Status2}" VerticalAlignment="Center">
+                                    <xctk:DropDownButton.DropDownContent>
+                                        <StackPanel>
+                                            <xctk:ColorPicker Margin="5" HorizontalAlignment="Center"
+                                                              VerticalAlignment="Center"
+                                                              SelectedColor="{Binding Color, Converter={StaticResource BrushToColorConverter}}"
+                                                              DisplayColorAndName="True" />
+                                            <CheckBox Margin="5,0,5,5" Content="Hauptfenster"
+                                                      HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                      IsChecked="{Binding MainOn}" />
+                                            <CheckBox Margin="5,0,5,5" Content="Alarmfenster"
+                                                      HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                      IsChecked="{Binding AlarmOn}" />
+                                        </StackPanel>
+                                    </xctk:DropDownButton.DropDownContent>
+                                </xctk:DropDownButton>
+
+                                <xctk:DropDownButton Grid.Row="5" Grid.Column="1" Content="Status 3"
+                                                     DataContext="{Binding Status3}" VerticalAlignment="Center">
+                                    <xctk:DropDownButton.DropDownContent>
+                                        <StackPanel>
+                                            <xctk:ColorPicker Margin="5" HorizontalAlignment="Center"
+                                                              VerticalAlignment="Center"
+                                                              SelectedColor="{Binding Color, Converter={StaticResource BrushToColorConverter}}"
+                                                              DisplayColorAndName="True" />
+                                            <CheckBox Margin="5,0,5,5" Content="Hauptfenster"
+                                                      HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                      IsChecked="{Binding MainOn}" />
+                                            <CheckBox Margin="5,0,5,5" Content="Alarmfenster"
+                                                      HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                      IsChecked="{Binding AlarmOn}" />
+                                        </StackPanel>
+                                    </xctk:DropDownButton.DropDownContent>
+                                </xctk:DropDownButton>
+
+                                <xctk:DropDownButton Grid.Row="7" Grid.Column="1" Content="Status 4"
+                                                     DataContext="{Binding Status4}" VerticalAlignment="Center">
+                                    <xctk:DropDownButton.DropDownContent>
+                                        <StackPanel>
+                                            <xctk:ColorPicker Margin="5" HorizontalAlignment="Center"
+                                                              VerticalAlignment="Center"
+                                                              SelectedColor="{Binding Color, Converter={StaticResource BrushToColorConverter}}"
+                                                              DisplayColorAndName="True" />
+                                            <CheckBox Margin="5,0,5,5" Content="Hauptfenster"
+                                                      HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                      IsChecked="{Binding MainOn}" />
+                                            <CheckBox Margin="5,0,5,5" Content="Alarmfenster"
+                                                      HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                      IsChecked="{Binding AlarmOn}" />
+                                        </StackPanel>
+                                    </xctk:DropDownButton.DropDownContent>
+                                </xctk:DropDownButton>
+
+                                <xctk:DropDownButton Grid.Row="9" Grid.Column="1" Content="Status 5"
+                                                     DataContext="{Binding Status5}" VerticalAlignment="Center">
+                                    <xctk:DropDownButton.DropDownContent>
+                                        <StackPanel>
+                                            <xctk:ColorPicker Margin="5" HorizontalAlignment="Center"
+                                                              VerticalAlignment="Center"
+                                                              SelectedColor="{Binding Color, Converter={StaticResource BrushToColorConverter}}"
+                                                              DisplayColorAndName="True" />
+                                            <CheckBox Margin="5,0,5,5" Content="Hauptfenster"
+                                                      HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                      IsChecked="{Binding MainOn}" />
+                                            <CheckBox Margin="5,0,5,5" Content="Alarmfenster"
+                                                      HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                      IsChecked="{Binding AlarmOn}" />
+                                        </StackPanel>
+                                    </xctk:DropDownButton.DropDownContent>
+                                </xctk:DropDownButton>
+
+                                <xctk:DropDownButton Grid.Row="11" Grid.Column="1" Content="Status 6"
+                                                     DataContext="{Binding Status6}" VerticalAlignment="Center">
+                                    <xctk:DropDownButton.DropDownContent>
+                                        <StackPanel>
+                                            <xctk:ColorPicker Margin="5" HorizontalAlignment="Center"
+                                                              VerticalAlignment="Center"
+                                                              SelectedColor="{Binding Color, Converter={StaticResource BrushToColorConverter}}"
+                                                              DisplayColorAndName="True" />
+                                            <CheckBox Margin="5,0,5,5" Content="Hauptfenster"
+                                                      HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                      IsChecked="{Binding MainOn}" />
+                                            <CheckBox Margin="5,0,5,5" Content="Alarmfenster"
+                                                      HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                      IsChecked="{Binding AlarmOn}" />
+                                        </StackPanel>
+                                    </xctk:DropDownButton.DropDownContent>
+                                </xctk:DropDownButton>
+
+                                <xctk:DropDownButton Grid.Row="13" Grid.Column="1" Content="Status 7"
+                                                     DataContext="{Binding Status7}" VerticalAlignment="Center">
+                                    <xctk:DropDownButton.DropDownContent>
+                                        <StackPanel>
+                                            <xctk:ColorPicker Margin="5" HorizontalAlignment="Center"
+                                                              VerticalAlignment="Center"
+                                                              SelectedColor="{Binding Color, Converter={StaticResource BrushToColorConverter}}"
+                                                              DisplayColorAndName="True" />
+                                            <CheckBox Margin="5,0,5,5" Content="Hauptfenster"
+                                                      HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                      IsChecked="{Binding MainOn}" />
+                                            <CheckBox Margin="5,0,5,5" Content="Alarmfenster"
+                                                      HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                      IsChecked="{Binding AlarmOn}" />
+                                        </StackPanel>
+                                    </xctk:DropDownButton.DropDownContent>
+                                </xctk:DropDownButton>
+
+                                <xctk:DropDownButton Grid.Row="15" Grid.Column="1" Content="Status 8"
+                                                     DataContext="{Binding Status8}" VerticalAlignment="Center">
+                                    <xctk:DropDownButton.DropDownContent>
+                                        <StackPanel>
+                                            <xctk:ColorPicker Margin="5" HorizontalAlignment="Center"
+                                                              VerticalAlignment="Center"
+                                                              SelectedColor="{Binding Color, Converter={StaticResource BrushToColorConverter}}"
+                                                              DisplayColorAndName="True" />
+                                            <CheckBox Margin="5,0,5,5" Content="Hauptfenster"
+                                                      HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                      IsChecked="{Binding MainOn}" />
+                                            <CheckBox Margin="5,0,5,5" Content="Alarmfenster"
+                                                      HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                      IsChecked="{Binding AlarmOn}" />
+                                        </StackPanel>
+                                    </xctk:DropDownButton.DropDownContent>
+                                </xctk:DropDownButton>
+
+                                <xctk:DropDownButton Grid.Row="17" Grid.Column="1" Content="Status 9"
+                                                     DataContext="{Binding Status9}" VerticalAlignment="Center">
+                                    <xctk:DropDownButton.DropDownContent>
+                                        <StackPanel Width="{Binding Actual}">
+                                            <xctk:ColorPicker Margin="5" HorizontalAlignment="Center"
+                                                              VerticalAlignment="Center"
+                                                              SelectedColor="{Binding Color, Converter={StaticResource BrushToColorConverter}}"
+                                                              DisplayColorAndName="True" />
+                                            <CheckBox Margin="5,0,5,5" Content="Hauptfenster"
+                                                      HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                      IsChecked="{Binding MainOn}" />
+                                            <CheckBox Margin="5,0,5,5" Content="Alarmfenster"
+                                                      HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                      IsChecked="{Binding AlarmOn}" />
+                                        </StackPanel>
+                                    </xctk:DropDownButton.DropDownContent>
+                                </xctk:DropDownButton>
+                            </Grid>
+                        </Border>
+
+                        <!-- Leitstelle/Fahrzeug -->
+                        <Label Grid.Row="0" Grid.Column="2" Content="Leitstelle -> Fahrzeug"
+                               Background="{StaticResource ColorbrushLight}" />
+                        <Border Grid.Row="1" Grid.Column="2" BorderBrush="{StaticResource ColorbrushLight}"
+                                BorderThickness="1">
+                            <Grid DataContext="{Binding FmsSettings}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="5" />
+                                    <ColumnDefinition Width="3*" />
+                                    <ColumnDefinition Width="5" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="5" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="5" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="5" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="5" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="5" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="5" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="5" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="5" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="5" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="5" />
+                                </Grid.RowDefinitions>
+
+                                <xctk:DropDownButton Grid.Row="1" Grid.Column="1" Content="Status A"
+                                                     DataContext="{Binding StatusA}" VerticalAlignment="Center">
+                                    <xctk:DropDownButton.DropDownContent>
+                                        <StackPanel>
+                                            <xctk:ColorPicker Margin="5" HorizontalAlignment="Center"
+                                                              VerticalAlignment="Center"
+                                                              SelectedColor="{Binding Color, Converter={StaticResource BrushToColorConverter}}"
+                                                              DisplayColorAndName="True" />
+                                            <CheckBox Margin="5,0,5,5" Content="Hauptfenster"
+                                                      HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                      IsChecked="{Binding MainOn}" />
+                                            <CheckBox Margin="5,0,5,5" Content="Alarmfenster"
+                                                      HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                      IsChecked="{Binding AlarmOn}" />
+                                        </StackPanel>
+                                    </xctk:DropDownButton.DropDownContent>
+                                </xctk:DropDownButton>
+
+                                <xctk:DropDownButton Grid.Row="3" Grid.Column="1" Content="Status C"
+                                                     DataContext="{Binding StatusC}" VerticalAlignment="Center">
+                                    <xctk:DropDownButton.DropDownContent>
+                                        <StackPanel>
+                                            <xctk:ColorPicker Margin="5" HorizontalAlignment="Center"
+                                                              VerticalAlignment="Center"
+                                                              SelectedColor="{Binding Color, Converter={StaticResource BrushToColorConverter}}"
+                                                              DisplayColorAndName="True" />
+                                            <CheckBox Margin="5,0,5,5" Content="Hauptfenster"
+                                                      HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                      IsChecked="{Binding MainOn}" />
+                                            <CheckBox Margin="5,0,5,5" Content="Alarmfenster"
+                                                      HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                      IsChecked="{Binding AlarmOn}" />
+                                        </StackPanel>
+                                    </xctk:DropDownButton.DropDownContent>
+                                </xctk:DropDownButton>
+
+                                <xctk:DropDownButton Grid.Row="5" Grid.Column="1" Content="Status E"
+                                                     DataContext="{Binding StatusE}" VerticalAlignment="Center">
+                                    <xctk:DropDownButton.DropDownContent>
+                                        <StackPanel>
+                                            <xctk:ColorPicker Margin="5" HorizontalAlignment="Center"
+                                                              VerticalAlignment="Center"
+                                                              SelectedColor="{Binding Color, Converter={StaticResource BrushToColorConverter}}"
+                                                              DisplayColorAndName="True" />
+                                            <CheckBox Margin="5,0,5,5" Content="Hauptfenster"
+                                                      HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                      IsChecked="{Binding MainOn}" />
+                                            <CheckBox Margin="5,0,5,5" Content="Alarmfenster"
+                                                      HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                      IsChecked="{Binding AlarmOn}" />
+                                        </StackPanel>
+                                    </xctk:DropDownButton.DropDownContent>
+                                </xctk:DropDownButton>
+
+                                <xctk:DropDownButton Grid.Row="7" Grid.Column="1" Content="Status F"
+                                                     DataContext="{Binding StatusF}" VerticalAlignment="Center">
+                                    <xctk:DropDownButton.DropDownContent>
+                                        <StackPanel>
+                                            <xctk:ColorPicker Margin="5" HorizontalAlignment="Center"
+                                                              VerticalAlignment="Center"
+                                                              SelectedColor="{Binding Color, Converter={StaticResource BrushToColorConverter}}"
+                                                              DisplayColorAndName="True" />
+                                            <CheckBox Margin="5,0,5,5" Content="Hauptfenster"
+                                                      HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                      IsChecked="{Binding MainOn}" />
+                                            <CheckBox Margin="5,0,5,5" Content="Alarmfenster"
+                                                      HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                      IsChecked="{Binding AlarmOn}" />
+                                        </StackPanel>
+                                    </xctk:DropDownButton.DropDownContent>
+                                </xctk:DropDownButton>
+
+                                <xctk:DropDownButton Grid.Row="9" Grid.Column="1" Content="Status H"
+                                                     DataContext="{Binding StatusH}" VerticalAlignment="Center">
+                                    <xctk:DropDownButton.DropDownContent>
+                                        <StackPanel>
+                                            <xctk:ColorPicker Margin="5" HorizontalAlignment="Center"
+                                                              VerticalAlignment="Center"
+                                                              SelectedColor="{Binding Color, Converter={StaticResource BrushToColorConverter}}"
+                                                              DisplayColorAndName="True" />
+                                            <CheckBox Margin="5,0,5,5" Content="Hauptfenster"
+                                                      HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                      IsChecked="{Binding MainOn}" />
+                                            <CheckBox Margin="5,0,5,5" Content="Alarmfenster"
+                                                      HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                      IsChecked="{Binding AlarmOn}" />
+                                        </StackPanel>
+                                    </xctk:DropDownButton.DropDownContent>
+                                </xctk:DropDownButton>
+
+                                <xctk:DropDownButton Grid.Row="11" Grid.Column="1" Content="Status J"
+                                                     DataContext="{Binding StatusJ}" VerticalAlignment="Center">
+                                    <xctk:DropDownButton.DropDownContent>
+                                        <StackPanel>
+                                            <xctk:ColorPicker Margin="5" HorizontalAlignment="Center"
+                                                              VerticalAlignment="Center"
+                                                              SelectedColor="{Binding Color, Converter={StaticResource BrushToColorConverter}}"
+                                                              DisplayColorAndName="True" />
+                                            <CheckBox Margin="5,0,5,5" Content="Hauptfenster"
+                                                      HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                      IsChecked="{Binding MainOn}" />
+                                            <CheckBox Margin="5,0,5,5" Content="Alarmfenster"
+                                                      HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                      IsChecked="{Binding AlarmOn}" />
+                                        </StackPanel>
+                                    </xctk:DropDownButton.DropDownContent>
+                                </xctk:DropDownButton>
+
+                                <xctk:DropDownButton Grid.Row="13" Grid.Column="1" Content="Status L"
+                                                     DataContext="{Binding StatusL}" VerticalAlignment="Center">
+                                    <xctk:DropDownButton.DropDownContent>
+                                        <StackPanel>
+                                            <xctk:ColorPicker Margin="5" HorizontalAlignment="Center"
+                                                              VerticalAlignment="Center"
+                                                              SelectedColor="{Binding Color, Converter={StaticResource BrushToColorConverter}}"
+                                                              DisplayColorAndName="True" />
+                                            <CheckBox Margin="5,0,5,5" Content="Hauptfenster"
+                                                      HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                      IsChecked="{Binding MainOn}" />
+                                            <CheckBox Margin="5,0,5,5" Content="Alarmfenster"
+                                                      HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                      IsChecked="{Binding AlarmOn}" />
+                                        </StackPanel>
+                                    </xctk:DropDownButton.DropDownContent>
+                                </xctk:DropDownButton>
+
+                                <xctk:DropDownButton Grid.Row="15" Grid.Column="1" Content="Status P"
+                                                     DataContext="{Binding StatusP}" VerticalAlignment="Center">
+                                    <xctk:DropDownButton.DropDownContent>
+                                        <StackPanel>
+                                            <xctk:ColorPicker Margin="5" HorizontalAlignment="Center"
+                                                              VerticalAlignment="Center"
+                                                              SelectedColor="{Binding Color, Converter={StaticResource BrushToColorConverter}}"
+                                                              DisplayColorAndName="True" />
+                                            <CheckBox Margin="5,0,5,5" Content="Hauptfenster"
+                                                      HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                      IsChecked="{Binding MainOn}" />
+                                            <CheckBox Margin="5,0,5,5" Content="Alarmfenster"
+                                                      HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                      IsChecked="{Binding AlarmOn}" />
+                                        </StackPanel>
+                                    </xctk:DropDownButton.DropDownContent>
+                                </xctk:DropDownButton>
+
+                                <xctk:DropDownButton Grid.Row="17" Grid.Column="1" Content="Status U"
+                                                     DataContext="{Binding StatusU}" VerticalAlignment="Center">
+                                    <xctk:DropDownButton.DropDownContent>
+                                        <StackPanel>
+                                            <xctk:ColorPicker Margin="5" HorizontalAlignment="Center"
+                                                              VerticalAlignment="Center"
+                                                              SelectedColor="{Binding Color, Converter={StaticResource BrushToColorConverter}}"
+                                                              DisplayColorAndName="True" />
+                                            <CheckBox Margin="5,0,5,5" Content="Hauptfenster"
+                                                      HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                      IsChecked="{Binding MainOn}" />
+                                            <CheckBox Margin="5,0,5,5" Content="Alarmfenster"
+                                                      HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                      IsChecked="{Binding AlarmOn}" />
+                                        </StackPanel>
+                                    </xctk:DropDownButton.DropDownContent>
+                                </xctk:DropDownButton>
+                            </Grid>
+                        </Border>
+                    </Grid>
+                </Border>
+            </Grid>
+        </TabItem>
+
+        <TabItem Header="Fahrzeuge" Background="{x:Null}" Width="150" Height="30">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="5" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <DataGrid Grid.Row="0" Name="gridVehicle" HeadersVisibility="Column"
+                          ItemsSource="{Binding VehicleList}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Name" Binding="{Binding Path=Name}" Width="*" />
+                        <DataGridTextColumn Header="Anzeigetext" Binding="{Binding Path=ViewText}" Width="*" />
+                        <DataGridTextColumn Header="Einsatzmittel" Binding="{Binding Path=FaxText}" Width="*" />
+                        <DataGridTextColumn Header="BOS-Kennung" Binding="{Binding Path=BosIdentifier}" Width="Auto" />
+                        <DataGridTemplateColumn Width="Auto">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Button Background="{x:Null}"
+                                                Command="{Binding DataContext.EditVehicleCommand, ElementName=gridVehicle}"
+                                                CommandParameter="{Binding Path=.}">
+                                            <Image Source="/Resources/Image.Edit.png" Width="25" Height="25" />
+                                        </Button>
+                                        <Button Background="{x:Null}"
+                                                Command="{Binding DataContext.DeleteVehicleCommand, ElementName=gridVehicle}"
+                                                CommandParameter="{Binding Path=.}">
+                                            <Image Source="/Resources/Image.Delete.png" Width="25" Height="25" />
+                                        </Button>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+
+                <Button Grid.Row="1" Height="35" Content="Fahrzeug hinzufügen"
+                        Command="{Binding Path=AddVehicleCommand}" />
+
+                <Button Grid.Row="3" Height="35" Content="Import aus FMS32"
+                        Command="{Binding Path=ImportVehicleCommand}" />
+            </Grid>
+        </TabItem>
+    </TabControl>
+</UserControl>

@@ -1,0 +1,170 @@
+﻿<Window
+    x:Class="RIS.Views.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:views="clr-namespace:RIS.Views"
+    xmlns:avalonDock="http://schemas.xceed.com/wpf/xaml/avalondock"
+
+    mc:Ignorable="d" d:DesignHeight="550" d:DesignWidth="800"
+
+    DataContext="{Binding MainVM, Source={StaticResource ViewModelLocator}}"
+    Title="Rescue-Information-System" Icon="/Resources/Icon.RIS.ico" Background="{StaticResource ColorbrushDark}"
+    Foreground="{Binding ForegroundColor, Converter={StaticResource DrawingColorToSolidBrushConverter}}"
+    WindowStartupLocation="CenterScreen" WindowStyle="None" WindowState="Maximized" FontSize="14" FontWeight="Bold"
+    PreviewKeyDown="Window_PreviewKeyDown">
+
+    <!-- Content -->
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- Menubar -->
+        <Menu Grid.Row="0" x:Name="uxMenu" Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Top"
+              Width="Auto" Grid.ColumnSpan="2" Background="{x:Null}">
+            <MenuItem x:Name="uxMenu_AdminState" Header="{Binding MenuAdminStateHeader}"
+                      Command="{Binding AdminCommand}" />
+            <MenuItem x:Name="uxMenu_Datei" Header="Datei" IsEnabled="{Binding IsAdminMode}">
+                <MenuItem x:Name="uxMenu_DateiOptionen" Header="Einstellungen" Command="{Binding ShowSettingsCommand}" />
+                <MenuItem x:Name="uxMenu_DateiLog" Header="Log" Command="{Binding ShowLogCommand}" />
+                <MenuItem x:Name="uxMenu_DateiHelp" Header="Hilfe" Command="{Binding HelpCommand}" />
+                <MenuItem x:Name="uxMenu_DateiBeenden" Header="Schließen" Command="{Binding ExitCommand}" />
+            </MenuItem>
+            <MenuItem x:Name="uxMenu_Admin" Header="Fenster" IsEnabled="{Binding IsAdminMode}">
+                <MenuItem x:Name="uxMenu_WinShowAlarm" Header="Alarmfenster anzeigen"
+                          Command="{Binding ShowAlarmCommand}" />
+                <Separator />
+                <MenuItem Header="Layout">
+                    <MenuItem x:Name="uxMenu_LayoutMainReset" Header="Layout zurücksetzen"
+                              Click="uxMenu_LayoutReset_Click" />
+                    <MenuItem x:Name="uxMenu_LayoutMainSave" Header="Layout speichern" Click="uxMenu_LayoutSave_Click" />
+                </MenuItem>
+                <MenuItem Header="Daten">
+                    <MenuItem x:Name="uxMenu_DataVehiclesReset" Header="Fahrzeuge auf Status 2"
+                              Command="{Binding DataVehiclesResetCommand}" />
+                    <MenuItem x:Name="uxMenu_DataPagersReset" Header="Alarmierungen löschen"
+                              Command="{Binding DataPagersResetCommand}" />
+                </MenuItem>
+                <Separator />
+                <MenuItem x:Name="uxMenu_WinVehicles" Header="Fahrzeuge"
+                          DataContext="{Binding ElementName=uxDock_Vehicles}" IsCheckable="True"
+                          IsChecked="{Binding Path=IsVisible, Mode=OneWay}" Click="MenuDockItem_Click" />
+                <MenuItem x:Name="uxMenu_WinPagers" Header="Alarmierungen"
+                          DataContext="{Binding ElementName=uxDock_Pagers}" IsCheckable="True"
+                          IsChecked="{Binding Path=IsVisible, Mode=OneWay}" Click="MenuDockItem_Click" />
+                <MenuItem x:Name="uxMenu_WinTicker" Header="Ticker" DataContext="{Binding ElementName=uxDock_Ticker}"
+                          IsCheckable="True" IsChecked="{Binding Path=IsVisible, Mode=OneWay}"
+                          Click="MenuDockItem_Click" />
+                <MenuItem x:Name="uxMenu_WinTime" Header="Uhrzeit" DataContext="{Binding ElementName=uxDock_Time}"
+                          IsCheckable="True" IsChecked="{Binding Path=IsVisible, Mode=OneWay}"
+                          Click="MenuDockItem_Click" />
+                <MenuItem x:Name="uxMenu_WinRiverlevel" Header="Pegelstand"
+                          DataContext="{Binding ElementName=uxDock_Riverlevel}" IsCheckable="True"
+                          IsChecked="{Binding Path=IsVisible, Mode=OneWay}" Click="MenuDockItem_Click" />
+                <MenuItem x:Name="uxMenu_WinWarnweather" Header="Wetter-Warnung"
+                          DataContext="{Binding ElementName=uxDock_Warnweather}" IsCheckable="True"
+                          IsChecked="{Binding Path=IsVisible, Mode=OneWay}" Click="MenuDockItem_Click" />
+                <!--<MenuItem x:Name="uxMenu_WinWebbrowser" Header="Webbrowser"
+                          DataContext="{Binding ElementName=uxDock_Webbrowser}" IsCheckable="True"
+                          IsChecked="{Binding Path=IsVisible, Mode=OneWay}" Click="MenuDockItem_Click" />-->
+            </MenuItem>
+            <MenuItem x:Name="uxMenu_DecoderConnect" Header="Decoder verbinden"
+                      Command="{Binding DecoderConnectCommand}" />
+        </Menu>
+
+        <!-- Content -->
+        <avalonDock:DockingManager Grid.Row="1" x:Name="uxDockManager_Main" AllowMixedOrientation="True"
+                                   Background="{StaticResource ColorbrushLight}">
+            <avalonDock:DockingManager.Theme>
+                <avalonDock:MetroTheme />
+            </avalonDock:DockingManager.Theme>
+
+            <avalonDock:LayoutRoot>
+                <avalonDock:LayoutRoot.RootPanel>
+                    <avalonDock:LayoutPanel Orientation="Horizontal">
+                        <avalonDock:LayoutAnchorablePaneGroup Orientation="Vertical">
+                            <avalonDock:LayoutAnchorablePane DockHeight="0.2*">
+                                <avalonDock:LayoutAnchorable x:Name="uxDock_Ticker" Title="Ticker" CanAutoHide="False"
+                                                             CanClose="True" FloatingHeight="400" FloatingWidth="400">
+                                    <views:MainTickerUserControl x:Name="uxView_Ticker" />
+                                </avalonDock:LayoutAnchorable>
+                            </avalonDock:LayoutAnchorablePane>
+
+                            <avalonDock:LayoutAnchorablePane DockHeight="1.0*">
+                                <avalonDock:LayoutAnchorable x:Name="uxDock_Vehicles" Title="Fahrzeuge"
+                                                             CanAutoHide="False" CanClose="True" FloatingHeight="400"
+                                                             FloatingWidth="400">
+                                    <views:MainVehiclesUserControl x:Name="uxView_Vehicles" />
+                                </avalonDock:LayoutAnchorable>
+                            </avalonDock:LayoutAnchorablePane>
+
+                            <!--<avalonDock:LayoutAnchorablePane DockHeight="0.8*">
+                                <avalonDock:LayoutAnchorable x:Name="uxDock_Webbrowser" Title="Webbrowser"
+                                                             CanAutoHide="False" CanClose="True" FloatingHeight="400"
+                                                             FloatingWidth="400">
+                                    <views:MainWebbrowserUserControl x:Name="uxView_Webbrowser" />
+                                </avalonDock:LayoutAnchorable>
+                            </avalonDock:LayoutAnchorablePane>-->
+                        </avalonDock:LayoutAnchorablePaneGroup>
+
+                        <avalonDock:LayoutAnchorablePaneGroup Orientation="Vertical">
+                            <avalonDock:LayoutAnchorablePane DockHeight="0.2*">
+                                <avalonDock:LayoutAnchorable x:Name="uxDock_Time" Title="Uhrzeit" CanAutoHide="False"
+                                                             CanClose="True" FloatingHeight="400" FloatingWidth="400">
+                                    <views:MainTimeUserControl x:Name="uxView_Time" />
+                                </avalonDock:LayoutAnchorable>
+                            </avalonDock:LayoutAnchorablePane>
+
+                            <avalonDock:LayoutAnchorablePane DockHeight="1.0*">
+                                <avalonDock:LayoutAnchorable x:Name="uxDock_Pagers" Title="Alarmierungen"
+                                                             CanAutoHide="False" CanClose="True" FloatingHeight="400"
+                                                             FloatingWidth="200">
+                                    <views:MainPagersUserControl x:Name="uxView_Pagers" />
+                                </avalonDock:LayoutAnchorable>
+                            </avalonDock:LayoutAnchorablePane>
+
+                            <avalonDock:LayoutAnchorablePaneGroup DockHeight="0.8*" Orientation="Horizontal">
+                                <avalonDock:LayoutAnchorablePane>
+                                    <avalonDock:LayoutAnchorable x:Name="uxDock_Warnweather" Title="Wetterwarnung"
+                                                                 CanAutoHide="False" CanClose="True"
+                                                                 FloatingHeight="400" FloatingWidth="400">
+                                        <views:MainWarnweatherUserControl x:Name="uxView_Warnweather" />
+                                    </avalonDock:LayoutAnchorable>
+                                </avalonDock:LayoutAnchorablePane>
+
+                                <avalonDock:LayoutAnchorablePane>
+                                    <avalonDock:LayoutAnchorable x:Name="uxDock_Riverlevel" Title="Pegelstand"
+                                                                 CanAutoHide="False" CanClose="True"
+                                                                 FloatingHeight="400" FloatingWidth="400">
+                                        <views:MainRiverlevelUserControl x:Name="uxView_Riverlevel" />
+                                    </avalonDock:LayoutAnchorable>
+                                </avalonDock:LayoutAnchorablePane>
+                            </avalonDock:LayoutAnchorablePaneGroup>
+                        </avalonDock:LayoutAnchorablePaneGroup>
+                    </avalonDock:LayoutPanel>
+                </avalonDock:LayoutRoot.RootPanel>
+            </avalonDock:LayoutRoot>
+        </avalonDock:DockingManager>
+
+        <!-- Statusbar -->
+        <StatusBar Grid.Row="2" x:Name="uxStatusbar" Background="{x:Null}" Focusable="False">
+            <DockPanel>
+                <StatusBarItem Content="Decoder 1:" FontSize="14" Focusable="False" VerticalAlignment="Center" />
+                <StatusBarItem Content="{Binding DecoderStatus1}" FontSize="14" FontWeight="Bold"
+                               VerticalAlignment="Center" />
+            </DockPanel>
+            <DockPanel Margin="10,0,0,0">
+                <StatusBarItem Content="Decoder 2:" FontSize="14" Focusable="False" VerticalAlignment="Center" />
+                <StatusBarItem Content="{Binding DecoderStatus2}" FontSize="14" FontWeight="Bold"
+                               VerticalAlignment="Center" />
+            </DockPanel>
+            <StatusBarItem Content="{Binding UpdateStatus}" Visibility="{Binding UpdateVisibility}" FontSize="14"
+                           FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="20,0"
+                           Background="Red" />
+        </StatusBar>
+    </Grid>
+</Window>

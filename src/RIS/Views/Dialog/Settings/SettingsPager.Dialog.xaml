@@ -1,0 +1,65 @@
+﻿<UserControl
+    x:Class="RIS.Views.SettingsPagerDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+
+    Background="{StaticResource ColorbrushDark}" Width="450">
+
+    <DockPanel>
+        <!-- Titel -->
+        <ContentControl DockPanel.Dock="Top" Template="{StaticResource WindowTopbar}" />
+
+        <!-- Content -->
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="10" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition />
+                <ColumnDefinition Width="10" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="5" />
+                <RowDefinition />
+                <RowDefinition Height="5" />
+                <RowDefinition />
+                <RowDefinition Height="5" />
+                <RowDefinition />
+                <RowDefinition Height="5" />
+                <RowDefinition />
+                <RowDefinition Height="10" />
+                <RowDefinition />
+                <RowDefinition Height="5" />
+            </Grid.RowDefinitions>
+
+            <Label Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center"
+                   Content="Kennung:" />
+            <TextBox Grid.Row="1" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                     Text="{Binding Identifier, UpdateSourceTrigger=PropertyChanged}"
+                     ToolTip="{Binding Path=., Converter={StaticResource DisplayAttributeConverter}, ConverterParameter=Identifier}" />
+
+            <Label Grid.Row="3" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center"
+                   Content="Bezeichnung:" />
+            <TextBox Grid.Row="3" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                     Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"
+                     ToolTip="{Binding Path=., Converter={StaticResource DisplayAttributeConverter}, ConverterParameter=Name}" />
+
+            <Label Grid.Row="5" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center"
+                   Content="Priorität:" />
+            <CheckBox Grid.Row="5" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center"
+                      IsChecked="{Binding Priority}"
+                      ToolTip="{Binding Path=., Converter={StaticResource DisplayAttributeConverter}, ConverterParameter=Priority}" />
+
+            <Label Grid.Row="7" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" Content="Datei:" />
+            <DockPanel Grid.Row="7" Grid.Column="2">
+                <Button DockPanel.Dock="Right" Content="..." Command="{Binding Path=SelectFileCommand}" />
+                <TextBox HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                         Text="{Binding Path=File, UpdateSourceTrigger=PropertyChanged}"
+                         ToolTip="{Binding Path=., Converter={StaticResource DisplayAttributeConverter}, ConverterParameter=File}" />
+            </DockPanel>
+
+            <!-- Button -->
+            <Button Grid.Row="9" Grid.Column="1" Grid.ColumnSpan="2" Height="35" Content="Speichern"
+                    Command="{Binding SaveCommand}" />
+        </Grid>
+    </DockPanel>
+</UserControl>
