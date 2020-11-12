@@ -9,8 +9,8 @@ using System.Runtime.InteropServices;
 //[assembly: AssemblyDescription("Rescue-Information-System")]
 //[assembly: AssemblyCulture("")]
 
-[assembly: AssemblyVersion("7.6.0.0")]
-[assembly: AssemblyFileVersion("7.6.0.0")]
+[assembly: AssemblyVersion("7.6.1.0")]
+[assembly: AssemblyFileVersion("7.6.1.0")]
 [assembly: AssemblyProduct("Rescue-Information-System")]
 [assembly: AssemblyCompany("SpecialRescueSolutions UG(haftungsbeschränkt)")]
 [assembly: AssemblyCopyright("GPL-v3 licensed")]

@@ -72,8 +72,7 @@ namespace RIS
                 }
 
                 //Check if process is already running
-                var countAppProcess = Process.GetProcesses()
-                    .Count(p => p.ProcessName == Process.GetCurrentProcess().ProcessName);
+                var countAppProcess = Process.GetProcesses().Count(p => p.ProcessName == Process.GetCurrentProcess().ProcessName);
                 if (countAppProcess > 1)
                 {
                     MessageBox.Show("RIS läuft bereits", MessageBoxButton.OK, MessageBoxImage.Information);

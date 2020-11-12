@@ -81,6 +81,11 @@ namespace RIS.Factories
             SimpleIoc.Default.GetInstance<IFaxService>().Start();
             SimpleIoc.Default.GetInstance<IFireboardService>().Start();
 
+            SimpleIoc.Default.GetInstance<IAmsService>().Start();
+            SimpleIoc.Default.GetInstance<IMailService>().Start();
+            SimpleIoc.Default.GetInstance<IMapService>().Start();
+            SimpleIoc.Default.GetInstance<IAlarmappService>().Start();
+
             SimpleIoc.Default.GetInstance<IWatchdogService>().Start();
             SimpleIoc.Default.GetInstance<IPrinterService>().Start();
             SimpleIoc.Default.GetInstance<IMonitorService>().Start();
@@ -105,10 +110,6 @@ namespace RIS.Factories
             SimpleIoc.Default.GetInstance<IAlarmappService>().Stop();
 
             SimpleIoc.Default.GetInstance<IWatchdogService>().Stop();
-            SimpleIoc.Default.GetInstance<IAmsService>().Stop();
-            SimpleIoc.Default.GetInstance<IAlarmappService>().Stop();
-            SimpleIoc.Default.GetInstance<IMailService>().Stop();
-            SimpleIoc.Default.GetInstance<IMapService>().Stop();
             SimpleIoc.Default.GetInstance<IPrinterService>().Stop();
             SimpleIoc.Default.GetInstance<IMonitorService>().Stop();
             SimpleIoc.Default.GetInstance<IRebootService>().Stop();
